@@ -41,7 +41,7 @@
     <Compile Include="LightSwitch.cs" />
     <Compile Include="ReaderWriter.cs" />
     <Compile Include="Barrier.cs" />
-    <Compile Include="Rendezvous.cs" />
+    <Compile Include="Exchanger.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
