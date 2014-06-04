@@ -28,7 +28,7 @@ namespace TestConcurrencyUtilities
 			                   "\nVisitor threads will start every " + TestSupport.StringFromMilliseconds(_sleepTime));
 
 			List<Thread> threads = new List<Thread>();
-			foreach (string threadName in new string[] {"Barrier visitor thread", "Excess barrier visitor thread"})
+			foreach (string threadName in new string[] {"Barrier visitor group 1 thread", "Barrier visitor group 2 thread"})
 				threads.AddRange(TestSupport.CreateThreads(BarrierVisitor, threadName, magnitude, 1));
 			foreach (Thread thread in threads) {
 				TestSupport.SleepThread(_sleepTime);

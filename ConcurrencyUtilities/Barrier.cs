@@ -6,7 +6,7 @@ namespace ConcurrencyUtilities
 	/// A barrier is like the stalls in a horse race. It has a quota of threads. Threads enter the barrier, and stay there until the quota is met, at which point they can all leave.
 	/// Once the barrier opens, it is reset; the next thread will wait for the quota to be met.
 	/// </summary>
-	// Status: TODO: add reuse, TODO: test reuse, TODO: get marked off
+	// Status: complete, test complete, TODO: get marked off
 	public class Barrier
 	{
 		readonly int _numThreadsNeededAtBarrier;         // The quota -- the number of threads that the barrier requires before it lets them all through
