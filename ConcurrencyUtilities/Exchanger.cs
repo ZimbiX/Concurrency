@@ -18,6 +18,8 @@ namespace ConcurrencyUtilities
 		Semaphore _bArrived;
 		T _dataForA;
 		T _dataForB;
+		Mutex _accessToNextThreadIsB;
+		bool _nextThreadIsB;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ConcurrencyUtilities.Exchanger"/> class.
@@ -25,16 +27,53 @@ namespace ConcurrencyUtilities
 		public Exchanger() {
 			_aArrived = new Semaphore(0);
 			_bArrived = new Semaphore(0);
-			//_exchangeData = 
+			_accessToNextThreadIsB = new Mutex();
+			_nextThreadIsB = false;
 		}
 
 		/// <summary>
 		/// Arrives at the exchanger to exchange data.
 		/// </summary>
+		/// <returns>The data received from the other thread.</returns>
+		/// <param name="dataToGive">The data to give to the other thread.</param>
 		public T Arrive(T dataToGive) {
-			_dataForA = dataToGive;
+			T dataReceived;
+			_accessToNextThreadIsB.Acquire();
+			if (!_nextThreadIsB) {
+				// Will run as thread A
+				_nextThreadIsB = !_nextThreadIsB; // Force the next thread to run as thread B
+				_accessToNextThreadIsB.Release(); // Let the next thread arrive
+				dataReceived = ExchangeAsA(dataToGive);
+			} else {
+				// Will run as thread B
+				_nextThreadIsB = !_nextThreadIsB; // Force the next thread to run as thread A
+				_accessToNextThreadIsB.Release(); // Let the next thread arrive
+				dataReceived = ExchangeAsB(dataToGive);
+			}
+			return dataReceived;
+		}
+
+		/// <summary>
+		/// Exchanges the data as thread A.
+		/// </summary>
+		/// <returns>The data received from thread B.</returns>
+		/// <param name="dataToGive">The data to give to thread B.</param>
+		T ExchangeAsA(T dataToGive) {
+			_dataForB = dataToGive;
 			_aArrived.Release();
-			_bArrived.Acquire();
+			_bArrived.Acquire(); // Wait for the other thread to arrive and surrender its data
+			return _dataForA;
+		}
+		
+		/// <summary>
+		/// Exchanges the data as thread B.
+		/// </summary>
+		/// <returns>The data received from thread A.</returns>
+		/// <param name="dataToGive">The data to give to thread A.</param>
+		T ExchangeAsB(T dataToGive) {
+			_dataForA = dataToGive;
+			_bArrived.Release();
+			_aArrived.Acquire(); // Wait for the other thread to arrive and surrender its data
 			return _dataForB;
 		}
 	}

@@ -16,7 +16,7 @@ namespace TestConcurrencyUtilities
 		private static void BarrierVisitor() {
 			TestSupport.DebugThread("is entering the barrier");
 			_barrier.Arrive();
-			TestSupport.DebugThread("  ", "has left the barrier");
+			TestSupport.DebugThreadWithPrefix("  ", "has left the barrier");
 		}
 
 		public static void Run(int magnitude, int sleepTime = 0) {

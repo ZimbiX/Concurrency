@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcurrencyUtilities", "Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConcurrencyUtilities", "TestConcurrencyUtilities\TestConcurrencyUtilities.csproj", "{855A46C7-4AF4-426A-BAA3-F651CC54363F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnsiColor", "AnsiColor\AnsiColor.csproj", "{9ABB8BD3-A26A-4E60-A28A-9AF0B98C8CAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{855A46C7-4AF4-426A-BAA3-F651CC54363F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{855A46C7-4AF4-426A-BAA3-F651CC54363F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{855A46C7-4AF4-426A-BAA3-F651CC54363F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ABB8BD3-A26A-4E60-A28A-9AF0B98C8CAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ABB8BD3-A26A-4E60-A28A-9AF0B98C8CAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ABB8BD3-A26A-4E60-A28A-9AF0B98C8CAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ABB8BD3-A26A-4E60-A28A-9AF0B98C8CAF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D83797F8-0CEC-4C9F-BD7C-8C9EDCDFB308}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D83797F8-0CEC-4C9F-BD7C-8C9EDCDFB308}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D83797F8-0CEC-4C9F-BD7C-8C9EDCDFB308}.Release|Any CPU.ActiveCfg = Release|Any CPU

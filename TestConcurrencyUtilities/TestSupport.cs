@@ -2,6 +2,7 @@ using System;
 using System.Threading; // Required for access to Thread
 using System.Collections.Generic; // Required for access to List
 using ConcurrencyUtilities;
+using Colorizer = AnsiColor.AnsiColor;
 
 namespace TestConcurrencyUtilities
 {
@@ -9,14 +10,35 @@ namespace TestConcurrencyUtilities
 	class TestSupport
 	{
 		// Create the specified number of thread objects which will run the supplied method. These are identified by the supplied name (onto which is added the thread's ID number). The threads are returned in a list object
-		public static List<Thread> CreateThreads(ThreadStart threadMethod, string threadID, int numThreads, int startingNum = 0) {
+		public static List<Thread> CreateThreads(ThreadStart threadMethod, string threadID, int numThreads, int startingNum = 0, int columnWidth = 0, int startingColumn = 0) {
 			List<Thread> threads = new List<Thread>();
 			for (int i = 0; i < numThreads; i++) {
 				Thread t = new Thread(threadMethod);
-				t.Name = threadID + ( numThreads == 1 ? "" : " " + (i + startingNum).ToString() );
+				if (numThreads == 1) {
+					t.Name = threadID;
+				} else {
+					string idNumSpacer = columnWidth > 0 ? "" : " ";
+					string nameSuffix = idNumSpacer + (i + startingNum).ToString();
+					if (columnWidth == 0) {
+						t.Name = threadID + nameSuffix;
+					} else {
+						string realName = threadID + nameSuffix; // The real thread name without the column indicator or column padding
+						t.Name = "%%%%" + new string(' ', columnWidth * (i + startingColumn - 1)) + realName; // Add column indicator and column padding to the thread name
+						Console.Write(realName.PadRight(columnWidth)); // Output the header for this column. A manual newline will be required after creating all the required thread groups
+					}
+				}
 				threads.Add(t);
 			}
 			return threads;
+		}
+
+		// Create a single thread with a given name, returned in a list object
+		public static List<Thread> CreateThread(ThreadStart threadMethod, string threadID) {
+			return CreateThreads(threadMethod, threadID, 1);
+		}
+
+		public static void EndColumnHeader(int numColumns, int columnWidth) {
+			Console.WriteLine( "\n" + new string('-', numColumns * columnWidth) );
 		}
 
 		// Run the threads - start each one, and then wait for them all to finish
@@ -68,14 +90,37 @@ namespace TestConcurrencyUtilities
 
 		// Log a message to the console, indicating from which thread it originated
 		public static void DebugThread(string message) {
-			Console.WriteLine(Thread.CurrentThread.Name + " " + message);
+			string longName = Thread.CurrentThread.Name;
+			string shortName = ThreadName(); // Get the real thread name without the column indicator or column padding
+			string outputNameAndMessageSpacer = shortName + " ";
+			string columnWhitespace = "";
+			if (longName.StartsWith("%%%%")) {
+				// For the second column of an 8 character wide column layout, the thread's name would be:
+				// %%%%        Name
+				outputNameAndMessageSpacer = ""; // Disable the forced spacing between a thread's name and message
+				string nameWithoutColumnIndicatorPrefix = longName.Substring(4);
+				int columnWhitespaceCount = (nameWithoutColumnIndicatorPrefix.IndexOf(shortName)); // Get the horizontal offset whitespace to use for column padding
+				columnWhitespace = new string(' ', columnWhitespaceCount);
+			}
+			Console.WriteLine(Colorizer.Colorize("{white}" + columnWhitespace + outputNameAndMessageSpacer + message));
 		}
 
-		public static void DebugThread(string prefix, string message) {
+		public static string ThreadName() {
+			string name = Thread.CurrentThread.Name;
+			if (name.StartsWith("%%%%")) {
+				// For the second column of an 8 character wide column layout, the thread's name would be:
+				// %%%%        Name
+				string nameWithoutColumnIndicatorPrefix = name.Substring(4);
+				name = nameWithoutColumnIndicatorPrefix.TrimStart(' '); // Get the real thread name without the column indicator or column padding
+			}
+			return name;
+		}
+
+		public static void DebugThreadWithPrefix(string prefix, string message) {
 			Console.WriteLine(prefix + Thread.CurrentThread.Name + " " + message);
 		}
 
-		//		public static void DebugThread(ConsoleColor colour, string message) {
+		//		public static void DebugThreadWithPrefix(ConsoleColor colour, string message) {
 		//			Console.ForegroundColor = colour;
 		//			DebugThread(message);
 		//			Console.ForegroundColor = ConsoleColor.White;

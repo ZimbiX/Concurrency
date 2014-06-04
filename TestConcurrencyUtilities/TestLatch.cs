@@ -15,7 +15,7 @@ namespace TestConcurrencyUtilities
 		private static void LatchVisitor() {
 			TestSupport.DebugThread("is visiting the latch");
 			_latch.Visit();
-			TestSupport.DebugThread("  ", "has left the latch");
+			TestSupport.DebugThreadWithPrefix("  ", "has left the latch");
 		}
 
 		private static void DelayedLatchOpener() {

@@ -51,5 +51,9 @@
       <Project>{D83797F8-0CEC-4C9F-BD7C-8C9EDCDFB308}</Project>
       <Name>ConcurrencyUtilities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AnsiColor\AnsiColor.csproj">
+      <Project>{9ABB8BD3-A26A-4E60-A28A-9AF0B98C8CAF}</Project>
+      <Name>AnsiColor</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
