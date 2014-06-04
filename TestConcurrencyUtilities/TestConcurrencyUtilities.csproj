@@ -43,6 +43,7 @@
     <Compile Include="TestSupport.cs" />
     <Compile Include="TestMutex.cs" />
     <Compile Include="TestLightSwitch.cs" />
+    <Compile Include="TestRendezvous.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
