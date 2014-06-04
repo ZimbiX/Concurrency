@@ -5,6 +5,7 @@ namespace ConcurrencyUtilities
 	/// <summary>
 	/// A lightswitch can be used to give multiple threads shared access to a single permisson. It works like a light switch in a room -- the first person to enter the room turns the light on, and the last person to leave turns the light off. Here, the light is a metaphor for a permisson. When the light is on, any thread using this light switch has (the) permission. When the light switch is off, that permission is free to be acquired by another thread
 	/// </summary>
+	// Status: complete, test complete, TODO: get marked off
 	public class LightSwitch
 	{
 		Semaphore _managedPermisson; // The semaphore that the lightswitch will control permisson with
