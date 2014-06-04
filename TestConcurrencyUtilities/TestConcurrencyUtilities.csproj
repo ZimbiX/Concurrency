@@ -41,6 +41,7 @@
     <Compile Include="TestLatch.cs" />
     <Compile Include="TestBarrier.cs" />
     <Compile Include="TestSupport.cs" />
+    <Compile Include="TestMutex.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

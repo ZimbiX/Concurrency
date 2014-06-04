@@ -11,11 +11,12 @@ namespace TestConcurrencyUtilities
 
 			int sleepTimeMs = (int)Math.Round(sleepTimeSeconds*1000);
 
-			// TestSemaphore.Run(testMagnitude, sleepTimeMs);
-			 TestChannel.Run(testMagnitude, sleepTimeMs);
+//			TestSemaphore.Run(testMagnitude, sleepTimeMs);
+//			TestChannel.Run(testMagnitude, sleepTimeMs);
 //			TestBoundChannel.Run(testMagnitude, 3, sleepTimeMs);
-			// TestLatch.Run(4, sleepTimeMs);
-			// TestBarrier.Run(4, sleepTimeMs);
+			TestMutex.Run(100000);
+//			TestLatch.Run(4, sleepTimeMs);
+//			TestBarrier.Run(4, sleepTimeMs);
 
 			TestSupport.Log(ConsoleColor.DarkGreen, "\nAll threads have finished");
 		}
