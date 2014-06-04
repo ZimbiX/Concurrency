@@ -13,7 +13,7 @@ namespace TestConcurrencyUtilities
 			List<Thread> threads = new List<Thread>();
 			for (int i = 0; i < numThreads; i++) {
 				Thread t = new Thread(threadMethod);
-				t.Name = threadID + " " + (i + startingNum).ToString();
+				t.Name = threadID + ( numThreads == 1 ? "" : " " + (i + startingNum).ToString() );
 				threads.Add(t);
 			}
 			return threads;
@@ -55,13 +55,15 @@ namespace TestConcurrencyUtilities
 
 		// Make the current thread sleep for a specified number of milliseconds, logging the fact that it is sleeping, and what its name is
 		public static void SleepThread(int msSleepTime, bool blankLine = true) {
-			int sleepTimePreLog = 130;
-			int sleepTimeA = (msSleepTime > sleepTimePreLog ? sleepTimePreLog               : (int)Math.Round((double)msSleepTime / 2));
-			int sleepTimeB = (msSleepTime > sleepTimePreLog ? msSleepTime - sleepTimePreLog : (int)Math.Round((double)msSleepTime / 2));
-			Thread.Sleep(sleepTimeA);
-			if (blankLine)
-				Console.WriteLine("..."); // Now that any logging from other threads should be finished, print a line indicating that we're sleeping
-			Thread.Sleep(sleepTimeB);
+			if (msSleepTime > 0) {
+				int sleepTimePreLog = 130;
+				int sleepTimeA = (msSleepTime > sleepTimePreLog ? sleepTimePreLog               : (int)Math.Round((double)msSleepTime / 2));
+				int sleepTimeB = (msSleepTime > sleepTimePreLog ? msSleepTime - sleepTimePreLog : (int)Math.Round((double)msSleepTime / 2));
+				Thread.Sleep(sleepTimeA);
+				if (blankLine)
+					Console.WriteLine("..."); // Now that any logging from other threads should be finished, print a line indicating that we're sleeping
+				Thread.Sleep(sleepTimeB);
+			}
 		}
 
 		// Log a message to the console, indicating from which thread it originated
