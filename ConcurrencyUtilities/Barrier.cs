@@ -14,6 +14,10 @@ namespace ConcurrencyUtilities
 		readonly Mutex _accessToNumThreadsAtBarrier;     // Mutex providing thread-safe access to the variable: _numThreadsAtBarrier
 		readonly Semaphore _goPermission;                // Semaphore that determines whether threads can leave the barrier
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ConcurrencyUtilities.Barrier"/> class.
+		/// </summary>
+		/// <param name="numThreadsNeededAtBarrier">Number threads needed at the barrier for it to release all the threads.</param>
 		public Barrier(int numThreadsNeededAtBarrier) {
 			_numThreadsAtBarrier = 0;
 			_accessToNumThreadsAtBarrier = new Mutex();
@@ -21,6 +25,9 @@ namespace ConcurrencyUtilities
 			_goPermission = new Semaphore(0);
 		}
 
+		/// <summary>
+		/// Arrive at the barrier, and wait for the thread quota to be met before leaving the barrier.
+		/// </summary>
 		public void Arrive() {
 			// Arrive at the barrier:
 
