@@ -9,6 +9,9 @@ namespace ConcurrencyUtilities
 	// Status: complete, TODO: test?, TODO: get marked off?
 	public class Mutex: Semaphore
 	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ConcurrencyUtilities.Mutex"/> class.
+		/// </summary>
 		public Mutex(): base(1) {}
 
 		/// <summary>
