@@ -37,7 +37,8 @@ namespace TestConcurrencyUtilities
 			TestSupport.Log(ConsoleColor.Blue, "Barrier test\n==============================");
 
 			TestSupport.Log(ConsoleColor.Blue, "\nTesting mutual exclusion\n---------------------");
-			TestSupport.Log(ConsoleColor.Blue, "\nA mutex will be used to modify a bank account balance by positive and negative $" + _magnitude + " in steps of $1. The resulting balance should be $0.");
+			TestSupport.Log(ConsoleColor.Blue, "\nA mutex will be used to modify a bank account balance by positive " +
+				"and negative $" + _magnitude + " in steps of $1. The resulting balance should be $0.");
 			TestSupport.SleepThread(4000);
 
 			List<Thread> threads = new List<Thread>();
