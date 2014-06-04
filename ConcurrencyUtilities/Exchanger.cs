@@ -10,12 +10,14 @@ namespace ConcurrencyUtilities
 	// TODO: describe
 	// Status: TODO: add data exchange, TODO: update test, TODO: get marked off
 	/// <summary>
-	/// The Exchanger allows two threads to meet.
+	/// An exchanger allows two threads to meet and exchange data.
 	/// </summary>
-	public class Exchanger
+	public class Exchanger<T>
 	{
 		Semaphore _aArrived;
 		Semaphore _bArrived;
+		T _dataForA;
+		T _dataForB;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ConcurrencyUtilities.Exchanger"/> class.
@@ -23,22 +25,17 @@ namespace ConcurrencyUtilities
 		public Exchanger() {
 			_aArrived = new Semaphore(0);
 			_bArrived = new Semaphore(0);
+			//_exchangeData = 
 		}
 
 		/// <summary>
-		/// Arrives at the Exchanger as the A thread.
+		/// Arrives at the exchanger to exchange data.
 		/// </summary>
-		public void AArrive() {
+		public T Arrive(T dataToGive) {
+			_dataForA = dataToGive;
 			_aArrived.Release();
 			_bArrived.Acquire();
-		}
-
-		/// <summary>
-		/// Arrives at the Exchanger as the B thread.
-		/// </summary>
-		public void BArrive() {
-			_bArrived.Release();
-			_aArrived.Acquire();
+			return _dataForB;
 		}
 	}
 }

@@ -18,7 +18,7 @@ namespace TestConcurrencyUtilities
 //			TestLatch.Run(4, sleepTimeMs);
 //			TestBarrier.Run(4, sleepTimeMs);
 //			TestLightSwitch.Run(5, sleepTimeMs);
-			TestRendezvous.Run(sleepTimeMs);
+			TestExchanger.Run(sleepTimeMs);
 
 			TestSupport.Log(ConsoleColor.DarkGreen, "\nAll threads have finished");
 		}
