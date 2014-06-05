@@ -6,8 +6,7 @@ using Colorizer = AnsiColor.AnsiColor;
 
 namespace TestConcurrencyUtilities
 {
-	
-	class TestSupport
+	public class TestSupport
 	{
 		// Create the specified number of thread objects which will run the supplied method. These are identified by the supplied name (onto which is added the thread's ID number). The threads are returned in a list object
 		public static List<Thread> CreateThreads(ThreadStart threadMethod, string threadID, int numThreads, int startingNum = 0, int columnWidth = 0, int startingColumn = 1) {
