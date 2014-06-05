@@ -84,7 +84,7 @@ namespace TestConcurrencyUtilities
 				int sleepTimeB = (msSleepTime > sleepTimePreLog ? msSleepTime - sleepTimePreLog : (int)Math.Round((double)msSleepTime / 2));
 				Thread.Sleep(sleepTimeA);
 				if (blankLine)
-					Console.WriteLine("..."); // Now that any logging from other threads should be finished, print a line indicating that we're sleeping
+					Console.WriteLine(Colorizer.Colorize("{white}...")); // Now that any logging from other threads should be finished, print a line indicating that we're sleeping
 				Thread.Sleep(sleepTimeB);
 			}
 		}
