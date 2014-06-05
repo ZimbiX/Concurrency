@@ -6,6 +6,19 @@ using TestConcurrencyUtilities;
 using Colorizer = AnsiColor.AnsiColor;
 using ThreadSupport = TestConcurrencyUtilities.TestSupport;
 
+/// <summary>
+/// A program to demonstrate the problem and one of the solutions to the Dining Philosophers problem.
+/// There is a large bowl of noodle in the middle of a table surrounded by five philosophers, with one chopstick
+/// between each philosopher. A philosopher spends some time philosophising, and then becomes hungry.
+/// To eat, a philosopher has to pick up both adjacent chopsticks, eat some noodles, and then put the chopsticks
+/// down.
+/// A deadlock can occur if each philosopher has picked up the chopstick on one side, as no one will be able to eat,
+/// and no one will put their first chopstick back.
+/// The first solution I have implemented is where philosophers pick up first from different sides; in this
+/// implementation, one philosopher picks up the right chopstick first, while the others all go for the left one first.
+/// This works because there will always be at least one philosopher able to eat at any time, therefore ensuring that
+/// both chopsticks will become available to the others again (because they will actually finish eating at some point).
+/// </summary>
 namespace DiningPhilosophers
 {
 	class MainClass
