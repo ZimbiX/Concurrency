@@ -16,23 +16,21 @@ namespace TestConcurrencyUtilities
 		static Mutex _lightSwitchReleaseDelayer;
 
 		public static void VisitRoomAsGroupMember() {
-			TestSupport.DebugThread("is attempting to visit the room as a group member " +
-				"(accessing the permission through the light switch)");
+			TestSupport.DebugThread("{yellow}Acq");
 			_lightSwitch.Acquire();
-			TestSupport.DebugThread("acquired permission");
+			TestSupport.DebugThread("{green}Acq'd");
 			_lightSwitchReleaseDelayer.Acquire();
 				TestSupport.SleepThread(_sleepTime);
 				_lightSwitch.Release();
-				TestSupport.DebugThread("released permission");
+				TestSupport.DebugThread("{cyan}Rel'd");
 			_lightSwitchReleaseDelayer.Release();
 		}
 
 		public static void VisitRoomAsIndividual() {
 			TestSupport.SleepThread(_sleepTime, false);
-			TestSupport.DebugThread("is attempting to visit the room as an individual " +
-				"(acquring the permisson directly from the semaphore)");
+			TestSupport.DebugThread("{yellow}Acq");
 			_permission.Acquire();
-			TestSupport.DebugThread("acquired permission");
+			TestSupport.DebugThread("{green}Acq'd");
 		}
 		
 		public static void Run(int magnitude, int sleepTime) {
@@ -45,13 +43,15 @@ namespace TestConcurrencyUtilities
 			TestSupport.Log(ConsoleColor.Blue, "Light Switch test\n==============================");
 
 			TestSupport.Log(ConsoleColor.Blue, "\nA group of " + _magnitude + " threads will use the light switch " +
-				"to gain access to the permission semaphore, then another thread will attempt to gain access " +
-				"to the permission sempahore. This test will demonstrate that this will not be possible " +
-				"until all the threads using the light switch have released the permission.\n");
+				"to gain access from the permission semaphore, then another thread will attempt to gain access " +
+				"directly from the permission sempahore. This test will demonstrate that this individual thread " +
+				"will have to wait until all the threads using the light switch have released the permission.\n");
 
 			List<Thread> threads = new List<Thread>();
-			threads.AddRange( TestSupport.CreateThreads(VisitRoomAsGroupMember, "LS group member thread", _magnitude) );
-			threads.AddRange( TestSupport.CreateThreads(VisitRoomAsIndividual, "Independent thread", 1) );
+			int columnWidth = 6+1;
+			threads.AddRange( TestSupport.CreateThreads(VisitRoomAsGroupMember, "LS", _magnitude, 1, columnWidth, 1) );
+			threads.AddRange( TestSupport.CreateThreads(VisitRoomAsIndividual, "D", 1, 1, columnWidth, _magnitude + 1) );
+			TestSupport.EndColumnHeader(_magnitude + 1, columnWidth); // End the column header line
 			TestSupport.RunThreads(threads);
 		}
 	}

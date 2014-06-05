@@ -16,8 +16,8 @@ namespace TestConcurrencyUtilities
 //			TestBoundChannel.Run(10, 3, sleepTimeMs);
 //			TestMutex.Run(100000);
 //			TestLatch.Run(4, sleepTimeMs);
-			TestBarrier.Run(4, sleepTimeMs);
-//			TestLightSwitch.Run(5, sleepTimeMs);
+//			TestBarrier.Run(4, sleepTimeMs);
+			TestLightSwitch.Run(5, sleepTimeMs);
 //			TestExchanger.Run(12, sleepTimeMs);
 
 			TestSupport.Log(ConsoleColor.DarkGreen, "\nAll threads have finished");
