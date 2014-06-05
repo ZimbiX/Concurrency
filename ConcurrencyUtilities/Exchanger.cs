@@ -14,14 +14,16 @@ namespace ConcurrencyUtilities
 	/// </summary>
 	public class Exchanger<T>
 	{
-		Semaphore _aArrived;
-		Semaphore _bArrived;
-		T _dataForA;
-		T _dataForB;
-		Mutex _accessToNextThreadIsB;
-		bool _nextThreadIsB;
-		Semaphore _agentPairer;
-		Semaphore _dataHasBeenTaken;
+		Semaphore _aArrived; // Whether thread A has arrived at the rendezvous, with data ready for thread B to collect
+		Semaphore _bArrived; // Whether thread B has arrived at the rendezvous, with data ready for thread A to collect
+		T _dataForA; // The data from thread B, for collection by thread A
+		T _dataForB; // The data from thread A, for collection by thread B
+		Mutex _accessToNextThreadIsB; // Thread-safe permisson for access to the variable '_nextThreadIsB'
+		bool _nextThreadIsB; // A flip-flop used to determine the identity of the next thread
+		Semaphore _agentPairer; /* Used to let through only two threads at once. Once both current threads have
+			finished exchanging, two token are released into this to let another pair into the exchanger */
+		Semaphore _dataHasBeenTaken; /* Used to determine whether both threads have taken their data, and so have
+			finished their exchange */
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ConcurrencyUtilities.Exchanger"/> class.
