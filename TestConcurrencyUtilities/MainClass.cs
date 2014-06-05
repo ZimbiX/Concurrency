@@ -21,6 +21,7 @@ namespace TestConcurrencyUtilities
 			                  "\n  7. Light Switch" +
 			                  "\n  8. Exchanger" +
 			                  "\n  9. Active Object" +
+			                  "\n 10. Semaphore FIFO" +
 			                  "\n  Q. Quit");
 			string response = "INVALID_RESPONSE";
 //			response = "1"; // Can preload with an option to choose automatically
@@ -30,16 +31,17 @@ namespace TestConcurrencyUtilities
 					response = Console.ReadLine().ToUpper();
 				}
 				switch (response) {
-				case "1": TestSemaphore.Run(10, sleepTimeMs); 			break;
-				case "2": TestChannel.Run(10, sleepTimeMs); 			break;
-				case "3": TestBoundChannel.Run(10, 3, sleepTimeMs); 	break;
-				case "4": TestMutex.Run(100000); 						break;
-				case "5": TestLatch.Run(4, sleepTimeMs); 				break;
-				case "6": TestBarrier.Run(4, sleepTimeMs); 				break;
-				case "7": TestLightSwitch.Run(5, sleepTimeMs); 			break;
-				case "8": TestExchanger.Run(12, sleepTimeMs); 			break;
-				case "9": TestActiveObject.Run();						break;
-				case "Q": break;
+				case "1" : TestSemaphore.Run(10, sleepTimeMs); 			break;
+				case "2" : TestChannel.Run(10, sleepTimeMs); 			break;
+				case "3" : TestBoundChannel.Run(10, 3, sleepTimeMs); 	break;
+				case "4" : TestMutex.Run(100000); 						break;
+				case "5" : TestLatch.Run(4, sleepTimeMs); 				break;
+				case "6" : TestBarrier.Run(4, sleepTimeMs);				break;
+				case "7" : TestLightSwitch.Run(5, sleepTimeMs); 		break;
+				case "8" : TestExchanger.Run(12, sleepTimeMs); 			break;
+				case "9" : TestActiveObject.Run();						break;
+				case "10": TestSemaphoreFIFO.Run(10,sleepTimeMs);		break;
+				case "Q" : break;
 				default:
 					Console.WriteLine("Invalid response");
 					response = "INVALID_RESPONSE";

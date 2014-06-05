@@ -46,6 +46,7 @@
     <Compile Include="ActiveObjectInput.cs" />
     <Compile Include="ActiveObjectOutput.cs" />
     <Compile Include="ActiveObjectInputOutput.cs" />
+    <Compile Include="SemaphoreFIFO.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
