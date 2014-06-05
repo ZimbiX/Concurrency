@@ -17,7 +17,9 @@ namespace TestConcurrencyUtilities
 					t.Name = threadID;
 				} else {
 					string idNumSpacer = columnWidth > 0 ? "" : " ";
-					string nameSuffix = idNumSpacer + (i + startingNum).ToString();
+					string nameSuffix = "";;
+					if (startingNum >= 0)
+						nameSuffix = idNumSpacer + (i + startingNum).ToString();
 					if (columnWidth == 0) {
 						t.Name = threadID + nameSuffix;
 					} else {
