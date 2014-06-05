@@ -12,7 +12,8 @@ namespace ConcurrencyUtilities
 	/// - Any number of readers
 	/// This version of ReaderWriter gives readers and writers fairer treatment (than a writer having to wait for
 	/// there to be no readers before getting its turn). Threads are cordoned off into two groups based on the kind of
-	/// access that's desired before being let use the permisson.
+	/// access that's desired before being let use the permisson. When the group in front empties, the groups behind
+	/// shuffle forward.
 	/// 
 	/// 
 	///   Readers         Writers
@@ -51,12 +52,6 @@ namespace ConcurrencyUtilities
 		LightSwitch _blockWTS0;
 		LightSwitch _blockWTS1;
 
-		private void DebugThread(string message) {
-			string threadNameWithoutPrefix = Thread.CurrentThread.Name.Replace("%%%%","");
-			string threadColumnOffset = threadNameWithoutPrefix.Replace(threadNameWithoutPrefix.TrimStart(' '), "");
-			Console.WriteLine(threadColumnOffset + message);
-		}
-
 		public ReaderWriter() {
 			_permisson = new Mutex();
 			_lightSwitch = new LightSwitch(_permisson);
@@ -71,6 +66,12 @@ namespace ConcurrencyUtilities
 			_blockWTS0 = new LightSwitch(_WTS0);
 			_blockWTS1 = new LightSwitch(_WTS1);
 		}
+		
+//		private void DebugThread(string message) {
+//			string threadNameWithoutPrefix = Thread.CurrentThread.Name.Replace("%%%%","");
+//			string threadColumnOffset = threadNameWithoutPrefix.Replace(threadNameWithoutPrefix.TrimStart(' '), "");
+//			Console.WriteLine(threadColumnOffset + message);
+//		}
 
 		// Acquire read permisson - join the reading group
 		public void ReaderAcquire() {
