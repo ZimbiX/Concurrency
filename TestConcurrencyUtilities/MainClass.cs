@@ -22,6 +22,7 @@ namespace TestConcurrencyUtilities
 			                  "\n  8. Exchanger" +
 			                  "\n  9. Active Object" +
 			                  "\n 10. Semaphore FIFO" +
+			                  "\n 11. Reader-Writer Lock" +
 			                  "\n  Q. Quit");
 			string response = "INVALID_RESPONSE";
 //			response = "1"; // Can preload with an option to choose automatically
@@ -41,6 +42,7 @@ namespace TestConcurrencyUtilities
 				case "8" : TestExchanger.Run(12, sleepTimeMs); 			break;
 				case "9" : TestActiveObject.Run();						break;
 				case "10": TestSemaphoreFIFO.Run(10,sleepTimeMs);		break;
+				case "11": TestReaderWriter.Run(sleepTimeMs);		break;
 				case "Q" : break;
 				default:
 					Console.WriteLine("Invalid response");

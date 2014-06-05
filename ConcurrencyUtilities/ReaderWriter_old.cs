@@ -2,11 +2,6 @@ using System;
 
 namespace ConcurrencyUtilities
 {
-	// A reader-writer can be used to manage permisson between threads that need read access or write access to something. Multiple threads can read something simultaneously with no problem, but when a thread needs to write to it, that thread must have sole access.
-	// A reader-write allows simultaneously either:
-	// - One writer; or
-	// - Any number of readers
-	// This version of ReaderWriter is incomplete due to not giving readers and writers fair treatment -- a writer has to wait for there to be no readers before it gets its turn
 	public class ReaderWriter_incomplete
 	{
 		Semaphore _permisson; // Or use a mutex since it's a simple lock only requiring one simultaneous access
