@@ -10,7 +10,7 @@ namespace TestConcurrencyUtilities
 	class TestSupport
 	{
 		// Create the specified number of thread objects which will run the supplied method. These are identified by the supplied name (onto which is added the thread's ID number). The threads are returned in a list object
-		public static List<Thread> CreateThreads(ThreadStart threadMethod, string threadID, int numThreads, int startingNum = 0, int columnWidth = 0, int startingColumn = 0) {
+		public static List<Thread> CreateThreads(ThreadStart threadMethod, string threadID, int numThreads, int startingNum = 0, int columnWidth = 0, int startingColumn = 1) {
 			List<Thread> threads = new List<Thread>();
 			for (int i = 0; i < numThreads; i++) {
 				Thread t = new Thread(threadMethod);
