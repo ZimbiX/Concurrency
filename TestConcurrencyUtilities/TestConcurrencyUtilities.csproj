@@ -44,6 +44,7 @@
     <Compile Include="TestMutex.cs" />
     <Compile Include="TestLightSwitch.cs" />
     <Compile Include="TestExchanger.cs" />
+    <Compile Include="TestActiveObject.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

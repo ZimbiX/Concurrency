@@ -12,15 +12,16 @@ namespace TestConcurrencyUtilities
 			int sleepTimeMs = (int)Math.Round(sleepTimeSeconds*1000);
 
 			Console.WriteLine("Which test do you want to run?" +
-				"\n  1. Semaphore" +
-				"\n  2. Channel" +
-				"\n  3. Bound Channel" +
-				"\n  4. Mutex" +
-				"\n  5. Latch" +
-				"\n  6. Barrier" +
-				"\n  7. Light Switch" +
-				"\n  8. Exchanger" +
-				"\n  Q. Quit");
+			                  "\n  1. Semaphore" +
+			                  "\n  2. Channel" +
+			                  "\n  3. Bound Channel" +
+			                  "\n  4. Mutex" +
+			                  "\n  5. Latch" +
+			                  "\n  6. Barrier" +
+			                  "\n  7. Light Switch" +
+			                  "\n  8. Exchanger" +
+			                  "\n  9. Active Object" +
+			                  "\n  Q. Quit");
 			string response = "INVALID_RESPONSE";
 //			response = "1"; // Can preload with an option to choose automatically
 			do {
@@ -37,6 +38,7 @@ namespace TestConcurrencyUtilities
 				case "6": TestBarrier.Run(4, sleepTimeMs); 				break;
 				case "7": TestLightSwitch.Run(5, sleepTimeMs); 			break;
 				case "8": TestExchanger.Run(12, sleepTimeMs); 			break;
+				case "9": TestActiveObject.Run();						break;
 				case "Q": break;
 				default:
 					Console.WriteLine("Invalid response");
