@@ -11,14 +11,15 @@ namespace TestConcurrencyUtilities
 	public class TestExchanger
 	{
 		static int _sleepTime;
+		static int _magnitude;
 		static Exchanger<string> _exchanger;
 
 		static void AttendExchange() {
 			string intelToGive = "I-" + TestSupport.ThreadName();
-			TestSupport.DebugThread("{red}Tx:"+intelToGive);
+			TestSupport.DebugThread("{yellow}Tx:"+intelToGive);
 			string intelReceived = _exchanger.Arrive(intelToGive);
 			if (intelReceived != intelToGive)
-				TestSupport.DebugThread("Rx:"+intelReceived);
+				TestSupport.DebugThread("{green}Rx:"+intelReceived);
 			else
 				TestSupport.DebugThread("ERROR:Rx:"+intelReceived);
 		}
@@ -28,7 +29,8 @@ namespace TestConcurrencyUtilities
 			AttendExchange();
 		}
 
-		public static void Run(int sleepTime) {
+		public static void Run(int magnitude, int sleepTime) {
+			_magnitude = magnitude;
 			_sleepTime = sleepTime;
 			_exchanger = new Exchanger<string>();
 
@@ -47,8 +49,8 @@ namespace TestConcurrencyUtilities
 			                "waiting for the other to arrive before parting ways (rendezvous).\n");
 
 			threads = new List<Thread>();
-			threads.AddRange( TestSupport.CreateThreads(AttendExchange, "A", 10, 0, 7+1, 1) );
-			TestSupport.EndColumnHeader(10, 7+1); // End the column header line
+			threads.AddRange( TestSupport.CreateThreads(AttendExchange, "A", _magnitude, 0, 7+1, 1) );
+			TestSupport.EndColumnHeader(_magnitude, 7+1); // End the column header line
 			TestSupport.RunThreads(threads);
 		}
 	}

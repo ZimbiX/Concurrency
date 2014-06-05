@@ -7,6 +7,8 @@
  * 
  ***********************************************/
 
+// Downloaded from: http://www.codeproject.com/Articles/24753/Using-ANSI-Colors-within-NET
+
 #region Using Directive
 
 using System;
