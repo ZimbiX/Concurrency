@@ -7,11 +7,11 @@ using System.Threading;
 
 namespace ConcurrencyUtilities
 {
-	// Status: complete, test complete, TODO: get marked off
 	/// <summary>
 	/// An exchanger allows two threads to meet and exchange data. If the other thread is not yet present at the
 	/// rendezvous, it is waited upon.
 	/// </summary>
+	// Status: complete, test complete, TODO: get marked off
 	public class Exchanger<T>
 	{
 		Semaphore _aArrived; // Whether thread A has arrived at the rendezvous, with data ready for thread B to collect
