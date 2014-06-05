@@ -15,8 +15,8 @@ namespace TestConcurrencyUtilities
 
 		private static void BarrierVisitor() {
 			TestSupport.DebugThread("{yellow}Entering");
-			_barrier.Arrive();
-			TestSupport.DebugThread("{green}Leaving");
+			bool isCaptain = _barrier.Arrive();
+			TestSupport.DebugThread("{green}Leaving" + (isCaptain ? "*" : ""));
 		}
 
 		public static void Run(int magnitude, int sleepTime = 0) {
@@ -26,7 +26,8 @@ namespace TestConcurrencyUtilities
 			TestSupport.Log(ConsoleColor.Blue, "Barrier test\n==============================");
 			TestSupport.Log(ConsoleColor.Blue, "\nBarrier size: " + magnitude +
 			                   "\nVisitor threads will start every " + TestSupport.StringFromMilliseconds(_sleepTime) +
-			                   "\nWe'll be testing 2 groups of the barrier size.\n");
+			                   "\nWe'll be testing 2 groups of the barrier size." +
+			                   "\nA '*' indicates the chosen barrier captain\n");
 
 			List<Thread> threads = new List<Thread>();
 			int column = 1;

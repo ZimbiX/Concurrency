@@ -27,8 +27,10 @@ namespace ConcurrencyUtilities
 
 		/// <summary>
 		/// Arrive at the barrier, and wait for the thread quota to be met before leaving the barrier.
+		/// Returns whether the thread was chosen to be captain of the barrier
 		/// </summary>
-		public void Arrive() {
+		public bool Arrive() {
+			bool isCaptain = false;
 			// Arrive at the barrier:
 
 			_accessToNumThreadsAtBarrier.Acquire(); // Also functions as a turnstile! =)
@@ -36,12 +38,15 @@ namespace ConcurrencyUtilities
 				if (_numThreadsAtBarrier == _numThreadsNeededAtBarrier) {
 					_goPermission.Release(_numThreadsAtBarrier); // The current thread just met the quota, so let through everyone that's here
 					_numThreadsAtBarrier = 0; // Reset the barrier
+					isCaptain = true;
 				}
 			_accessToNumThreadsAtBarrier.Release();
 
 			// Wait for permission to leave the barrier:
-
 			_goPermission.Acquire();
+
+			// Leave:
+			return isCaptain;
 		}
 	}
 }
