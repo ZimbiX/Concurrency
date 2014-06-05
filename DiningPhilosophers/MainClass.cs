@@ -34,9 +34,9 @@ namespace DiningPhilosophers
 
 			// Determine speed of philosophers
 
-			Console.Write("Do you want to have lightning-fast Philosophers?\nEnter (y/N):");
+			Console.Write("Do you want to have lightning-fast philosophers?\nEnter [y/N]:");
 			string response = Console.ReadLine();
-//			response = "Y"; // Can preload with an option to choose automatically
+//			response = "Y"; // Can preload with an option to use regardless
 			if (response.ToUpper() == "Y")
 				timeRange = new int[] { 0, 0 };
 			else
@@ -45,8 +45,9 @@ namespace DiningPhilosophers
 			// Determine which strategy to use
 
 			string strategy = "";
+			// I'd like to implement another solution strategy for this problem if I have time
 			Console.WriteLine("\nWhich strategy do you want to use?" +
-			                  "\n  0. None" +
+			                  "\n  0. None (issue demonstration)" +
 			                  "\n  1. Swap the chopstick that's picked up first for one philosopher" +
 			                  "\n  Q. Quit");
 			response = "INVALID_RESPONSE";
@@ -59,13 +60,14 @@ namespace DiningPhilosophers
 				switch (response) {
 				case "0": strategy = "NONE";						 	break;
 				case "1": strategy = "SWAP_FIRST_CHOPSTICK_FOR_ONE";	break;
-				case "Q": return;
+				case "Q": return; // Exit
 				default:
 					Console.WriteLine("Invalid response");
 					response = "INVALID_RESPONSE";
 					break;
 				}
 			} while (response == "INVALID_RESPONSE");
+			Console.WriteLine();
 
 			List<Chopstick> chopsticks = new List<Chopstick>();
 			List<Philosopher> philosophers = new List<Philosopher>();
