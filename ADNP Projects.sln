@@ -7,12 +7,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConcurrencyUtilities", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnsiColor", "AnsiColor\AnsiColor.csproj", "{9ABB8BD3-A26A-4E60-A28A-9AF0B98C8CAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiningPhilosophers", "DiningPhilosophers\DiningPhilosophers.csproj", "{80BE9EE5-88F0-4779-A7A5-087F7198745F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{80BE9EE5-88F0-4779-A7A5-087F7198745F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80BE9EE5-88F0-4779-A7A5-087F7198745F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80BE9EE5-88F0-4779-A7A5-087F7198745F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80BE9EE5-88F0-4779-A7A5-087F7198745F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{855A46C7-4AF4-426A-BAA3-F651CC54363F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{855A46C7-4AF4-426A-BAA3-F651CC54363F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{855A46C7-4AF4-426A-BAA3-F651CC54363F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,7 +33,7 @@ Global
 		{D83797F8-0CEC-4C9F-BD7C-8C9EDCDFB308}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = TestConcurrencyUtilities\TestConcurrencyUtilities.csproj
+		StartupItem = DiningPhilosophers\DiningPhilosophers.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
 		$1.FileWidth = 120

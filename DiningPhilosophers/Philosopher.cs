@@ -1,0 +1,50 @@
+using System;
+using ThreadSupport = TestConcurrencyUtilities.TestSupport;
+
+namespace DiningPhilosophers
+{
+	public class Philosopher
+	{
+		Chopstick _chopstickA; // Left, normally
+		Chopstick _chopstickB; // Right, normally
+		Random _rnd;
+		int[] _timeRange;
+
+		public Philosopher(Chopstick chopstickA, Chopstick chopstickB, Random rnd, int[] timeRange) {
+			_chopstickA = chopstickA;
+			_chopstickB = chopstickB;
+			_rnd = rnd;
+			_timeRange = timeRange;
+		}
+
+		public void Philosophise() {
+			while (true)
+				ThinkAndEat();
+		}
+
+		private void ThinkAndEat() {
+			// Think
+
+			ThreadSupport.DebugThread("{cyan}Thinking");
+			ThreadSupport.SleepThread(GetDurationForActivity(), false);
+
+			// Eat
+			
+			ThreadSupport.DebugThread("{yellow}Hungry");
+			_chopstickA.PickUp();
+			ThreadSupport.DebugThread("{green}{italic}Have A: " + _chopstickA.Name);
+			_chopstickB.PickUp();
+			ThreadSupport.DebugThread("{green}{italic}Have B: " + _chopstickA.Name);
+				ThreadSupport.DebugThread("{green}Eating");
+				ThreadSupport.SleepThread(GetDurationForActivity(), false);
+			_chopstickA.PutDown();
+			ThreadSupport.DebugThread("{green}{italic}Drop'd A: " + _chopstickA.Name);
+			_chopstickB.PutDown();
+			ThreadSupport.DebugThread("{green}{italic}Drop'd B: " + _chopstickA.Name);
+		}
+
+		int GetDurationForActivity() {
+			return _rnd.Next(_timeRange[0], _timeRange[1]);
+		}
+	}
+}
