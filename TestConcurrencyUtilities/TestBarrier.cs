@@ -14,9 +14,9 @@ namespace TestConcurrencyUtilities
 		private static Barrier _barrier;
 
 		private static void BarrierVisitor() {
-			TestSupport.DebugThread("is entering the barrier");
+			TestSupport.DebugThread("{yellow}Entering");
 			_barrier.Arrive();
-			TestSupport.DebugThreadWithPrefix("  ", "has left the barrier");
+			TestSupport.DebugThread("{green}Leaving");
 		}
 
 		public static void Run(int magnitude, int sleepTime = 0) {
@@ -25,11 +25,18 @@ namespace TestConcurrencyUtilities
 
 			TestSupport.Log(ConsoleColor.Blue, "Barrier test\n==============================");
 			TestSupport.Log(ConsoleColor.Blue, "\nBarrier size: " + magnitude +
-			                   "\nVisitor threads will start every " + TestSupport.StringFromMilliseconds(_sleepTime));
+			                   "\nVisitor threads will start every " + TestSupport.StringFromMilliseconds(_sleepTime) +
+			                   "\nWe'll be testing 2 groups of the barrier size.\n");
 
 			List<Thread> threads = new List<Thread>();
-			foreach (string threadName in new string[] {"Barrier visitor group 1 thread", "Barrier visitor group 2 thread"})
-				threads.AddRange(TestSupport.CreateThreads(BarrierVisitor, threadName, magnitude, 1));
+			int column = 1;
+			int columnWidth = 7+1;
+			foreach (string threadName in new string[] {"G1-", "G2-"}) {
+				threads.AddRange( TestSupport.CreateThreads(BarrierVisitor, threadName, magnitude, 1, columnWidth, column) );
+				column += magnitude;
+			}
+			TestSupport.EndColumnHeader(column-1, columnWidth); // End the column header line
+
 			foreach (Thread thread in threads) {
 				TestSupport.SleepThread(_sleepTime);
 				thread.Start();
