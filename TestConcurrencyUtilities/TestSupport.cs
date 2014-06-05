@@ -14,7 +14,7 @@ namespace TestConcurrencyUtilities
 			List<Thread> threads = new List<Thread>();
 			for (int i = 0; i < numThreads; i++) {
 				Thread t = new Thread(threadMethod);
-				if (numThreads == 1) {
+				if (columnWidth == 0) { // If not using columns
 					t.Name = threadID;
 				} else {
 					string idNumSpacer = columnWidth > 0 ? "" : " ";
@@ -102,6 +102,7 @@ namespace TestConcurrencyUtilities
 				int columnWhitespaceCount = (nameWithoutColumnIndicatorPrefix.IndexOf(shortName)); // Get the horizontal offset whitespace to use for column padding
 				columnWhitespace = new string(' ', columnWhitespaceCount);
 			}
+			// Uses 'AnsiColor', downloaded from: http://www.codeproject.com/Articles/24753/Using-ANSI-Colors-within-NET
 			Console.WriteLine(Colorizer.Colorize("{white}" + columnWhitespace + outputNameAndMessageSpacer + message));
 		}
 
