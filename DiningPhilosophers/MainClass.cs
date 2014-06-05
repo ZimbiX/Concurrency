@@ -76,15 +76,21 @@ namespace DiningPhilosophers
 			string[] directionsStandard = new string[] { "< ", ""  , ""  , " >" };
 			string[] directionsReversed = new string[] { ""  , " >", "< ", ""   };
 
+			// Create philosophers
+
 			if (strategy == "SWAP_FIRST_CHOPSTICK_FOR_ONE")
-				philosophers.Add(new Philosopher(chopsticks[1], chopsticks[0], rnd, timeRange, directionsReversed)); // Chopsticks reversed: fixes issue
+				// Chopsticks reversed: fixes issue
+				philosophers.Add(new Philosopher(chopsticks[1], chopsticks[0], rnd, timeRange, directionsReversed));
 			else
-				philosophers.Add(new Philosopher(chopsticks[0], chopsticks[1], rnd, timeRange, directionsStandard)); // Original: with issue
+				// Original: with issue
+				philosophers.Add(new Philosopher(chopsticks[0], chopsticks[1], rnd, timeRange, directionsStandard));
 
 			philosophers.Add(new Philosopher(chopsticks[1], chopsticks[2], rnd, timeRange, directionsStandard));
 			philosophers.Add(new Philosopher(chopsticks[2], chopsticks[3], rnd, timeRange, directionsStandard));
 			philosophers.Add(new Philosopher(chopsticks[3], chopsticks[4], rnd, timeRange, directionsStandard));
 			philosophers.Add(new Philosopher(chopsticks[4], chopsticks[0], rnd, timeRange, directionsStandard));
+
+			// Create and run philosopher threads
 
 			int columnWidth = 17;
 			List<Thread> threads = new List<Thread>();
