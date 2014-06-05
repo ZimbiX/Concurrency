@@ -39,7 +39,6 @@
     <Compile Include="BoundChannel.cs" />
     <Compile Include="Latch.cs" />
     <Compile Include="LightSwitch.cs" />
-    <Compile Include="ReaderWriter.cs" />
     <Compile Include="Barrier.cs" />
     <Compile Include="Exchanger.cs" />
     <Compile Include="ActiveObject.cs" />
@@ -47,6 +46,7 @@
     <Compile Include="ActiveObjectOutput.cs" />
     <Compile Include="ActiveObjectInputOutput.cs" />
     <Compile Include="SemaphoreFIFO.cs" />
+    <Compile Include="ReaderWriter_old.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
