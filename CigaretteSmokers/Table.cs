@@ -9,13 +9,10 @@ namespace CigaretteSmokers
 	{
 		List<SmokerResource> _resources;
 
-		public Object IterationID { get; private set; }
-		public Mutex AccessToIterationID { get; private set; }
 		Semaphore _startIteration;
 		Random _rnd;
 
 		public Table(List<SmokerResource> resources) {
-			AccessToIterationID = new Mutex();
 			_startIteration = new Semaphore(0);
 			_resources = resources;
 			_rnd = new Random();
@@ -28,12 +25,9 @@ namespace CigaretteSmokers
 				// Wait for a new iteration to begin before continuing (signalled by constructor / successful smoker)
 				_startIteration.Acquire();
 
-				// Start a new iteration
-				
-				AccessToIterationID.Acquire();
-					IterationID = new Object();
-					RestockTwoResources();
-				AccessToIterationID.Release();
+				// Start a new iteration. If using the iteration checking method, the IterationID has already been
+				// updated by the successful smoker -- avoiding modifying the 'agent' (table) from the original problem
+				RestockTwoResources();
 			}
 		}
 

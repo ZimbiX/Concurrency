@@ -37,6 +37,7 @@
     <Compile Include="Smoker.cs" />
     <Compile Include="Table.cs" />
     <Compile Include="SmokerResource.cs" />
+    <Compile Include="IterationManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -47,6 +48,10 @@
     <ProjectReference Include="..\TestConcurrencyUtilities\TestConcurrencyUtilities.csproj">
       <Project>{855A46C7-4AF4-426A-BAA3-F651CC54363F}</Project>
       <Name>TestConcurrencyUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AnsiColor\AnsiColor.csproj">
+      <Project>{9ABB8BD3-A26A-4E60-A28A-9AF0B98C8CAF}</Project>
+      <Name>AnsiColor</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
