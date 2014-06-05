@@ -6,6 +6,15 @@ using Mutex = ConcurrencyUtilities.Mutex;
 using Colorizer = AnsiColor.AnsiColor;
 using ThreadSupport = TestConcurrencyUtilities.TestSupport;
 
+/// <summary>
+/// A program to demonstrate the problem and one of the solutions to the Cigarette Smokers problem.
+/// There are three resources required in order to make a cigarette: tobacco, paper, and a match.
+/// There are three smokers, who each individually have an unlimited supply of a particular resource.
+/// An 'agent' supplies two of the three resources (one unit of each) at any one time. The smoker who has the
+/// complementing resource should grab the two supplied, make their cigarette, and smoke it. When a smoker takes both
+/// of the required resources from the 'agent', they should signal to the agent that it needs to supply another two
+/// resources, which it should then do.
+/// </summary>
 namespace CigaretteSmokers
 {
 	class MainClass
@@ -82,6 +91,7 @@ namespace CigaretteSmokers
 			List<Thread> threads = new List<Thread>();
 			threads.AddRange(ThreadSupport.CreateThreads(table.Run, "Table", 1, -1, columnWidth, 1));
 			for (int i = 0; i < 3; i++) {
+				// Select the method used to run the smoker based on the chosen solution strategy
 				ThreadStart threadMethod;
 				if (strategy == "RESOURCE_TURNSTILING_AND_ITERATION_CHECKING")
 					threadMethod = smokers[i].RunSolutionByResourceTurnstilingAndIterationChecking;
