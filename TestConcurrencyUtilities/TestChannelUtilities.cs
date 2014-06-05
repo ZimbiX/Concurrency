@@ -13,16 +13,16 @@ namespace TestConcurrencyUtilities
 		protected static Channel<string> _channel;
 
 		protected static void ChannelPut() {
-			TestSupport.DebugThread("will now attempt to put to the channel");
-			string item = "Data from " + Thread.CurrentThread.Name;
-			_channel.Put(item); // Lock (wait); put the item onto the channel; sleep; unlock; return
-			TestSupport.DebugThreadWithPrefix("    ", "enqueued: \"" + item + '"');
+			string item = TestSupport.ThreadName();
+			TestSupport.DebugThread("{yellow}Tx:" + item + "...");
+			_channel.Put(item); // Lock; put the item onto the channel; unlock; return
+			TestSupport.DebugThread("{green}Tx:" + item);
 		}
 
 		protected static void ChannelTake() {
-			TestSupport.DebugThread("will now attempt to take from the channel");
-			string item = _channel.Take(); // Lock (wait); take the item from the channel; sleep; unlock; return the item
-			TestSupport.DebugThreadWithPrefix("        ", "has dequeued: \"" + item + '"');
+			TestSupport.DebugThread("{yellow}Rx...");
+			string item = _channel.Take(); // Lock; take the item from the channel; unlock; return the item
+			TestSupport.DebugThread("{green}Rx:" + item);
 		}
 	}
 }
