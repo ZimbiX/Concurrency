@@ -4,7 +4,7 @@ using Colorizer = AnsiColor.AnsiColor;
 
 namespace TestConcurrencyUtilities
 {
-	public static class TestActiveObject
+	public static class TestActiveObjects
 	{
 		public static void Run() {
 			Channel<string> words = new Channel<string>();
@@ -39,9 +39,10 @@ namespace TestConcurrencyUtilities
 			} else {
 				Console.WriteLine(Colorizer.Colorize("{black}TestActiveObjectWordGenerator finished sending words " +
 				                                     "to its output channel; Stopping ActiveObject"));
-//				Stop();
-				(new Semaphore(0)).Acquire();
+//				Stop(); // Doesn't seem to have much effect currently... (it just continues to loop for a while)
+				(new Semaphore(0)).Acquire(); // Force pause
 			}
+			TestSupport.SleepThread(100, false); // No '...'
 			return word;
 		}
 	}

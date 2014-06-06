@@ -28,8 +28,10 @@ namespace ConcurrencyUtilities
 		/// Does not let you specify the number of tokens to acquire since you should never really need to acquire more than one at a time.
 		/// </summary>
 		public void Acquire() {
+			// Prepare for console logging in columns
 			string threadNameWithoutPrefix = Thread.CurrentThread.Name.Replace("%%%%","");
 			string threadColumnOffset = threadNameWithoutPrefix.Replace(threadNameWithoutPrefix.TrimStart(' '), "");
+
 			Object threadAwakener = new Object(); // Only used if required
 			bool waitingForAwakener = false;
 			lock (_lockObjectForAccessToFields) {
@@ -38,6 +40,7 @@ namespace ConcurrencyUtilities
 				} else {
 					// Add this thread to the back of the queue
 					_numThreadsQueued++;
+					// It's not good to be printing here, but this seems to be the only way to actually test this
 					Console.WriteLine(threadColumnOffset + "Acq.. O=" + _numThreadsQueued);
 					_threadQueue.Put(threadAwakener);
 					waitingForAwakener = true;
@@ -52,6 +55,7 @@ namespace ConcurrencyUtilities
 				}
 				lock (_lockObjectForAccessToFields) {
 					_numThreadsQueued--;
+					// It's not good to be printing here, but this seems to be the only way to actually test this
 					Console.WriteLine(threadColumnOffset + "Acq'd O=" + (10-_numThreadsQueued));
 				}
 			}

@@ -37,6 +37,7 @@ namespace ConcurrencyUtilities
 	///          v v v    v
 	/// 
 	/// </summary>
+	// Status: TODO: check if complete, TODO: check if test complete, TODO: get marked off
 	public class ReaderWriter
 	{
 		Mutex _permisson;

@@ -40,7 +40,7 @@ namespace TestConcurrencyUtilities
 				case "6" : TestBarrier.Run(4, sleepTimeMs);				break;
 				case "7" : TestLightSwitch.Run(5, sleepTimeMs); 		break;
 				case "8" : TestExchanger.Run(12, sleepTimeMs); 			break;
-				case "9" : TestActiveObject.Run();						break;
+				case "9" : TestActiveObjects.Run();						break;
 				case "10": TestSemaphoreFIFO.Run(10,sleepTimeMs);		break;
 				case "11": TestReaderWriter.Run(sleepTimeMs);		break;
 				case "Q" : break;

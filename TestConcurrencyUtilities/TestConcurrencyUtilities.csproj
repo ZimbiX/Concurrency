@@ -44,9 +44,9 @@
     <Compile Include="TestMutex.cs" />
     <Compile Include="TestLightSwitch.cs" />
     <Compile Include="TestExchanger.cs" />
-    <Compile Include="TestActiveObject.cs" />
     <Compile Include="TestSemaphoreFIFO.cs" />
     <Compile Include="TestReaderWriter.cs" />
+    <Compile Include="TestActiveObjects.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
