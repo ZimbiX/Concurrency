@@ -95,7 +95,6 @@ namespace CigaretteSmokers
 						ThreadSupport.DebugThread("{green}Smoking");
 						ThreadSupport.SleepThread(_greedyTime);
 						_iterationManager.NewIteration(); // Update the iteration ID for a new iteration
-						_table.ReadyToStartNewIteration(); // Allow the 'agent' table to restock more resources
 						// You'd do any actual work now
 					}
 				}
