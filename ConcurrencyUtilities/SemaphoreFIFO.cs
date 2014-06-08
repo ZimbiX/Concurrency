@@ -1,86 +1,91 @@
 using System;
 using System.Threading; // Required for access to Thread
 using System.Collections.Generic; // Required for access to List
+using Colorizer = AnsiColor.AnsiColor;
 
 namespace ConcurrencyUtilities
 {
-	// TODO: describe
+	/// <summary>
+	/// A FIFO Semaphore is a semaphore where delayed requests for tokens are granted in the order that they were made.
+	/// 
+	/// </summary>
 	// Status: TODO: check if complete, TODO: check if test complete, TODO: get marked off
 	public class SemaphoreFIFO
 	{
-		protected int _numTokens; // The number of tokens held by the semaphore
-		protected Object _lockObjectForAccessToFields = new Object(); // The object to be locked - determines whether _numTokens can be accessed. Avoids using 'lock this', to prevent things screwing up if some idiot locks using this semaphore as the lock object
-		protected Channel<Object> _threadQueue;
-		protected int _numThreadsQueued;
+		int _numTokens;
+		Channel<Semaphore> _threadQueue;
+		int _numThreadsQueued;
+		Mutex _mutex;
+		bool _internalTesting;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ConcurrencyUtilities.Semaphore"/> class.
 		/// </summary>
 		/// <param name="tokens">The number of tokens to start with (0 if unspecified).</param>
-		public SemaphoreFIFO(int tokens = 0) {
+		public SemaphoreFIFO(int tokens = 0, bool internalTesting = false) {
 			_numTokens = tokens;
-			_threadQueue = new Channel<object>();
+			_threadQueue = new Channel<Semaphore>();
+			_numThreadsQueued = 0;
+			_mutex = new Mutex();
+			_internalTesting = internalTesting;
 		}
 
-		/// <summary>
-		/// Take (acquire) a token from the semaphore.
-		/// Decreases the amount of tokens held in the semaphore.
-		/// Does not let you specify the number of tokens to acquire since you should never really need to acquire more than one at a time.
-		/// </summary>
-		public void Acquire() {
-			// Prepare for console logging in columns
+		void DebugThread(string message) {
+			// Prepare for console logging in columns -- used if _isTesting
 			string threadNameWithoutPrefix = Thread.CurrentThread.Name.Replace("%%%%","");
 			string threadColumnOffset = threadNameWithoutPrefix.Replace(threadNameWithoutPrefix.TrimStart(' '), "");
-
-			Object threadAwakener = new Object(); // Only used if required
-			bool waitingForAwakener = false;
-			lock (_lockObjectForAccessToFields) {
-				if (_numTokens > 0) {
-					_numTokens -= 1;
-				} else {
-					// Add this thread to the back of the queue
-					_numThreadsQueued++;
-					// It's not good to be printing here, but this seems to be the only way to actually test this
-					Console.WriteLine(threadColumnOffset + "Acq.. O=" + _numThreadsQueued);
-					_threadQueue.Put(threadAwakener);
-					waitingForAwakener = true;
-
-//					Monitor.Wait(_lockObjectForAccessToFields);
-				}
-			}
-			if (waitingForAwakener) {
-				// Wait for this thread to be woken
-				lock (threadAwakener) {
-					Monitor.Wait(threadAwakener); // Wait for a pulse on this object
-				}
-				lock (_lockObjectForAccessToFields) {
-					_numThreadsQueued--;
-					// It's not good to be printing here, but this seems to be the only way to actually test this
-					Console.WriteLine(threadColumnOffset + "Acq'd O=" + (10-_numThreadsQueued));
-				}
-			}
+			Console.WriteLine(threadColumnOffset + Colorizer.Colorize(message));
 		}
 
 		/// <summary>
-		/// Give (release) a number of tokens back to the semaphore.
-		/// Increases the amount of tokens held in the semaphore.
+		/// Take (acquire) a token from the FIFO semaphore.
+		/// Decreases the amount of tokens held in the FIFO semaphore.
+		/// Does not let you specify the number of tokens to acquire since you should never really need to
+		/// acquire more than one at a time.
+		/// If a token is not available, the thread joins a queue and waits for its turn to take one.
 		/// </summary>
-		/// <param name="n">The number of tokens to release into / give to the semaphore.</param>
-		public virtual void Release(int n) {
-			if (n < 1)
-				throw new System.ArgumentException("Parameter cannot be less than 1", "n");
-			lock (_lockObjectForAccessToFields) {
-				_numTokens += n;
-				if (_numThreadsQueued > 0) {
-					Object threadAwakener = _threadQueue.Take();
-					lock (threadAwakener) {
-						Monitor.PulseAll(threadAwakener); // Pulse on this object
-					}
+		public void Acquire() {
+			_mutex.Acquire();
+				if (_internalTesting)
+					DebugThread("{yellow}A:" + (_numThreadsQueued + 1));
+				if (_numTokens == 0) {
+					Semaphore tokenWaiter = new Semaphore();
+					_threadQueue.Put(tokenWaiter); // Join the end of the queue
+					_numThreadsQueued++;
+				_mutex.Release();
+				tokenWaiter.Acquire(); // Wait for a signal that it is our turn to take a token from the core token counter
+				_mutex.Acquire();
+					_numThreadsQueued--;
 				}
-			}
+				_numTokens--;
+				if (_internalTesting)
+					DebugThread("{green}A:" + (10 - _numThreadsQueued));
+			_mutex.Release();
 		}
 
-		public virtual void Release() {
+		/// <summary>
+		/// Give (release) a number of tokens back to the FIFO semaphore.
+		/// Increases the amount of tokens held in the FIFO semaphore.
+		/// Tokens are released iteratively. After releasing a token, check if there are any threads waiting; if so,
+		/// take the one at the front of the queue and wake it up so that it knows it can now take a token.
+		/// If multiple tokens are being released, the exact order of the front threads' departures does not matter.
+		/// </summary>
+		/// <param name="n">The number of tokens to release into / give to the semaphore.</param>
+		public void Release(int n) {
+			_mutex.Acquire(); /* This could be done inside the loop, but I feel that it'd be slightly faster to release
+				all the required tokens at once, rather than context switching a few times */
+				for (int i = 0; i < n; i++) {
+					_numTokens++; // Add a token to the core token counter
+					// If there's a thread at the front of the queue, signal to it that it's their turn to take a token from the core token counter
+					if (_numThreadsQueued > 0) {
+						Semaphore tokenWaiter = _threadQueue.Take();
+						tokenWaiter.Release(); // Signal its turn. It has to then wait until we release the mutex
+					}
+				}
+			_mutex.Release();
+		}
+
+		public void Release() {
 			Release(1);
 		}
 	}
