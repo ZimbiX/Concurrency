@@ -61,7 +61,7 @@ namespace TestConcurrencyUtilities
 			RunTestRound(false);
 		}
 
-		private static void RunTestRound(bool internalTesting) {
+		static void RunTestRound(bool internalTesting) {
 			_internalTesting = internalTesting;
 			_semaphoreFIFO = new SemaphoreFIFO(0, _internalTesting);
 
