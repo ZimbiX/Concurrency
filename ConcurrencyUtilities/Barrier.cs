@@ -5,7 +5,8 @@ using System.Threading;
 namespace ConcurrencyUtilities
 {
 	/// <summary>
-	/// A barrier is like the stalls in a horse race. It has a quota of threads. Threads enter the barrier, and stay there until the quota is met, at which point they can all leave.
+	/// A barrier is like the stalls in a horse race. It has a quota of threads. Threads enter the barrier,
+	/// and stay there until the quota is met, at which point they can all leave.
 	/// Once the barrier opens, it is reset; the next thread will wait for the quota to be met.
 	/// </summary>
 	// Status: complete, test complete, TODO: get marked off
@@ -18,19 +19,23 @@ namespace ConcurrencyUtilities
 			variable: _numThreadsAtBarrier */
 		readonly Semaphore _leavePermission;         // Semaphore that determines whether threads can leave the barrier
 		readonly Semaphore _entryTicket;             // Semaphore that determines whether threads can enter the barrier
-		readonly Semaphore _vacancy;                 // Semaphore that lets the captain know when all the other threads in the group have left
+		readonly Semaphore _vacancy;                 /* Semaphore that lets the captain know when all the other
+			threads in the group have left */
+		readonly bool _isTesting;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ConcurrencyUtilities.Barrier"/> class.
 		/// </summary>
-		/// <param name="numThreadsNeededAtBarrier">Number threads needed at the barrier for it to release all the threads.</param>
-		public Barrier(int numThreadsNeededAtBarrier) {
+		/// <param name="numThreadsNeededAtBarrier">Number threads needed at the barrier for it to release
+		/// all the threads.</param>
+		public Barrier(int numThreadsNeededAtBarrier, bool isTesting = false) {
 			_numThreadsAtBarrier = 0;
 			_accessToNumThreadsAtBarrier = new Mutex();
 			_numThreadsNeededAtBarrier = numThreadsNeededAtBarrier;
 			_leavePermission = new Semaphore(0);
 			_entryTicket = new Semaphore(numThreadsNeededAtBarrier);
 			_vacancy = new Semaphore();
+			_isTesting = isTesting;
 		}
 
 		/// <summary>
@@ -43,12 +48,12 @@ namespace ConcurrencyUtilities
 			string threadColumnOffset = threadNameWithoutPrefix.Replace(threadNameWithoutPrefix.TrimStart(' '), "");
 
 			bool isCaptain = false;
-			// Arrive at the barrier:
-			Console.WriteLine(threadColumnOffset + Colorizer.Colorize("{yellow}A"));
+			// Arrive at the barrier
 
 			// Enter if the barrier is not yet full, otherwise wait for a new group to begin
 			_entryTicket.Acquire();
-			Console.WriteLine(threadColumnOffset + Colorizer.Colorize("{cyan}E"));
+			if (_isTesting)
+				Console.WriteLine(threadColumnOffset + Colorizer.Colorize("{cyan}E"));
 
 			_accessToNumThreadsAtBarrier.Acquire();
 				_numThreadsAtBarrier++;
@@ -65,7 +70,8 @@ namespace ConcurrencyUtilities
 
 			// Wait for permission to leave the barrier (wait for the quota to be met):
 			_leavePermission.Acquire();
-			Console.WriteLine(threadColumnOffset + Colorizer.Colorize("{green}L" + (isCaptain ? "*" : "")));
+			if (_isTesting)
+				Console.WriteLine(threadColumnOffset + Colorizer.Colorize("{green}L" + (isCaptain ? "*" : "")));
 
 			// Now that this thread has effectively left the barrier...
 			if (isCaptain)

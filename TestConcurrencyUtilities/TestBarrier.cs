@@ -14,7 +14,7 @@ namespace TestConcurrencyUtilities
 		private static Barrier _barrier;
 
 		private static void BarrierVisitor() {
-//			TestSupport.DebugThread("{yellow}A");
+			TestSupport.DebugThread("{yellow}A");
 			bool isCaptain = _barrier.Arrive();
 //			TestSupport.DebugThread("{green}L" + (isCaptain ? "*" : ""));
 		}
@@ -22,7 +22,7 @@ namespace TestConcurrencyUtilities
 		public static void Run(int magnitude, int sleepTime = 0) {
 			_sleepTime = sleepTime;
 			_sleepTime *= 4; // TODO: revert
-			_barrier = new Barrier(magnitude);
+			_barrier = new Barrier(magnitude, true);
 			int numGroups = 6;
 
 			TestSupport.Log(ConsoleColor.Blue, "Barrier test\n==============================");
