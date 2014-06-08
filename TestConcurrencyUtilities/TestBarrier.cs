@@ -15,7 +15,8 @@ namespace TestConcurrencyUtilities
 
 		private static void BarrierVisitor() {
 			TestSupport.DebugThread("{yellow}A");
-			bool isCaptain = _barrier.Arrive();
+			_barrier.Arrive();
+//			bool isCaptain = _barrier.Arrive();
 //			TestSupport.DebugThread("{green}L" + (isCaptain ? "*" : ""));
 		}
 
