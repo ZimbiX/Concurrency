@@ -43,7 +43,7 @@ namespace ConcurrencyUtilities
 		/// Returns whether the thread was chosen to be captain of the barrier
 		/// </summary>
 		public bool Arrive() {
-			// Prepare for console logging in columns
+			// Prepare for console logging in columns -- used if _isTesting
 			string threadNameWithoutPrefix = Thread.CurrentThread.Name.Replace("%%%%","");
 			string threadColumnOffset = threadNameWithoutPrefix.Replace(threadNameWithoutPrefix.TrimStart(' '), "");
 
@@ -79,7 +79,6 @@ namespace ConcurrencyUtilities
 					now left, so allow the next group of threads to enter */
 			else
 				_vacancy.Release(); // Signal to the captain that another non-captain thread has left
-
 
 			// Leave:
 			return isCaptain;
