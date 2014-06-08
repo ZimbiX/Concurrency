@@ -23,13 +23,15 @@ namespace TestConcurrencyUtilities
 			_sleepTime = sleepTime;
 			_sleepTime *= 4; // TODO: revert
 			_barrier = new Barrier(magnitude);
+			int numGroups = 6;
 
 			TestSupport.Log(ConsoleColor.Blue, "Barrier test\n==============================");
 			TestSupport.Log(ConsoleColor.Blue, "\nBarrier size: " + magnitude +
-			                "\nVisitor threads will start every " + TestSupport.StringFromMilliseconds(_sleepTime) +
-			                "\nWe'll be testing 2 groups of the barrier size." +
+			                "\nSplit visitor thread groups will start every " +
+			                TestSupport.StringFromMilliseconds(_sleepTime) +
+			                "\nWe'll be testing " + numGroups + " groups of the barrier size." +
 			                "\nNote how threads may arrive at the barrier at any time, but threads of a new group " +
-			                "can only begin entering the barrier when it is empty.\n" +
+			                "can only begin entering the barrier once it is empty.\n" +
 			                "\nLegend:" +
 			                "\n- A -- thread has just arrived at the barrier (now waiting to enter it)" +
 			                "\n- E -- thread has just entered the barrier (now waiting to leave it)" +
@@ -39,7 +41,8 @@ namespace TestConcurrencyUtilities
 			List<Thread> threads = new List<Thread>();
 			int column = 1;
 			int columnWidth = 2+1;
-			threads.AddRange( TestSupport.CreateThreads(BarrierVisitor, "V", magnitude*6, -1, columnWidth, column) );
+			threads.AddRange( TestSupport.CreateThreads(BarrierVisitor, "V", magnitude * numGroups, -1,
+			                                            columnWidth, column) );
 			TestSupport.EndColumnHeader(column-1, columnWidth); // End the column header line
 
 
