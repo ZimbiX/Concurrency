@@ -38,7 +38,7 @@ namespace ConcurrencyUtilities
 	/// 
 	/// </summary>
 	// Status: TODO: check if complete, TODO: check if test complete, TODO: get marked off
-	public class ReaderWriter
+	public class ReaderWriter_old2
 	{
 		Mutex _permisson;
 		LightSwitch _lightSwitch;
@@ -53,7 +53,7 @@ namespace ConcurrencyUtilities
 		LightSwitch _blockWTS0;
 		LightSwitch _blockWTS1;
 
-		public ReaderWriter() {
+		public ReaderWriter_old2() {
 			_permisson = new Mutex();
 			_lightSwitch = new LightSwitch(_permisson);
 
