@@ -9,7 +9,7 @@ namespace ConcurrencyUtilities
 	/// A FIFO Semaphore is a semaphore where delayed requests for tokens are granted in the order that they were made.
 	/// 
 	/// </summary>
-	// Status: TODO: check if complete, TODO: check if test complete, TODO: get marked off
+	// Status: complete, test complete, TODO: get marked off
 	public class SemaphoreFIFO
 	{
 		int _numTokens;
