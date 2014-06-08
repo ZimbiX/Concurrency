@@ -14,33 +14,39 @@ namespace TestConcurrencyUtilities
 		private static Barrier _barrier;
 
 		private static void BarrierVisitor() {
-			TestSupport.DebugThread("{yellow}Entering");
+//			TestSupport.DebugThread("{yellow}A");
 			bool isCaptain = _barrier.Arrive();
-			TestSupport.DebugThread("{green}Leaving" + (isCaptain ? "*" : ""));
+//			TestSupport.DebugThread("{green}L" + (isCaptain ? "*" : ""));
 		}
 
 		public static void Run(int magnitude, int sleepTime = 0) {
 			_sleepTime = sleepTime;
+			_sleepTime *= 4; // TODO: revert
 			_barrier = new Barrier(magnitude);
 
 			TestSupport.Log(ConsoleColor.Blue, "Barrier test\n==============================");
 			TestSupport.Log(ConsoleColor.Blue, "\nBarrier size: " + magnitude +
-			                   "\nVisitor threads will start every " + TestSupport.StringFromMilliseconds(_sleepTime) +
-			                   "\nWe'll be testing 2 groups of the barrier size." +
-			                   "\nA '*' indicates the chosen barrier captain\n");
+			                "\nVisitor threads will start every " + TestSupport.StringFromMilliseconds(_sleepTime) +
+			                "\nWe'll be testing 2 groups of the barrier size." +
+			                "\nNote how threads may arrive at the barrier at any time, but threads of a new group " +
+			                "can only begin entering the barrier when it is empty.\n" +
+			                "\nLegend:" +
+			                "\n- A -- thread has just arrived at the barrier (now waiting to enter it)" +
+			                "\n- E -- thread has just entered the barrier (now waiting to leave it)" +
+			                "\n- L -- thread has just left the barrier" +
+			                "\n- L* -- thread has left the barrier as the captain for the group");
 
 			List<Thread> threads = new List<Thread>();
 			int column = 1;
-			int columnWidth = 7+1;
-			foreach (string threadName in new string[] {"G1-", "G2-"}) {
-				threads.AddRange( TestSupport.CreateThreads(BarrierVisitor, threadName, magnitude, 1, columnWidth, column) );
-				column += magnitude;
-			}
+			int columnWidth = 2+1;
+			threads.AddRange( TestSupport.CreateThreads(BarrierVisitor, "V", magnitude*6, -1, columnWidth, column) );
 			TestSupport.EndColumnHeader(column-1, columnWidth); // End the column header line
 
-			foreach (Thread thread in threads) {
-				TestSupport.SleepThread(_sleepTime);
-				thread.Start();
+
+			for (int i = 0; i < threads.Count; i++) {
+				if (((i+2) % 4) == 0) // Sleep halfway through starting each group
+					TestSupport.SleepThread(_sleepTime, "{white}" + new String('.', columnWidth * threads.Count));
+				threads[i].Start();
 			}
 			TestSupport.JoinThreads(threads);
 		}

@@ -50,4 +50,10 @@
     <Compile Include="ReaderWriter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\AnsiColor\AnsiColor.csproj">
+      <Project>{9ABB8BD3-A26A-4E60-A28A-9AF0B98C8CAF}</Project>
+      <Name>AnsiColor</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
