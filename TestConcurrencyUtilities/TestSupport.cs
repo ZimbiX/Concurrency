@@ -99,6 +99,8 @@ namespace TestConcurrencyUtilities
 		// Log a message to the console, indicating from which thread it originated
 		public static void DebugThread(string message) {
 			string longName = Thread.CurrentThread.Name;
+			if (longName == null)
+				longName = "%%%%"; // Column 1 (fixes unnecessarily including the spacer for no thread name)
 			string shortName = ThreadName(); // Get the real thread name without the column indicator or column padding
 			string outputNameAndMessageSpacer = shortName + " ";
 			string columnWhitespace = "";
@@ -116,7 +118,9 @@ namespace TestConcurrencyUtilities
 
 		public static string ThreadName() {
 			string name = Thread.CurrentThread.Name;
-			if (name.StartsWith("%%%%")) {
+			if (name == null) {
+				name = "";
+			} else if (name.StartsWith("%%%%")) {
 				// For the second column of an 8 character wide column layout, the thread's name would be:
 				// %%%%        Name
 				string nameWithoutColumnIndicatorPrefix = name.Substring(4);
@@ -134,6 +138,10 @@ namespace TestConcurrencyUtilities
 		//			DebugThread(message);
 		//			Console.ForegroundColor = ConsoleColor.White;
 		//		}
+
+		public static void Log(string message) {
+			Console.WriteLine(Colorizer.Colorize("{white}" + message));
+		}
 
 		public static void Log(ConsoleColor colour, string message) {
 			Console.ForegroundColor = colour;
