@@ -19,7 +19,7 @@ namespace ConcurrencyUtilities
 	/// Readers use a light switch to access the room. The '_roomEmpty' core permission is managed by this light switch.
 	/// </summary>
 	// Status: incorrect functionality; abandoned
-	public class ReaderWriter
+	public class ReaderWriter_old3
 	{
 		Mutex _roomEmpty;
 		LightSwitch _readSwitch;
@@ -32,7 +32,7 @@ namespace ConcurrencyUtilities
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ConcurrencyUtilities.ReaderWriter"/> class.
 		/// </summary>
-		public ReaderWriter(bool internalTesting = false) {
+		public ReaderWriter_old3(bool internalTesting = false) {
 			_roomEmpty = new Mutex(); /* Whether the room is empty -- effectively the core permission managed 
 			                           by the reader-writer lock */
 			_readSwitch = new LightSwitch(_roomEmpty); /* Keeps track of how many readers are in the room (and so 
