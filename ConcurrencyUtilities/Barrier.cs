@@ -9,7 +9,7 @@ namespace ConcurrencyUtilities
 	/// and stay there until the quota is met, at which point they can all leave.
 	/// Once the barrier opens, it is reset; the next thread will wait for the quota to be met.
 	/// </summary>
-	// Status: complete, test complete, TODO: get marked off
+	// Status: complete, test complete, marked off
 	public class Barrier
 	{
 		readonly int _numThreadsNeededAtBarrier;         /* The quota -- the number of threads that the barrier

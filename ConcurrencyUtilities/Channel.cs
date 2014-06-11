@@ -7,7 +7,7 @@ namespace ConcurrencyUtilities
 	/// <summary>
 	/// A channel is effectively a data queue that can be used as a thread-safe method of communicating data between threads
 	/// </summary>
-	// Status: complete, test complete, TODO: get marked off
+	// Status: complete, test complete, marked off
 	public class Channel<T>
 	{
 		protected readonly Semaphore _takePermission; // The tokens held by this semaphore correspond to the number of items currently held in the channel's queue. Decrementing this is required before something can be taken from the queue; it equates to permission to take

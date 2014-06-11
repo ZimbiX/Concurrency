@@ -6,7 +6,7 @@ namespace ConcurrencyUtilities
 	/// A mutex can be used in place of a lock. This isn't very useful for us in C# since the language aready supports lock
 	/// The mutex is a single-token (boolean) semaphore. It starts with 1 token to signify that it is not locked
 	/// </summary>
-	// Status: complete, test complete, get marked off
+	// Status: complete, test complete, marked off
 	public class Mutex: Semaphore
 	{
 		/// <summary>
