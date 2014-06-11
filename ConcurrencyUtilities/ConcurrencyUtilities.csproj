@@ -48,8 +48,8 @@
     <Compile Include="SemaphoreFIFO.cs" />
     <Compile Include="ReaderWriter_old.cs" />
     <Compile Include="ReaderWriter_old2.cs" />
-    <Compile Include="ReaderWriterAndrew.cs" />
     <Compile Include="ReaderWriter_old3.cs" />
+    <Compile Include="ReaderWriter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
