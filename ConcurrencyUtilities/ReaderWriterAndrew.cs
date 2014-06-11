@@ -3,6 +3,10 @@ using System.Threading; // Required for access to Thread
 
 namespace ConcurrencyUtilities
 {
+	/// <summary>
+	/// Reader writer lock based on Andrew's pseudocode from class.
+	/// </summary>
+	// Status: TODO: further understanding and add documentation, TODO: finalise test, TODO: get marked off
 	public class ReaderWriterAndrew
 	{
 		Mutex _corePermission;

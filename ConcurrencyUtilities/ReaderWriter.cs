@@ -18,7 +18,7 @@ namespace ConcurrencyUtilities
 	/// readers and writers again.
 	/// Readers use a light switch to access the room. The '_roomEmpty' core permission is managed by this light switch.
 	/// </summary>
-	// Status: TODO: make writer block new writers from queueing, test complete, TODO: get marked off
+	// Status: incorrect functionality; abandoned
 	public class ReaderWriter
 	{
 		Mutex _roomEmpty;
