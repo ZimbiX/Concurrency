@@ -1,35 +1,25 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TestConcurrencyUtilities/MainClass.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ConcurrencyUtilities/ReaderWriterAndrew.cs">
     <Files>
-      <File FileName="TestConcurrencyUtilities/TestComponents.cs" Line="1" Column="1" />
-      <File FileName="ConcurrencyUtilities/BoundChannel.cs" Line="1" Column="1" />
-      <File FileName="ConcurrencyUtilities/Channel.cs" Line="1" Column="1" />
-      <File FileName="ConcurrencyUtilities/AssemblyInfo.cs" Line="1" Column="1" />
-      <File FileName="ConcurrencyUtilities/Barrier.cs" Line="1" Column="1" />
-      <File FileName="ConcurrencyUtilities/TestSupport.cs" Line="1" Column="1" />
-      <File FileName="ConcurrencyUtilities/Latch.cs" Line="1" Column="1" />
-      <File FileName="TestConcurrencyUtilities/TestChannelUtilities.cs" Line="1" Column="1" />
-      <File FileName="TestConcurrencyUtilities/TestSemaphore.cs" Line="1" Column="1" />
-      <File FileName="TestConcurrencyUtilities/TestChannel.cs" Line="1" Column="1" />
-      <File FileName="TestConcurrencyUtilities/TestBoundChannel.cs" Line="1" Column="1" />
-      <File FileName="TestConcurrencyUtilities/MainClass.cs" Line="23" Column="2" />
-      <File FileName="TestConcurrencyUtilities/AssemblyInfo.cs" Line="1" Column="1" />
-      <File FileName="ConcurrencyUtilities/Semaphore.cs" Line="1" Column="1" />
-      <File FileName="ConcurrencyUtilities/LightSwitch.cs" Line="1" Column="1" />
-      <File FileName="ConcurrencyUtilities/Mutex.cs" Line="1" Column="1" />
-      <File FileName="ConcurrencyUtilities/ReaderWriter.cs" Line="1" Column="1" />
-      <File FileName="TestConcurrencyUtilities/TestLatch.cs" Line="1" Column="1" />
-      <File FileName="TestConcurrencyUtilities/TestBarrier.cs" Line="1" Column="1" />
+      <File FileName="ConcurrencyUtilities/ReaderWriter.cs" Line="20" Column="16" />
+      <File FileName="ConcurrencyUtilities/ReaderWriterAndrew.cs" Line="10" Column="19" />
+      <File FileName="TestConcurrencyUtilities/TestReaderWriter.cs" Line="127" Column="26" />
+      <File FileName="ConcurrencyUtilities/SemaphoreFIFO.cs" Line="53" Column="26" />
+      <File FileName="TestConcurrencyUtilities/TestSemaphoreFIFO.cs" Line="21" Column="29" />
+      <File FileName="ConcurrencyUtilities/Barrier.cs" Line="19" Column="37" />
+      <File FileName="ConcurrencyUtilities/ReaderWriter_old2.cs" Line="11" Column="22" />
+      <File FileName="TestConcurrencyUtilities/TestSupport.cs" Line="77" Column="4" />
+      <File FileName="ConcurrencyUtilities/Semaphore.cs" Line="1" Column="14" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="ConcurrencyUtilities" expanded="True" />
-          <Node name="TestConcurrencyUtilities" expanded="True" selected="True">
-            <Node name="TestChannel.cs" expanded="True" />
-            <Node name="TestChannelUtilities.cs" expanded="True" />
+          <Node name="AnsiColor" expanded="True" />
+          <Node name="ConcurrencyUtilities" expanded="True">
+            <Node name="ReaderWriterAndrew.cs" selected="True" />
           </Node>
+          <Node name="TestConcurrencyUtilities" expanded="True" />
         </State>
       </Pad>
       <Pad Id="ClassPad">

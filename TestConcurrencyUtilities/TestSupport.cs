@@ -113,7 +113,7 @@ namespace TestConcurrencyUtilities
 				columnWhitespace = new string(' ', columnWhitespaceCount);
 			}
 			// Uses 'AnsiColor', downloaded from: http://www.codeproject.com/Articles/24753/Using-ANSI-Colors-within-NET
-			Console.WriteLine(Colorizer.Colorize("{white}" + columnWhitespace + outputNameAndMessageSpacer + message));
+			Console.WriteLine(Colorizer.Colorize("{reset}" + columnWhitespace + outputNameAndMessageSpacer + message + "{reset}"));
 		}
 
 		public static string ThreadName() {
@@ -140,7 +140,7 @@ namespace TestConcurrencyUtilities
 		//		}
 
 		public static void Log(string message) {
-			Console.WriteLine(Colorizer.Colorize("{white}" + message));
+			Console.WriteLine(Colorizer.Colorize("{reset}" + message + "{reset}"));
 		}
 
 		public static void Log(ConsoleColor colour, string message) {
