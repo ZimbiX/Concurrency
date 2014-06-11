@@ -2,6 +2,7 @@ using System;
 using ConcurrencyUtilities;
 using System.Threading;
 using System.Collections.Generic;
+using TSpec = TestConcurrencyUtilities.TestSupport.TSpec;
 
 namespace TestConcurrencyUtilities
 {
@@ -15,7 +16,7 @@ namespace TestConcurrencyUtilities
 			_readerWriter.ReaderAcquire();
 			TestSupport.DebugThread("{!green}{black}RAcq");
 
-			TestSupport.SleepThread(_sleepTimeLocked);
+			TestSupport.SleepThread(_sleepTimeLocked/*, TODO: add column prefix */);
 
 			TestSupport.DebugThread("{!yellow}{black}RRel");
 			_readerWriter.ReaderRelease();
@@ -34,57 +35,24 @@ namespace TestConcurrencyUtilities
 			TestSupport.DebugThread("{!cyan}{black}WRel");
 		}
 
-		public static void Run(int sleepTimeLocked = 2000, int sleepTimeBetweenNewRequests = 100) {
+		public static void Run(int sleepTimeBetweenNewRequests = 500, int sleepTimeLocked = 2250, int numRounds = 3,
+		                       int sleepTimeBetweenRounds = 3000) {
 			_sleepTimeLocked = sleepTimeLocked;
-			int sleepTimeBetweenRounds = 3000;
 
-			TestSupport.Log(ConsoleColor.Blue, "Reader-Writer Lock test\n==============================");
+			TestSupport.Log(ConsoleColor.Blue, "\nReader-Writer Lock test\n==============================");
 
-//			RunTestRound(sleepTimeLocked);
-//			TestSupport.SleepThread(sleepTimeBetweenRounds);
-//			RunTestRound(sleepTimeBetweenNewRequests);
-//			TestSupport.SleepThread(sleepTimeBetweenRounds);
-//			RunTestRound(0);
-
-			while (true) { // TODO: remove
-				RunTestRoundForReaderPriorityFulfilmentOrder(sleepTimeBetweenNewRequests, true);
-				RunTestRoundForReaderPriorityFulfilmentOrder(sleepTimeBetweenNewRequests, false);
-			}
-
-		}
-
-		static void RunTestRound(int sleepTimeBetweenNewRequests) {
-			_readerWriter = new ReaderWriter();
-
-			TestSupport.Log(ConsoleColor.Blue, "\nTest with access duration of " +
-			                TestSupport.StringFromMilliseconds(_sleepTimeLocked) + ", and " +
+			TestSupport.Log(ConsoleColor.Blue, "\nTests have an access duration of " +
+			                TestSupport.StringFromMilliseconds(_sleepTimeLocked) + ", and wait " +
 			                TestSupport.StringFromMilliseconds(sleepTimeBetweenNewRequests) + " between new requests" +
-			                "\n------------------------------\n");
-			
-			// Create the threads:
-			
-			const int columnWidth = 10;
-			List<Thread> threads = new List<Thread>();
-			threads.AddRange(TestSupport.CreateThreads(Writer, "W", 1, 0, columnWidth, threads.Count + 1));
-			threads.AddRange(TestSupport.CreateThreads(Reader, "R", 4, 0, columnWidth, threads.Count + 1));
-			threads.AddRange(TestSupport.CreateThreads(Writer, "W", 2, 0, columnWidth, threads.Count + 1));
-			threads.AddRange(TestSupport.CreateThreads(Reader, "R", 2, 0, columnWidth, threads.Count + 1));
-			threads.AddRange(TestSupport.CreateThreads(Writer, "W", 1, 0, columnWidth, threads.Count + 1));
-			TestSupport.EndColumnHeader(threads.Count, columnWidth);
-			
-			// Start the threads:
-			
-			foreach (Thread t in threads) {
-				TestSupport.SleepThread(sleepTimeBetweenNewRequests, false);
-				t.Start();
+			                "\n------------------------------");
+
+			for (int i = 0; i < numRounds; i++) {
+				RunTestRounds(sleepTimeBetweenNewRequests);
+				TestSupport.SleepThread(sleepTimeBetweenRounds);
 			}
-			
-			// Wait for all the threads to finish:
-			
-			TestSupport.JoinThreads(threads);
 		}
 
-		static void RunTestRoundForReaderPriorityFulfilmentOrder(int sleepTimeBetweenNewRequests, bool useInternalTesting = false) {
+		static void RunTestRounds(int sleepTimeBetweenNewRequests) {
 			// Order of request:    W1, W2, R1, R2
 			// Order of fulfilment: W1, R1, R2, W2
 			// Desired test result log:
@@ -111,37 +79,43 @@ namespace TestConcurrencyUtilities
 			//           Rel
 			//           REL
 
-//			_readerWriter = new ReaderWriter(useInternalTesting);
-			_readerWriter = new ReaderWriter(); // TODO: revert
-
-			_sleepTimeLocked = 1000; // TODO: remove
-			sleepTimeBetweenNewRequests = 220; // TODO: remove
-
-			TestSupport.Log(ConsoleColor.Blue, "\nTest with access duration of " +
-			                TestSupport.StringFromMilliseconds(_sleepTimeLocked) + ", and " +
-			                TestSupport.StringFromMilliseconds(sleepTimeBetweenNewRequests) + " between new requests" +
-			                "\n------------------------------\n");
-
-			// Create the threads:
-
+			_readerWriter = new ReaderWriter();
 			const int columnWidth = 13;
-			List<Thread> threads = new List<Thread>();
-			threads.AddRange(TestSupport.CreateThreads(Writer, "W", 2, 1, columnWidth, threads.Count + 1));
-			threads.AddRange(TestSupport.CreateThreads(Reader, "R", 2, 1, columnWidth, threads.Count + 1));
-			threads.AddRange(TestSupport.CreateThreads(Reader, "R", 2, 1, columnWidth, threads.Count + 1));
-			threads.AddRange(TestSupport.CreateThreads(Writer, "W", 1, 1, columnWidth, threads.Count + 1));
-			TestSupport.EndColumnHeader(threads.Count, columnWidth);
 
-			// Start the threads:
-
-			foreach (Thread t in threads) {
-				TestSupport.SleepThread(sleepTimeBetweenNewRequests, false);
-				t.Start();
+			foreach (Func<int, List<Thread>> threadCreationMethod in new Func<int, List<Thread>>[] {
+				CreateTest1, CreateTest2
+			}) {
+				List<Thread> threads = threadCreationMethod(columnWidth);
+				TestSupport.RunThreads(threads, sleepTimeBetweenNewRequests);
 			}
+		}
 
-			// Wait for all the threads to finish:
-
-			TestSupport.JoinThreads(threads);
+		/// <summary>
+		/// Creates the threads for test 1.
+		/// </summary>
+		/// <returns>The threads to use for the test.</returns>
+		/// <param name="columnWidth">The character width for the thread logging columns, including padding.</param>
+		public static List<Thread> CreateTest1(int columnWidth) {
+			TestSupport.Log(ConsoleColor.Blue, "\nTest 1:\n");
+			return TestSupport.CreateThreadsFromThreadSpecs(new TSpec[] {
+				new TSpec("W", Writer, 2, 1),
+				new TSpec("R", Reader, 2, 1)
+			}, columnWidth);
+		}
+		
+		/// <summary>
+		/// Creates the threads for test 2 -- an extended version of test 1.
+		/// </summary>
+		/// <returns>The threads to use for the test.</returns>
+		/// <param name="columnWidth">The character width for the thread logging columns, including padding.</param>
+		public static List<Thread> CreateTest2(int columnWidth) {
+			TestSupport.Log(ConsoleColor.Blue, "\nTest 2:\n");
+			return TestSupport.CreateThreadsFromThreadSpecs(new TSpec[] {
+				new TSpec("W", Writer, 2, 1),
+				new TSpec("R", Reader, 2, 1),
+				new TSpec("R", Reader, 2, 3),
+				new TSpec("W", Writer, 1, 3)
+			}, columnWidth);
 		}
 	}
 }

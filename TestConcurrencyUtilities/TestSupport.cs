@@ -6,8 +6,38 @@ using Colorizer = AnsiColor.AnsiColor;
 
 namespace TestConcurrencyUtilities
 {
-	public class TestSupport
+
+	public static class TestSupport
 	{
+		public struct TSpec {
+			public ThreadStart Method;
+			public string Name;
+			public int NumThreads;
+			public int StartingNum;
+			
+			public TSpec(string name, ThreadStart method, int numThreads, int startingNum) {
+				Method = method;
+				Name = name;
+				NumThreads = numThreads;
+				StartingNum = startingNum;
+			}
+		}
+		
+		/// <summary>
+		/// Creates threads from the given array of thread specifications.
+		/// </summary>
+		/// <returns>The threads created from thethread specifications.</returns>
+		/// <param name="threadSpecs">An array of thread specifications.</param>
+		/// <param name="columnWidth">The character width for the thread logging columns, including padding.</param>
+		public static List<Thread> CreateThreadsFromThreadSpecs(TSpec[] threadSpecs, int columnWidth) {
+			List<Thread> threads = new List<Thread>();
+			foreach (TSpec ts in threadSpecs)
+				threads.AddRange(TestSupport.CreateThreads(ts.Method, ts.Name, ts.NumThreads, ts.StartingNum,
+				                                           columnWidth, threads.Count + 1));
+			TestSupport.EndColumnHeader(threads.Count, columnWidth);
+			return threads;
+		}
+
 		// Create the specified number of thread objects which will run the supplied method. These are identified by the supplied name (onto which is added the thread's ID number). The threads are returned in a list object
 		public static List<Thread> CreateThreads(ThreadStart threadMethod, string threadID, int numThreads, int startingNum = 0, int columnWidth = 0, int startingColumn = 1) {
 			List<Thread> threads = new List<Thread>();
@@ -24,13 +54,38 @@ namespace TestConcurrencyUtilities
 						t.Name = threadID + nameSuffix;
 					} else {
 						string realName = threadID + nameSuffix; // The real thread name without the column indicator or column padding
-						t.Name = "%%%%" + new string(' ', columnWidth * (i + startingColumn - 1)) + realName; // Add column indicator and column padding to the thread name
+						t.Name = CreateColumnIndicator(columnWidth, i + startingColumn - 1) + realName; // Add column indicator and column padding to the thread name
 						Console.Write(realName.PadRight(columnWidth)); // Output the header for this column. A manual newline will be required after creating all the required thread groups
 					}
 				}
 				threads.Add(t);
 			}
 			return threads;
+		}
+
+		public static string CreateColumnIndicator(int columnWidth, int columnNum) {
+			return "%%%%" + new string(' ', columnWidth * columnNum);
+		}
+
+		public static string ColumnPaddingFromLongName() {
+			string longName = ThreadLongName();
+			if (longName == null)
+				longName = "%%%%"; // Column 1 (fixes unnecessarily including the spacer for no thread name)
+			string shortName = ThreadName(); // Get the real thread name without the column indicator or column padding
+			string columnWhitespace = "";
+			if (longName.StartsWith("%%%%")) {
+				// For the second column of an 8 character wide column layout, the thread's name would be:
+				// %%%%        Name
+				string nameWithoutColumnIndicatorPrefix = longName.Substring(4);
+				// Get the horizontal offset whitespace to use for column padding
+				int columnWhitespaceCount = (nameWithoutColumnIndicatorPrefix.IndexOf(shortName));
+				columnWhitespace = new string(' ', columnWhitespaceCount);
+			}
+			return columnWhitespace;
+		}
+
+		public static bool IsColumnised() {
+			return ThreadLongName().StartsWith("%%%%");
 		}
 
 		// Create a single thread with a given name, returned in a list object
@@ -46,8 +101,15 @@ namespace TestConcurrencyUtilities
 		public static void RunThreads(List<Thread> threads) {
 			foreach (Thread t in threads)
 				t.Start();
-			foreach (Thread t in threads)
-				t.Join();
+			TestSupport.JoinThreads(threads); // Wait for all the threads to finish
+		}
+
+		public static void RunThreads(List<Thread> threads, int sleepTimeBetweenStarts) {
+			foreach (Thread t in threads) { // Start the threads
+				TestSupport.SleepThread(sleepTimeBetweenStarts, false);
+				t.Start();
+			}
+			TestSupport.JoinThreads(threads); // Wait for all the threads to finish
 		}
 
 		// Join the threads - wait for them all to finish
@@ -98,22 +160,22 @@ namespace TestConcurrencyUtilities
 
 		// Log a message to the console, indicating from which thread it originated
 		public static void DebugThread(string message) {
-			string longName = Thread.CurrentThread.Name;
-			if (longName == null)
-				longName = "%%%%"; // Column 1 (fixes unnecessarily including the spacer for no thread name)
-			string shortName = ThreadName(); // Get the real thread name without the column indicator or column padding
-			string outputNameAndMessageSpacer = shortName + " ";
-			string columnWhitespace = "";
-			if (longName.StartsWith("%%%%")) {
-				// For the second column of an 8 character wide column layout, the thread's name would be:
-				// %%%%        Name
-				outputNameAndMessageSpacer = ""; // Disable the forced spacing between a thread's name and message
-				string nameWithoutColumnIndicatorPrefix = longName.Substring(4);
-				int columnWhitespaceCount = (nameWithoutColumnIndicatorPrefix.IndexOf(shortName)); // Get the horizontal offset whitespace to use for column padding
-				columnWhitespace = new string(' ', columnWhitespaceCount);
-			}
+			string shortNameToLog = IsColumnised() ? "" : ThreadName() + " ";
+			string columnWhitespace = ColumnPaddingFromLongName();
+			Log(columnWhitespace + shortNameToLog + message);
+		}
+		
+		public static void DebugThreadWithPrefix(string prefix, string message) {
+			Console.WriteLine(prefix + Thread.CurrentThread.Name + " " + message);
+		}
+		
+		public static void Log(string message) {
 			// Uses 'AnsiColor', downloaded from: http://www.codeproject.com/Articles/24753/Using-ANSI-Colors-within-NET
-			Console.WriteLine(Colorizer.Colorize("{reset}" + columnWhitespace + outputNameAndMessageSpacer + message + "{reset}"));
+			Console.WriteLine(Colorizer.Colorize("{reset}" + message + "{reset}"));
+		}
+
+		public static string ThreadLongName() {
+			return Thread.CurrentThread.Name;
 		}
 
 		public static string ThreadName() {
@@ -127,20 +189,6 @@ namespace TestConcurrencyUtilities
 				name = nameWithoutColumnIndicatorPrefix.TrimStart(' '); // Get the real thread name without the column indicator or column padding
 			}
 			return name;
-		}
-
-		public static void DebugThreadWithPrefix(string prefix, string message) {
-			Console.WriteLine(prefix + Thread.CurrentThread.Name + " " + message);
-		}
-
-		//		public static void DebugThreadWithPrefix(ConsoleColor colour, string message) {
-		//			Console.ForegroundColor = colour;
-		//			DebugThread(message);
-		//			Console.ForegroundColor = ConsoleColor.White;
-		//		}
-
-		public static void Log(string message) {
-			Console.WriteLine(Colorizer.Colorize("{reset}" + message + "{reset}"));
 		}
 
 		public static void Log(ConsoleColor colour, string message) {

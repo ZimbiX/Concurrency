@@ -42,7 +42,7 @@ namespace TestConcurrencyUtilities
 				case "8" : TestExchanger.Run(12, sleepTimeMs); 			break;
 				case "9" : TestActiveObjects.Run();						break;
 				case "10": TestSemaphoreFIFO.Run(10, 300);				break;
-				case "11": TestReaderWriter.Run(2000);					break;
+				case "11": TestReaderWriter.Run();						break;
 				case "Q" : break;
 				default:
 					Console.WriteLine("Invalid response");
