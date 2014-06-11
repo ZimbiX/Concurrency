@@ -37,7 +37,7 @@ namespace ConcurrencyUtilities
 	///          v v v    v
 	/// 
 	/// </summary>
-	// Status: TODO: check if complete, TODO: check if test complete, TODO: get marked off
+	// Status: incorrect functionality; abandoned
 	public class ReaderWriter_old2
 	{
 		Mutex _permisson;

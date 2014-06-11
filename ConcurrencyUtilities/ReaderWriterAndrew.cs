@@ -7,7 +7,7 @@ namespace ConcurrencyUtilities
 	/// Reader writer lock based on Andrew's pseudocode from class.
 	/// </summary>
 	// Status: TODO: further understanding and add documentation, TODO: finalise test, TODO: get marked off
-	public class ReaderWriterAndrew
+	public class ReaderWriter
 	{
 		Mutex _corePermission;
 		LightSwitch _readersCorePremissonLS;
@@ -17,7 +17,7 @@ namespace ConcurrencyUtilities
 		Object _lockForNumReadersWaitingForAcquire;
 		// bool wasJustWriter;
 
-		public ReaderWriterAndrew() {
+		public ReaderWriter() {
 			_corePermission = new Mutex();
 			_readersCorePremissonLS = new LightSwitch(_corePermission);
 			_writerTS = new Mutex();

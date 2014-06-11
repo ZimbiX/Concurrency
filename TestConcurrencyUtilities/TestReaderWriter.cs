@@ -7,8 +7,7 @@ namespace TestConcurrencyUtilities
 {
 	public static class TestReaderWriter
 	{
-//		static ReaderWriter _readerWriter;
-		static ReaderWriterAndrew _readerWriter; // TODO: revert
+		static ReaderWriter _readerWriter;
 		static int _sleepTimeLocked;
 
 		public static void Reader() {
@@ -55,8 +54,7 @@ namespace TestConcurrencyUtilities
 		}
 
 		static void RunTestRound(int sleepTimeBetweenNewRequests) {
-//			_readerWriter = new ReaderWriter();
-			_readerWriter = new ReaderWriterAndrew(); // TODO: revert
+			_readerWriter = new ReaderWriter();
 
 			TestSupport.Log(ConsoleColor.Blue, "\nTest with access duration of " +
 			                TestSupport.StringFromMilliseconds(_sleepTimeLocked) + ", and " +
@@ -114,7 +112,7 @@ namespace TestConcurrencyUtilities
 			//           REL
 
 //			_readerWriter = new ReaderWriter(useInternalTesting);
-			_readerWriter = new ReaderWriterAndrew(); // TODO: revert
+			_readerWriter = new ReaderWriter(); // TODO: revert
 
 			_sleepTimeLocked = 1000; // TODO: remove
 			sleepTimeBetweenNewRequests = 220; // TODO: remove
