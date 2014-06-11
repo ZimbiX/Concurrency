@@ -15,7 +15,7 @@ namespace ConcurrencyUtilities
 	/// This version of ReaderWriter gives readers and writers fairer treatment (than a writer being blocked out by
 	/// having to wait for there to be no readers, while there actually isn't a gap where there aren't any readers).
 	/// </summary>
-	// Status: complete, TODO: finalise test, TODO: get marked off
+	// Status: complete, test complete, TODO: get marked off
 	public class ReaderWriter
 	{
 		Mutex _corePermission;                 // The core permisson that the readers are writers are gaining access to

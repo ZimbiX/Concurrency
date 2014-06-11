@@ -6,7 +6,6 @@ using Colorizer = AnsiColor.AnsiColor;
 
 namespace TestConcurrencyUtilities
 {
-
 	public static class TestSupport
 	{
 		public struct TSpec {
