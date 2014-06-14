@@ -6,73 +6,100 @@ using System.Collections.Generic;
 
 namespace RiverCrossing
 {
+	// Status: logic complete, test complete, TODO: documentation
 	class MainClass
 	{
+		static int _sleepTime;
 		static int _columnWidth;
-		static bool _displayColumnHeader;
+		static int _magnitude;
+		static Random _rand;
+
 		static Semaphore _lGroupPairer;
 		static Semaphore _mGroupPairer;
 		static Barrier _lGroupBarrier;
 		static Barrier _mGroupBarrier;
 		static Semaphore _boardPermission;
-//		static Semaphore _mPairCanBoard;
 		static Semaphore _lPartnerCanBoard;
 		static Semaphore _mPartnerCanBoard;
 		static Barrier _boatBarrier;
+
+		static int _numL;
+		static int _numM;
 
 		public static void Main(string[] args) {
 			_lGroupPairer = new Semaphore(2);
 			_mGroupPairer = new Semaphore(2);
 
-			_lGroupBarrier = new Barrier(2);      // Size: 2
-			_mGroupBarrier = new Barrier(2);      // Size: 2
+			_lGroupBarrier = new Barrier(2);
+			_mGroupBarrier = new Barrier(2);
 
-			_boardPermission = new Semaphore(2);    // Size: 2
-//			_mPairCanBoard = new Semaphore(2);    // Size: 2
+			_boardPermission = new Semaphore(2);
 
-			_lPartnerCanBoard = new Semaphore(0);     // Size: 1
-			_mPartnerCanBoard = new Semaphore(0);     // Size: 1
+			_lPartnerCanBoard = new Semaphore(0);
+			_mPartnerCanBoard = new Semaphore(0);
 
-			_boatBarrier = new Barrier(4);       // Size: 4
-			
+			_boatBarrier = new Barrier(4);
+
+			_sleepTime = 500;
 			_columnWidth = 9;
-			_displayColumnHeader = true;
+			_magnitude = 8; // How many pairs
+			_rand = new Random();
+			int sleepTimeBetweenRounds = 3000;
 
-//			bool areLinux = true;
-//			for (int i = 0; i < 10; i++) {
-			for (int i = 0; i < 10; i++) {
-				// Create two threads of each type
-				List<Thread> threadsIteration = new List<Thread>();
-				threadsIteration.AddRange(CreateProgrammerPair(true));
-				threadsIteration.AddRange(CreateProgrammerPair(false));
-				if (_displayColumnHeader) {
-					TestSupport.EndColumnHeader(4, _columnWidth);
-					_displayColumnHeader = false;
-				}
-				// Start them
-				foreach (Thread thread in threadsIteration)
-					thread.Start();
+			foreach (int sleepTimeBetweenThreadStarts in new int[] {_sleepTime, 0}) {
+				TestSupport.SleepThread(2000, true);
+				do {
+					_numL = 0;
+					_numM = 0;
+
+					List<Thread> threads = new List<Thread>();
+					for (int i = 0; i < _magnitude * 2; i++) {
+						threads.Add(CreateProgrammer(NextType(_rand)));
+					}
+					TestSupport.EndColumnHeader(_magnitude * 2, _columnWidth);
+					TestSupport.RunThreads(threads, sleepTimeBetweenThreadStarts);
+
+					TestSupport.SleepThread(sleepTimeBetweenRounds, false);
+					TestSupport.DebugThread(new String('\n', 20));
+				} while (sleepTimeBetweenThreadStarts == 0);
 			}
 		}
 
-		static List<Thread> CreateProgrammerPair(bool areLinux) {
+		static bool RandBool(Random rand) {
+			return rand.NextDouble() > 0.5;
+		}
+
+		static bool NextType(Random rand) {
+			int numRemaining = _magnitude * 2 - (_numL + _numM);
+			// Make sure the final thread has a partner
+//			if (numRemaining == 1) TestSupport.DebugThread("\nFinal thread is Linux hacker: " + (_numL < _numM));
+			if (numRemaining == 1)
+				return (_numM % 2 == 0); // TODO: fix!
+			return RandBool(rand);
+		}
+
+		static Thread CreateProgrammer(bool areLinux) {
 			if (areLinux)
-				return CreateProgrammerPair(true, _lGroupPairer, _lGroupBarrier, _lPartnerCanBoard);
+				return CreateProgrammer(true, _lGroupPairer, _lGroupBarrier, _lPartnerCanBoard);
 			else
-				return CreateProgrammerPair(false, _mGroupPairer, _mGroupBarrier, _mPartnerCanBoard);
+				return CreateProgrammer(false, _mGroupPairer, _mGroupBarrier, _mPartnerCanBoard);
 		}
 
-		static List<Thread> CreateProgrammerPair(bool areLinux, Semaphore groupPairer, Barrier groupBarrier,
-		                                         Semaphore partnerCanBoard) {
-			List<Thread> threadPair = new List<Thread>();
-			for (int i = 0; i < 2; i++) {
-				Programmer programmer = new Programmer(groupPairer, groupBarrier, _boardPermission, partnerCanBoard, _boatBarrier);
-				Thread thread = TestSupport.CreateThreads(programmer.Run, areLinux ? "LH" : "ME", 1, 1 + i,
-				                                          _columnWidth, (areLinux ? 3 : 1) + i,
-				                                          _displayColumnHeader)[0];
-				threadPair.Add(thread);
+		static Thread CreateProgrammer(bool isLinux, Semaphore groupPairer, Barrier groupBarrier,
+		                                     Semaphore partnerCanBoard) {
+			Programmer programmer = new Programmer(isLinux, groupPairer, groupBarrier, _boardPermission,
+			                                       partnerCanBoard, _boatBarrier);
+			string name;
+			if (isLinux) {
+				_numL++;
+				name = "LH";
+			} else {
+				_numM++;
+				name = "ME";
 			}
-			return threadPair;
+			int columnNum = _numL + _numM;
+			int nameNum = isLinux ? _numL : _numM;
+			return TestSupport.CreateThreads(programmer.Run, name, 1, nameNum, _columnWidth, columnNum)[0];
 		}
 	}
 }
