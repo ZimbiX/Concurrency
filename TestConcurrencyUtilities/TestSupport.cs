@@ -175,14 +175,15 @@ namespace TestConcurrencyUtilities
 		}
 
 		public static string ThreadLongName() {
-			return Thread.CurrentThread.Name;
+			string name = Thread.CurrentThread.Name;
+			if (name == null)
+				name = "";
+			return name;
 		}
 
 		public static string ThreadName() {
-			string name = Thread.CurrentThread.Name;
-			if (name == null) {
-				name = "";
-			} else if (name.StartsWith("%%%%")) {
+			string name = ThreadLongName();
+			if (name.StartsWith("%%%%")) {
 				// For the second column of an 8 character wide column layout, the thread's name would be:
 				// %%%%        Name
 				string nameWithoutColumnIndicatorPrefix = name.Substring(4);
