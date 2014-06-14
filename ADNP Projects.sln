@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiningPhilosophers", "Dinin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CigaretteSmokers", "CigaretteSmokers\CigaretteSmokers.csproj", "{8CE9B858-CF82-4430-95E1-D7B3279720A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiverCrossing", "RiverCrossing\RiverCrossing.csproj", "{C7133AF0-4C11-434A-99E5-7AD688164991}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,13 +35,17 @@ Global
 		{9ABB8BD3-A26A-4E60-A28A-9AF0B98C8CAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9ABB8BD3-A26A-4E60-A28A-9AF0B98C8CAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9ABB8BD3-A26A-4E60-A28A-9AF0B98C8CAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7133AF0-4C11-434A-99E5-7AD688164991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7133AF0-4C11-434A-99E5-7AD688164991}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7133AF0-4C11-434A-99E5-7AD688164991}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7133AF0-4C11-434A-99E5-7AD688164991}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D83797F8-0CEC-4C9F-BD7C-8C9EDCDFB308}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D83797F8-0CEC-4C9F-BD7C-8C9EDCDFB308}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D83797F8-0CEC-4C9F-BD7C-8C9EDCDFB308}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D83797F8-0CEC-4C9F-BD7C-8C9EDCDFB308}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = TestConcurrencyUtilities\TestConcurrencyUtilities.csproj
+		StartupItem = RiverCrossing\RiverCrossing.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
 		$1.FileWidth = 120

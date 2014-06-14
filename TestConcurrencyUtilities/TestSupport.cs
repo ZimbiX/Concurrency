@@ -38,7 +38,7 @@ namespace TestConcurrencyUtilities
 		}
 
 		// Create the specified number of thread objects which will run the supplied method. These are identified by the supplied name (onto which is added the thread's ID number). The threads are returned in a list object
-		public static List<Thread> CreateThreads(ThreadStart threadMethod, string threadID, int numThreads, int startingNum = 0, int columnWidth = 0, int startingColumn = 1) {
+		public static List<Thread> CreateThreads(ThreadStart threadMethod, string threadID, int numThreads, int startingNum = 0, int columnWidth = 0, int startingColumn = 1, bool displayColumnHeader = true) {
 			List<Thread> threads = new List<Thread>();
 			for (int i = 0; i < numThreads; i++) {
 				Thread t = new Thread(threadMethod);
@@ -54,7 +54,8 @@ namespace TestConcurrencyUtilities
 					} else {
 						string realName = threadID + nameSuffix; // The real thread name without the column indicator or column padding
 						t.Name = CreateColumnIndicator(columnWidth, i + startingColumn - 1) + realName; // Add column indicator and column padding to the thread name
-						Console.Write(realName.PadRight(columnWidth)); // Output the header for this column. A manual newline will be required after creating all the required thread groups
+						if (displayColumnHeader)
+							Console.Write(realName.PadRight(columnWidth)); // Output the header for this column. A manual newline will be required after creating all the required thread groups
 					}
 				}
 				threads.Add(t);
