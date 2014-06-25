@@ -6,6 +6,9 @@ using Semaphore = ConcurrencyUtilities.Semaphore;
 using TestConcurrencyUtilities;
 using System.Collections.Generic;
 
+/// <summary>
+/// This program is a demonstration of the LBOS solution to Hilzer's Barbershop problem.
+/// </summary>
 namespace HilzerBarbershop
 {
 	class MainClass
@@ -87,7 +90,7 @@ namespace HilzerBarbershop
 			_cash.Release();
 			_receipt.Acquire();
 			TestSupport.DebugThread("{!green}{black}Pay");
-			_chair.Release();
+			_chair.Release(); // This was missing from the LBOS solution
 			TestSupport.DebugThread("{!red}{black}SitInBarberChair");
 
 			_mutex.Acquire();

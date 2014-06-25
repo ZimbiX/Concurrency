@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiverCrossing", "RiverCross
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HilzerBarbershop", "HilzerBarbershop\HilzerBarbershop.csproj", "{D054AF4C-BE74-480D-8532-CDF1A805B61F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZorkServer", "ZorkServer\ZorkServer.csproj", "{BC8D2ACA-83A6-45BC-97DB-92E439796060}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{9ABB8BD3-A26A-4E60-A28A-9AF0B98C8CAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9ABB8BD3-A26A-4E60-A28A-9AF0B98C8CAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9ABB8BD3-A26A-4E60-A28A-9AF0B98C8CAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC8D2ACA-83A6-45BC-97DB-92E439796060}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC8D2ACA-83A6-45BC-97DB-92E439796060}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC8D2ACA-83A6-45BC-97DB-92E439796060}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC8D2ACA-83A6-45BC-97DB-92E439796060}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C7133AF0-4C11-434A-99E5-7AD688164991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C7133AF0-4C11-434A-99E5-7AD688164991}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7133AF0-4C11-434A-99E5-7AD688164991}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,7 +57,7 @@ Global
 		{D83797F8-0CEC-4C9F-BD7C-8C9EDCDFB308}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = HilzerBarbershop\HilzerBarbershop.csproj
+		StartupItem = ZorkServer\ZorkServer.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
 		$1.FileWidth = 120
