@@ -5,11 +5,11 @@ namespace ZorkServer
 {
 	public class TakeItemProcessor: ActiveObjectInputOutput<string[], string>
 	{
-		public static bool HaveStone { get; private set; } // It's not really worth making a player / game state class just to store this, or even worry about concurrency protection in this demo
+		public static bool HaveStone { get; private set; } /* It's not really worth making a player / game state class
+			just to store this, or even worry about concurrency protection in this demo */
 
-		public TakeItemProcessor(Channel<string[]> takeItemCommand, Channel<string> commandResult): base(takeItemCommand, commandResult) {
-
-		}
+		public TakeItemProcessor(Channel<string[]> takeItemCommand, Channel<string> commandResult):
+			base(takeItemCommand, commandResult) {}
 
 		protected override string Process(string[] items) {
 			if (items[0] == "stone") {

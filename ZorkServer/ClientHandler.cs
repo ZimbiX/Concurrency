@@ -4,15 +4,18 @@ using System.Net.Sockets;
 
 namespace ZorkServer
 {
-	// Input: messages to send to the client through the network stream
-	// Output: commands from the client to send to the command parser
+	// Input channel: messages to send to the client through the network stream
+	// Output channel: commands from the client to send to the command parser
+	// Can't use a more specific active object class, as it is not functioning in the standard manner of waiting for
+	// input on a channel as the prompt to start processing.
 	public class ClientHandler: ActiveObject
 	{
 		NetworkStream _networkStream;
 		Channel<string> _command;
 		Channel<string> _commandResultMessage;
 
-		public ClientHandler(NetworkStream networkStream, Channel<string> command, Channel<string> commandResultMessage): base() {
+		public ClientHandler(NetworkStream networkStream, Channel<string> command,
+		                     Channel<string> commandResultMessage): base() {
 			_networkStream = networkStream;
 			_command = command;
 			_commandResultMessage = commandResultMessage;
@@ -45,7 +48,6 @@ namespace ZorkServer
 			_command.Put(commandRead);
 
 			// 3. Wait for a result message from the command execution
-//			string resultMessage = "Done\n";
 			string resultMessage = _commandResultMessage.Take();
 
 			// 4. Send the result message to the client

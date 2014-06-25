@@ -5,9 +5,8 @@ namespace ZorkServer
 {
 	public class UseItemProcessor: ActiveObjectInputOutput<string[], string>
 	{
-		public UseItemProcessor(Channel<string[]> useItemCommand, Channel<string> commandResult): base(useItemCommand, commandResult) {
-
-		}
+		public UseItemProcessor(Channel<string[]> useItemCommand, Channel<string> commandResult):
+			base(useItemCommand, commandResult) {}
 
 		protected override string Process(string[] items) {
 			if (items[0] != "key")

@@ -3,6 +3,7 @@ using ConcurrencyUtilities;
 
 namespace ZorkServer
 {
+	// Can't use an ActiveObjectInputOutput as there are multiple output channels
 	public class CommandParser: ActiveObjectInput<string>
 	{
 		Channel<string[]> _changeRoomCommand;
@@ -12,7 +13,9 @@ namespace ZorkServer
 
 		// Input channel: command
 		// Manual output channels: changeRoomCommand, useItemCommand, takeItemCommand, invalidCommand
-		public CommandParser(Channel<string> command, Channel<string[]> changeRoomCommand, Channel<string[]> useItemCommand, Channel<string[]> takeItemCommand, Channel<string[]> invalidCommand): base(command) {
+		public CommandParser(Channel<string> command, Channel<string[]> changeRoomCommand,
+		                     Channel<string[]> useItemCommand, Channel<string[]> takeItemCommand,
+		                     Channel<string[]> invalidCommand): base(command) {
 			_changeRoomCommand = changeRoomCommand;
 			_useItemCommand = useItemCommand;
 			_takeItemCommand = takeItemCommand;
@@ -63,7 +66,10 @@ namespace ZorkServer
 			return words[1];
 		}
 
-		// Automatically process commands that appear in the command channel
+		/// <summary>
+		/// Automatically process commands that appear in the command channel
+		/// </summary>
+		/// <param name="command">The command string to parse.</param>
 		protected override void Process(string command) {
 			string[] words = command.ToLower().Split(' ');
 			if (IsDirectionCommand(words))

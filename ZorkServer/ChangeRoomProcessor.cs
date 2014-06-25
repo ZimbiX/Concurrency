@@ -5,9 +5,8 @@ namespace ZorkServer
 {
 	public class ChangeRoomProcessor: ActiveObjectInputOutput<string[], string>
 	{
-		public ChangeRoomProcessor(Channel<string[]> changeRoomCommand, Channel<string> commandResult): base(changeRoomCommand, commandResult) {
-
-		}
+		public ChangeRoomProcessor(Channel<string[]> changeRoomCommand, Channel<string> commandResult):
+			base(changeRoomCommand, commandResult) {}
 
 		protected override string Process(string[] command) {
 			string direction = command[0];
