@@ -72,9 +72,8 @@ namespace RiverCrossing
 		static bool NextType(Random rand) {
 			int numRemaining = _magnitude * 2 - (_numL + _numM);
 			// Make sure the final thread has a partner
-//			if (numRemaining == 1) TestSupport.DebugThread("\nFinal thread is Linux hacker: " + (_numL < _numM));
 			if (numRemaining == 1)
-				return (_numM % 2 == 0); // TODO: fix!
+				return (_numM % 2 == 0);
 			return RandBool(rand);
 		}
 
