@@ -38,12 +38,15 @@ namespace TestConcurrencyUtilities
 		}
 
 		// Create the specified number of thread objects which will run the supplied method. These are identified by the supplied name (onto which is added the thread's ID number). The threads are returned in a list object
-		public static List<Thread> CreateThreads(ThreadStart threadMethod, string threadID, int numThreads, int startingNum = 0, int columnWidth = 0, int startingColumn = 1, bool displayColumnHeader = true) {
+		public static List<Thread> CreateThreads(ThreadStart threadMethod, string threadID, int numThreads, int startingNum = -1, int columnWidth = 0, int startingColumn = 1, bool displayColumnHeader = true) {
 			List<Thread> threads = new List<Thread>();
 			for (int i = 0; i < numThreads; i++) {
 				Thread t = new Thread(threadMethod);
 				if (columnWidth == 0) { // If not using columns
-					t.Name = threadID;
+					string name = threadID;
+					if (startingNum != -1)
+						name += " " + (i + startingNum).ToString();
+					t.Name = name;
 				} else {
 					string idNumSpacer = columnWidth > 0 ? "" : " ";
 					string nameSuffix = "";;
