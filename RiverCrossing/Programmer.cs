@@ -54,7 +54,7 @@ namespace RiverCrossing
 		}
 
 		void Row() {
-			TestSupport.DebugThread("{!green}{black}Row{reset}\n" + new String('-', 200));
+			TestSupport.DebugThread("{!green}{black}Row{reset}\n" + new String('-', 144));
 		}
 	}
 }

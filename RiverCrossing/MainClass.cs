@@ -48,7 +48,9 @@ namespace RiverCrossing
 
 			foreach (int sleepTimeBetweenThreadStarts in new int[] {_sleepTime, 0}) {
 				TestSupport.SleepThread(2000, true);
+				string speed = sleepTimeBetweenThreadStarts == 0 ? "Fast" : "Slow";
 				do {
+					TestSupport.DebugThread("{blue}" + speed + " test round\n------------------------------\n");
 					_numL = 0;
 					_numM = 0;
 
@@ -60,7 +62,8 @@ namespace RiverCrossing
 					TestSupport.RunThreads(threads, sleepTimeBetweenThreadStarts);
 
 					TestSupport.SleepThread(sleepTimeBetweenRounds, false);
-					TestSupport.DebugThread(new String('\n', 20));
+					//					TestSupport.DebugThread(new String('\n', 20));
+					TestSupport.DebugThread("\n\n");
 				} while (sleepTimeBetweenThreadStarts == 0);
 			}
 		}
