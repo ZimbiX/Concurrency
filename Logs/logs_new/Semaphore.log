@@ -1,0 +1,57 @@
+Which test do you want to run?
+  1. Semaphore
+  2. Channel
+  3. Bound Channel
+  4. Mutex
+  5. Latch
+  6. Barrier
+  7. Light Switch
+  8. Exchanger
+  9. Active Object
+ 10. Semaphore FIFO
+ 11. Reader-Writer Lock
+  Q. Quit
+Enter: [0m    T_Sem_TokenAcq is now attempting to acquire a token from the semaphore[0m
+[0m    T_Sem_TokenAcq is now attempting to acquire a token from the semaphore[0m
+[0m    T_Sem_TokenAcq is now attempting to acquire a token from the semaphore[0m
+[0m    T_Sem_TokenAcq is now attempting to acquire a token from the semaphore[0m
+[0m    T_Sem_TokenAcq is now attempting to acquire a token from the semaphore[0m
+[0m    T_Sem_TokenAcq is now attempting to acquire a token from the semaphore[0m
+[0m    T_Sem_TokenAcq is now attempting to acquire a token from the semaphore[0m
+[0m    T_Sem_TokenAcq is now attempting to acquire a token from the semaphore[0m
+[0m    T_Sem_TokenAcq is now attempting to acquire a token from the semaphore[0m
+[0m    T_Sem_TokenAcq is now attempting to acquire a token from the semaphore[0m
+[37m...
+
+[0mT_Sem_TokenRel is about to release 3 token(s) to the semaphore (after a sleep)[0m
+[37m...
+[0mT_Sem_TokenRel is releasing 3 token(s) to the semaphore[0m
+[0m    T_Sem_TokenAcq has acquired a token from the semaphore[0m
+[0m    T_Sem_TokenAcq has acquired a token from the semaphore[0m
+[0m    T_Sem_TokenAcq has acquired a token from the semaphore[0m
+[37m...
+
+[0mT_Sem_TokenRel is about to release 3 token(s) to the semaphore (after a sleep)[0m
+[37m...
+[0mT_Sem_TokenRel is releasing 3 token(s) to the semaphore[0m
+[0m    T_Sem_TokenAcq has acquired a token from the semaphore[0m
+[0m    T_Sem_TokenAcq has acquired a token from the semaphore[0m
+[0m    T_Sem_TokenAcq has acquired a token from the semaphore[0m
+[37m...
+
+[0mT_Sem_TokenRel is about to release 3 token(s) to the semaphore (after a sleep)[0m
+[37m...
+[0mT_Sem_TokenRel is releasing 3 token(s) to the semaphore[0m
+[0m    T_Sem_TokenAcq has acquired a token from the semaphore[0m
+[0m    T_Sem_TokenAcq has acquired a token from the semaphore[0m
+[0m    T_Sem_TokenAcq has acquired a token from the semaphore[0m
+[37m...
+
+[0mT_Sem_TokenRel is about to release 1 token(s) to the semaphore (after a sleep)[0m
+[37m...
+[0mT_Sem_TokenRel is releasing 1 token(s) to the semaphore[0m
+[0m    T_Sem_TokenAcq has acquired a token from the semaphore[0m
+
+Finished
+
+All threads have finished

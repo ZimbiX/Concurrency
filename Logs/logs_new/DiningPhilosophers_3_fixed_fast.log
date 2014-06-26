@@ -1,0 +1,121 @@
+[34mDining Philosopher problem
+===============================
+
+Do you want to have lightning-fast philosophers?
+Enter [y/N]:
+Which strategy do you want to use?
+  0. None (issue demonstration)
+  1. Swap the chopstick that's picked up first for one philosopher
+  Q. Quit
+Enter: 
+P1               P2               P3               P4               P5               
+-------------------------------------------------------------------------------------
+[0m                                                   [36mThinking[0m
+[0m[36mThinking[0m
+[0m                 [36mThinking[0m
+[0m                                                                    [36mThinking[0m
+[0m                                                   [33mHungry[0m
+[0m                 [33mHungry[0m
+[0m[33mHungry[0m
+[0m                                                                    [33mHungry[0m
+[0m                                                   [30m< Have A: C3.5[0m
+[0m                                                                    [30m< Have A: C4.5[0m
+[0m                 [30m< Have A: C1.5[0m
+[0m                 [30mHave B: C2.5 >[0m
+[0m                 [32mEating[0m
+[0m                                                                    [30mHave B: C0.5 >[0m
+[0m                                                                    [32mEating[0m
+[0m                                                   [30mHave B: C4.5 >[0m
+[0m                 [30m< Drop'd A: C1.5[0m
+[0m                                                                    [30m< Drop'd A: C4.5[0m
+[0m[30mHave A: C1.5 >[0m
+[0m                 [30mDrop'd B: C2.5 >[0m
+[0m                                                                    [30mDrop'd B: C0.5 >[0m
+[0m                 [36mThinking[0m
+[0m                                                                    [36mThinking[0m
+[0m                 [33mHungry[0m
+[0m                                                                    [33mHungry[0m
+[0m[30m< Have B: C0.5[0m
+[0m[32mEating[0m
+[0m[30mDrop'd A: C1.5 >[0m
+[0m                                                   [32mEating[0m
+[0m                                                   [30m< Drop'd A: C3.5[0m
+[0m                                                   [30mDrop'd B: C4.5 >[0m
+[0m                                                   [36mThinking[0m
+[0m                                                   [33mHungry[0m
+[0m                                                   [30m< Have A: C3.5[0m
+[0m                                                   [30mHave B: C4.5 >[0m
+[0m                                                   [32mEating[0m
+[0m                                                   [30m< Drop'd A: C3.5[0m
+[0m                                                   [30mDrop'd B: C4.5 >[0m
+[0m                                                   [36mThinking[0m
+[0m                                                   [33mHungry[0m
+[0m                                                   [30m< Have A: C3.5[0m
+[0m                                                   [30mHave B: C4.5 >[0m
+[0m                                                   [32mEating[0m
+[0m                                                   [30m< Drop'd A: C3.5[0m
+[0m                                                   [30mDrop'd B: C4.5 >[0m
+[0m                                                   [36mThinking[0m
+[0m                                                   [33mHungry[0m
+[0m                                                   [30m< Have A: C3.5[0m
+[0m                                                   [30mHave B: C4.5 >[0m
+[0m                                                   [32mEating[0m
+[0m                                                   [30m< Drop'd A: C3.5[0m
+[0m                                                   [30mDrop'd B: C4.5 >[0m
+[0m                                                   [36mThinking[0m
+[0m                                                   [33mHungry[0m
+[0m                                                   [30m< Have A: C3.5[0m
+[0m                                                   [30mHave B: C4.5 >[0m
+[0m                                                   [32mEating[0m
+[0m                                                   [30m< Drop'd A: C3.5[0m
+[0m                                                   [30mDrop'd B: C4.5 >[0m
+[0m                                                   [36mThinking[0m
+[0m                                                   [33mHungry[0m
+[0m                                                   [30m< Have A: C3.5[0m
+[0m                                                   [30mHave B: C4.5 >[0m
+[0m                                                   [32mEating[0m
+[0m                                                   [30m< Drop'd A: C3.5[0m
+[0m                                                   [30mDrop'd B: C4.5 >[0m
+[0m                                                   [36mThinking[0m
+[0m                                                   [33mHungry[0m
+[0m                                                   [30m< Have A: C3.5[0m
+[0m                                                   [30mHave B: C4.5 >[0m
+[0m                                                   [32mEating[0m
+[0m                                                   [30m< Drop'd A: C3.5[0m
+[0m                                                   [30mDrop'd B: C4.5 >[0m
+[0m                                                   [36mThinking[0m
+[0m                                                   [33mHungry[0m
+[0m                                                   [30m< Have A: C3.5[0m
+[0m                                  [36mThinking[0m
+[0m                                                   [30mHave B: C4.5 >[0m
+[0m                                  [33mHungry[0m
+[0m                                                   [32mEating[0m
+[0m                                  [30m< Have A: C2.5[0m
+[0m                                                   [30m< Drop'd A: C3.5[0m
+[0m                                  [30mHave B: C3.5 >[0m
+[0m                                                   [30mDrop'd B: C4.5 >[0m
+[0m                                  [32mEating[0m
+[0m                                                   [36mThinking[0m
+[0m                                  [30m< Drop'd A: C2.5[0m
+[0m                                                   [33mHungry[0m
+[0m                                  [30mDrop'd B: C3.5 >[0m
+[0m                                                   [30m< Have A: C3.5[0m
+[0m                                  [36mThinking[0m
+[0m                                                   [30mHave B: C4.5 >[0m
+[0m                                  [33mHungry[0m
+[0m                                                   [32mEating[0m
+[0m                                  [30m< Have A: C2.5[0m
+[0m                                                   [30m< Drop'd A: C3.5[0m
+[0m                                  [30mHave B: C3.5 >[0m
+[0m                                                                    [30m< Have A: C4.5[0m
+[0m                                  [32mEating[0m
+[0m                                                                    [30mHave B: C0.5 >[0m
+[0m                                  [30m< Drop'd A: C2.5[0m
+[0m                                                                    [32mEating[0m
+[0m                                  [30mDrop'd B: C3.5 >[0m
+[0m                                                                    [30m< Drop'd A: C4.5[0m
+[0m                                  [36mThinking[0m
+[0m                                                                    [30mDrop'd B: C0.5 >[0m
+[0m                                  [33mHungry[0m
+[0m                                                                    [36mThinking[0m
+^C

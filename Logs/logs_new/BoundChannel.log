@@ -1,0 +1,64 @@
+Which test do you want to run?
+  1. Semaphore
+  2. Channel
+  3. Bound Channel
+  4. Mutex
+  5. Latch
+  6. Barrier
+  7. Light Switch
+  8. Exchanger
+  9. Active Object
+ 10. Semaphore FIFO
+ 11. Reader-Writer Lock
+  Q. Quit
+Enter: Bound channel test
+==============================
+
+Bound channel size: 3
+The take threads will start after a delay of 5 seconds
+
+Starting Put threads...
+[0mBoundChannelPutThread 6 [33mTx:BoundChannelPutThread 6...[0m
+[0mBoundChannelPutThread 7 [33mTx:BoundChannelPutThread 7...[0m
+[0mBoundChannelPutThread 5 [33mTx:BoundChannelPutThread 5...[0m
+[0mBoundChannelPutThread 4 [33mTx:BoundChannelPutThread 4...[0m
+[0mBoundChannelPutThread 3 [33mTx:BoundChannelPutThread 3...[0m
+[0mBoundChannelPutThread 8 [33mTx:BoundChannelPutThread 8...[0m
+[0mBoundChannelPutThread 1 [33mTx:BoundChannelPutThread 1...[0m
+[0mBoundChannelPutThread 2 [33mTx:BoundChannelPutThread 2...[0m
+[0mBoundChannelPutThread 9 [33mTx:BoundChannelPutThread 9...[0m
+[0mBoundChannelPutThread 0 [33mTx:BoundChannelPutThread 0...[0m
+[0mBoundChannelPutThread 7 [32mTx:BoundChannelPutThread 7[0m
+[0mBoundChannelPutThread 3 [32mTx:BoundChannelPutThread 3[0m
+[0mBoundChannelPutThread 1 [32mTx:BoundChannelPutThread 1[0m
+
+Will shortly start Take threads...
+[0m            BoundChannelTakeThread 0 [33mRx...[0m
+[0mBoundChannelPutThread 0 [32mTx:BoundChannelPutThread 0[0m
+[0m            BoundChannelTakeThread 0 [32mRx:BoundChannelPutThread 7[0m
+[0m            BoundChannelTakeThread 1 [33mRx...[0m
+[0m            BoundChannelTakeThread 2 [33mRx...[0m
+[0mBoundChannelPutThread 6 [32mTx:BoundChannelPutThread 6[0m
+[0mBoundChannelPutThread 8 [32mTx:BoundChannelPutThread 8[0m
+[0m            BoundChannelTakeThread 2 [32mRx:BoundChannelPutThread 3[0m
+[0m            BoundChannelTakeThread 1 [32mRx:BoundChannelPutThread 1[0m
+[0m            BoundChannelTakeThread 3 [33mRx...[0m
+[0m            BoundChannelTakeThread 3 [32mRx:BoundChannelPutThread 0[0m
+[0mBoundChannelPutThread 4 [32mTx:BoundChannelPutThread 4[0m
+[0m            BoundChannelTakeThread 4 [33mRx...[0m
+[0m            BoundChannelTakeThread 4 [32mRx:BoundChannelPutThread 6[0m
+[0mBoundChannelPutThread 2 [32mTx:BoundChannelPutThread 2[0m
+[0m            BoundChannelTakeThread 5 [33mRx...[0m
+[0m            BoundChannelTakeThread 6 [33mRx...[0m
+[0mBoundChannelPutThread 9 [32mTx:BoundChannelPutThread 9[0m
+[0m            BoundChannelTakeThread 5 [32mRx:BoundChannelPutThread 8[0m
+[0m            BoundChannelTakeThread 6 [32mRx:BoundChannelPutThread 4[0m
+[0m            BoundChannelTakeThread 7 [33mRx...[0m
+[0m            BoundChannelTakeThread 7 [32mRx:BoundChannelPutThread 2[0m
+[0mBoundChannelPutThread 5 [32mTx:BoundChannelPutThread 5[0m
+[0m            BoundChannelTakeThread 8 [33mRx...[0m
+[0m            BoundChannelTakeThread 8 [32mRx:BoundChannelPutThread 9[0m
+[0m            BoundChannelTakeThread 9 [33mRx...[0m
+[0m            BoundChannelTakeThread 9 [32mRx:BoundChannelPutThread 5[0m
+
+All threads have finished

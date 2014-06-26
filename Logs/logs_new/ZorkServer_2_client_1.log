@@ -1,0 +1,17 @@
+$ telnet localhost 5484
+
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+Welcome to the Zork server
+> 1
+Sorry, I don't understand the instruction "1"
+
+It is dark. You are deep within a forest, surrounded by trees. There is a smallcliff face to the North, with an iron door inset, faintly marked "EN513b". There is a smallpile of stones beside you. You have a key.
+
+> take stone
+You take a stone. It seems incredibly useful.
+
+It is dark. You are deep within a forest, surrounded by trees. There is a smallcliff face to the North, with an iron door inset, faintly marked "EN513b". There is a smallpile of stones beside you. You have a key and a small stone.
+
+> Connection closed by foreign host.

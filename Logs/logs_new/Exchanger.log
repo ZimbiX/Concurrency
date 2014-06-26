@@ -1,0 +1,55 @@
+Which test do you want to run?
+  1. Semaphore
+  2. Channel
+  3. Bound Channel
+  4. Mutex
+  5. Latch
+  6. Barrier
+  7. Light Switch
+  8. Exchanger
+  9. Active Object
+ 10. Semaphore FIFO
+ 11. Reader-Writer Lock
+  Q. Quit
+Enter: Exchanger test
+==============================
+
+Two secret agent threads will arrive at an exchange, waiting for the other to arrive before parting ways (rendezvous).
+
+[37m...
+[0mAgent A [33mTx:I-Agent A[0m
+[37m...
+[0mAgent B [33mTx:I-Agent B[0m
+[0mAgent B [32mRx:I-Agent A[0m
+[0mAgent A [32mRx:I-Agent B[0m
+
+Many secret agent threads will arrive at an exchange, waiting for the other to arrive before parting ways (rendezvous).
+
+A0      A1      A2      A3      A4      A5      A6      A7      A8      A9      A10     A11     
+------------------------------------------------------------------------------------------------
+[0m        [33mTx:I-A1[0m
+[0m                        [33mTx:I-A3[0m
+[0m                                        [33mTx:I-A5[0m
+[0m                                [33mTx:I-A4[0m
+[0m        [32mRx:I-A3[0m
+[0m                [33mTx:I-A2[0m
+[0m                        [32mRx:I-A1[0m
+[0m[33mTx:I-A0[0m
+[0m                                        [32mRx:I-A4[0m
+[0m                                                [33mTx:I-A6[0m
+[0m                                                        [33mTx:I-A7[0m
+[0m                                [32mRx:I-A5[0m
+[0m                [32mRx:I-A0[0m
+[0m                                                                [33mTx:I-A8[0m
+[0m[32mRx:I-A2[0m
+[0m                                                [32mRx:I-A7[0m
+[0m                                                        [32mRx:I-A6[0m
+[0m                                                                        [33mTx:I-A9[0m
+[0m                                                                [32mRx:I-A9[0m
+[0m                                                                        [32mRx:I-A8[0m
+[0m                                                                                [33mTx:I-A10[0m
+[0m                                                                                        [33mTx:I-A11[0m
+[0m                                                                                [32mRx:I-A11[0m
+[0m                                                                                        [32mRx:I-A10[0m
+
+All threads have finished

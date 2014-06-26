@@ -1,0 +1,17 @@
+Waiting for connection. (telnet localhost 5484).
+Client connected on port 5484
+Waiting for connection. (telnet localhost 5485).
+New command from client: "1"
+Client connected on port 5485
+Waiting for connection. (telnet localhost 5486).
+New command from client: "2"
+New command from client: "take stone"
+New command from client: "go south"
+New command from client: "walk north"
+New command from client: "use key in door"
+New command from client: "take tree"
+New command from client: "take stone"
+New command from client: "brush teeth"
+New command from client: "use key"
+New command from client: "right"
+^C

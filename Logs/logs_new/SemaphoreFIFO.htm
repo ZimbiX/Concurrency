@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>SemaphoreFIFO.log</title>
+<style type="text/css">* { font-size: 9pt !important; }</style><style type="text/css">pre { overflow-wrap: break-word; }</style></head>
+<body>
+<pre style="font-family:Courier New;font-size:10pt;">Which test do you want to run?
+  1. Semaphore
+  2. Channel
+  3. Bound Channel
+  4. Mutex
+  5. Latch
+  6. Barrier
+  7. Light Switch
+  8. Exchanger
+  9. Active Object
+ 10. Semaphore FIFO
+ 11. Reader-Writer Lock
+  Q. Quit
+Enter: FIFO Semaphore test
+==============================
+
+Acquire threads: 10
+After the Acquire() requests are made, a Release() will occur every 0.3 seconds
+Unfortunately, testing the order of fast Acquire() requests can only be verified using debug logging from within the actual SemaphoreFIFO utility class. We'll perform two tests utilising this first to prove that fulfilment order for fast Acquire() requests does actually work. Next, we'll perform a test to demonstrate the utility as well as we can while avoiding the potential for interference caused by internal logging.
+
+Legend:
+- (Yellow) -- Request initiated
+- (Green) -- Request fulfilled
+- R -- releasing a token into the FIFO semaphore
+- A -- acquiring a token from the FIFO semaphore
+- A:4 -- acquring a token as the fourth thread that requested one from the FIFO semaphore
+
+
+Test with internal logging (fast Acquire() requests, fast Release()s)
+This test is for checking the correctness of '_numThreadsQueued' and '_numTokens' after an Acquire() or Release(). With fast token releases, the exact thread release order does not matter -- in this test, the threads' number indicating its release order might not match its acquire order, but that's fine.
+------------------------------
+
+<span style="color:#888;">...
+R      A0     A1     A2     A3     A4     A5     A6     A7     A8     A9     
+-----------------------------------------------------------------------------
+</span> <span style="color:#F17E00;">R</span>
+<span style="color:#888;">_numThreadsQueued: 0
+</span><span style="color:#888;">_numTokens: 1
+</span> <span style="color:#008100;">R</span>
+ <span style="color:#F17E00;">R</span>
+<span style="color:#888;">_numThreadsQueued: 0
+</span><span style="color:#888;">_numTokens: 2
+</span> <span style="color:#008100;">R</span>
+              <span style="color:#F17E00;">A:1
+              </span><span style="color:#888;">_numThreadsQueued: 0
+              </span><span style="color:#888;">_numTokens: 1
+              </span><span style="color:#008100;">A:8
+                     </span><span style="color:#F17E00;">A:1
+                     </span><span style="color:#888;">_numThreadsQueued: 0
+                     </span><span style="color:#888;">_numTokens: 0
+                     </span><span style="color:#008100;">A:8
+                            </span><span style="color:#F17E00;">A:1
+                                                                      </span><span style="color:#F17E00;">A:2
+                                                 </span><span style="color:#F17E00;">A:3
+                                                               </span><span style="color:#F17E00;">A:4
+                                                        </span><span style="color:#F17E00;">A:5
+                                   </span><span style="color:#F17E00;">A:6
+                                          </span><span style="color:#F17E00;">A:7
+       </span><span style="color:#F17E00;">A:8
+</span><span style="color:#F17E00;">R</span>
+<span style="color:#888;">_numThreadsQueued: 8
+</span><span style="color:#888;">_numTokens: 0
+                            </span><span style="color:#888;">_numThreadsQueued: 7
+                            </span><span style="color:#888;">_numTokens: 0
+                            </span><span style="color:#008100;">A:1
+</span><span style="color:#008100;">R</span>
+<span style="color:#F17E00;">R</span>
+<span style="color:#888;">_numThreadsQueued: 7
+</span><span style="color:#888;">_numTokens: 0
+</span><span style="color:#008100;">R</span>
+                                                                      <span style="color:#888;">_numThreadsQueued: 6
+                                                                      </span><span style="color:#888;">_numTokens: 0
+</span><span style="color:#F17E00;">R</span>
+                                                                      <span style="color:#008100;">A:2
+</span><span style="color:#888;">_numThreadsQueued: 6
+</span><span style="color:#888;">_numTokens: 0
+                                                 </span><span style="color:#888;">_numThreadsQueued: 5
+                                                 </span><span style="color:#888;">_numTokens: 0
+                                                 </span><span style="color:#008100;">A:3
+</span><span style="color:#008100;">R</span>
+<span style="color:#F17E00;">R</span>
+<span style="color:#888;">_numThreadsQueued: 5
+</span><span style="color:#888;">_numTokens: 0
+                                                               </span><span style="color:#888;">_numThreadsQueued: 4
+                                                               </span><span style="color:#888;">_numTokens: 0
+                                                               </span><span style="color:#008100;">A:4
+</span><span style="color:#008100;">R</span>
+<span style="color:#F17E00;">R</span>
+<span style="color:#888;">_numThreadsQueued: 4
+</span><span style="color:#888;">_numTokens: 0
+</span><span style="color:#008100;">R</span>
+                                                        <span style="color:#888;">_numThreadsQueued: 3
+</span><span style="color:#F17E00;">R</span>
+                                                        <span style="color:#888;">_numTokens: 0
+                                                        </span><span style="color:#008100;">A:5
+</span><span style="color:#888;">_numThreadsQueued: 3
+</span><span style="color:#888;">_numTokens: 0
+</span><span style="color:#008100;">R</span>
+<span style="color:#F17E00;">R</span>
+<span style="color:#888;">_numThreadsQueued: 3
+</span><span style="color:#888;">_numTokens: 0
+                                          </span><span style="color:#888;">_numThreadsQueued: 2
+                                          </span><span style="color:#888;">_numTokens: 0
+                                          </span><span style="color:#008100;">A:6
+</span><span style="color:#008100;">R</span>
+<span style="color:#F17E00;">R</span>
+<span style="color:#888;">_numThreadsQueued: 2
+</span><span style="color:#888;">_numTokens: 0
+</span><span style="color:#008100;">R</span>
+       <span style="color:#888;">_numThreadsQueued: 1
+       </span><span style="color:#888;">_numTokens: 0
+       </span><span style="color:#008100;">A:7
+                                   </span><span style="color:#888;">_numThreadsQueued: 0
+                                   </span><span style="color:#888;">_numTokens: 0
+                                   </span><span style="color:#008100;">A:8
+
+Test with internal logging (fast Acquire() requests, slower Release()s)
+Order should be maintained.
+------------------------------
+
+</span><span style="color:#888;">...
+R      A0     A1     A2     A3     A4     A5     A6     A7     A8     A9     
+-----------------------------------------------------------------------------
+</span> <span style="color:#F17E00;">R</span>
+<span style="color:#888;">_numThreadsQueued: 0
+</span><span style="color:#888;">_numTokens: 1
+</span> <span style="color:#008100;">R</span>
+ <span style="color:#F17E00;">R</span>
+<span style="color:#888;">_numThreadsQueued: 0
+</span><span style="color:#888;">_numTokens: 2
+</span> <span style="color:#008100;">R</span>
+       <span style="color:#F17E00;">A:1
+       </span><span style="color:#888;">_numThreadsQueued: 0
+       </span><span style="color:#888;">_numTokens: 1
+       </span><span style="color:#008100;">A:8
+                                                 </span><span style="color:#F17E00;">A:1
+                                                 </span><span style="color:#888;">_numThreadsQueued: 0
+                                                 </span><span style="color:#888;">_numTokens: 0
+                                                 </span><span style="color:#008100;">A:8
+              </span><span style="color:#F17E00;">A:1
+                                          </span><span style="color:#F17E00;">A:2
+                                   </span><span style="color:#F17E00;">A:3
+                            </span><span style="color:#F17E00;">A:4
+                     </span><span style="color:#F17E00;">A:5
+                                                        </span><span style="color:#F17E00;">A:6
+                                                               </span><span style="color:#F17E00;">A:7
+                                                                      </span><span style="color:#F17E00;">A:8
+</span><span style="color:#F17E00;">R</span>
+<span style="color:#888;">_numThreadsQueued: 8
+</span><span style="color:#888;">_numTokens: 0
+              </span><span style="color:#888;">_numThreadsQueued: 7
+</span><span style="color:#008100;">R</span>
+              <span style="color:#888;">_numTokens: 0
+              </span><span style="color:#008100;">A:1
+</span><span style="color:#F17E00;">R</span>
+<span style="color:#888;">_numThreadsQueued: 7
+</span><span style="color:#888;">_numTokens: 0
+</span><span style="color:#008100;">R</span>
+                                          <span style="color:#888;">_numThreadsQueued: 6
+                                          </span><span style="color:#888;">_numTokens: 0
+                                          </span><span style="color:#008100;">A:2
+</span><span style="color:#F17E00;">R</span>
+<span style="color:#888;">_numThreadsQueued: 6
+</span><span style="color:#888;">_numTokens: 0
+                                   </span><span style="color:#888;">_numThreadsQueued: 5
+                                   </span><span style="color:#888;">_numTokens: 0
+</span><span style="color:#008100;">R</span>
+                                   <span style="color:#008100;">A:3
+</span><span style="color:#F17E00;">R</span>
+<span style="color:#888;">_numThreadsQueued: 5
+</span><span style="color:#888;">_numTokens: 0
+</span><span style="color:#008100;">R</span>
+                            <span style="color:#888;">_numThreadsQueued: 4
+                            </span><span style="color:#888;">_numTokens: 0
+                            </span><span style="color:#008100;">A:4
+</span><span style="color:#F17E00;">R</span>
+<span style="color:#888;">_numThreadsQueued: 4
+</span><span style="color:#888;">_numTokens: 0
+</span><span style="color:#008100;">R</span>
+                     <span style="color:#888;">_numThreadsQueued: 3
+                     </span><span style="color:#888;">_numTokens: 0
+                     </span><span style="color:#008100;">A:5
+</span><span style="color:#F17E00;">R</span>
+<span style="color:#888;">_numThreadsQueued: 3
+</span><span style="color:#888;">_numTokens: 0
+</span><span style="color:#008100;">R</span>
+                                                        <span style="color:#888;">_numThreadsQueued: 2
+                                                        </span><span style="color:#888;">_numTokens: 0
+                                                        </span><span style="color:#008100;">A:6
+</span><span style="color:#F17E00;">R</span>
+<span style="color:#888;">_numThreadsQueued: 2
+</span><span style="color:#888;">_numTokens: 0
+</span><span style="color:#008100;">R</span>
+                                                               <span style="color:#888;">_numThreadsQueued: 1
+                                                               </span><span style="color:#888;">_numTokens: 0
+                                                               </span><span style="color:#008100;">A:7
+</span><span style="color:#F17E00;">R</span>
+<span style="color:#888;">_numThreadsQueued: 1
+</span><span style="color:#888;">_numTokens: 0
+</span><span style="color:#008100;">R</span>
+                                                                      <span style="color:#888;">_numThreadsQueued: 0
+                                                                      </span><span style="color:#888;">_numTokens: 0
+                                                                      </span><span style="color:#008100;">A:8
+
+Test without internal logging (slower Acquire() requests, slower Release()s)
+Order should be maintained.
+------------------------------
+
+</span><span style="color:#888;">...
+R      A0     A1     A2     A3     A4     A5     A6     A7     A8     A9     
+-----------------------------------------------------------------------------
+</span> <span style="color:#F17E00;">R</span>
+ <span style="color:#008100;">R</span>
+ <span style="color:#F17E00;">R</span>
+ <span style="color:#008100;">R</span>
+       <span style="color:#F17E00;">A</span>
+       <span style="color:#008100;">A</span>
+              <span style="color:#F17E00;">A</span>
+              <span style="color:#008100;">A</span>
+                     <span style="color:#F17E00;">A</span>
+                            <span style="color:#F17E00;">A</span>
+                                   <span style="color:#F17E00;">A</span>
+                                          <span style="color:#F17E00;">A</span>
+                                                 <span style="color:#F17E00;">A</span>
+                                                        <span style="color:#F17E00;">A</span>
+                                                               <span style="color:#F17E00;">A</span>
+                                                                      <span style="color:#F17E00;">A</span>
+<span style="color:#F17E00;">R</span>
+<span style="color:#008100;">R</span>
+                     <span style="color:#008100;">A</span>
+<span style="color:#F17E00;">R</span>
+<span style="color:#008100;">R</span>
+                            <span style="color:#008100;">A</span>
+<span style="color:#F17E00;">R</span>
+<span style="color:#008100;">R</span>
+                                   <span style="color:#008100;">A</span>
+<span style="color:#F17E00;">R</span>
+<span style="color:#008100;">R</span>
+                                          <span style="color:#008100;">A</span>
+<span style="color:#F17E00;">R</span>
+<span style="color:#008100;">R</span>
+                                                 <span style="color:#008100;">A</span>
+<span style="color:#F17E00;">R</span>
+<span style="color:#008100;">R</span>
+                                                        <span style="color:#008100;">A</span>
+<span style="color:#F17E00;">R</span>
+<span style="color:#008100;">R</span>
+                                                               <span style="color:#008100;">A</span>
+<span style="color:#F17E00;">R</span>
+<span style="color:#008100;">R</span>
+                                                                      <span style="color:#008100;">A</span>
+
+All threads have finished
+</pre>
+</body>
+</html>
+<!--HTML generated by ansifilter 1.8, http://www.andre-simon.de/-->

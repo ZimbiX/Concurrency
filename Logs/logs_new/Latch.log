@@ -1,0 +1,32 @@
+Which test do you want to run?
+  1. Semaphore
+  2. Channel
+  3. Bound Channel
+  4. Mutex
+  5. Latch
+  6. Barrier
+  7. Light Switch
+  8. Exchanger
+  9. Active Object
+ 10. Semaphore FIFO
+ 11. Reader-Writer Lock
+  Q. Quit
+Enter: [0mLatch visitor thread is visiting the latch[0m
+[0mLatch visitor thread is visiting the latch[0m
+[0mLatch visitor thread is visiting the latch[0m
+[37m...
+[0mLatch visitor thread is visiting the latch[0m
+[0mDelayed latch opener thread will now open the latch[0m
+[37m...
+[0mDelayed latch opener thread has opened the latch[0m
+  Latch visitor thread has left the latch
+  Latch visitor thread has left the latch
+  Latch visitor thread has left the latch
+  Latch visitor thread has left the latch
+[37m...
+[0mLate latch visitor thread is visiting the latch[0m
+  Late latch visitor thread has left the latch
+[0mLate latch visitor thread is visiting the latch[0m
+  Late latch visitor thread has left the latch
+
+All threads have finished

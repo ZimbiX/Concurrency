@@ -1,0 +1,105 @@
+Which test do you want to run?
+  1. Semaphore
+  2. Channel
+  3. Bound Channel
+  4. Mutex
+  5. Latch
+  6. Barrier
+  7. Light Switch
+  8. Exchanger
+  9. Active Object
+ 10. Semaphore FIFO
+ 11. Reader-Writer Lock
+  Q. Quit
+Enter: Mutex test
+==============================
+
+Testing mutual exclusion
+---------------------
+
+A mutex will be used to modify a bank account balance by positive and negative $100000 in steps of $1. The resulting balance should be $0.
+[37m...
+[0mIncrementer Balance: $1[0m
+[0mIncrementer Balance: $2[0m
+[0mIncrementer Balance: $3[0m
+[0mIncrementer Balance: $4[0m
+<---- SNIP ---->
+[0mIncrementer Balance: $19124[0m
+[0mIncrementer Balance: $19125[0m
+[0mIncrementer Balance: $19126[0m
+[0mIncrementer Balance: $19127[0m
+[0mDecrementer Balance: $19126[0m
+[0mDecrementer Balance: $19125[0m
+[0mDecrementer Balance: $19124[0m
+[0mDecrementer Balance: $19123[0m
+<---- SNIP ---->
+[0mDecrementer Balance: $-31569[0m
+[0mDecrementer Balance: $-31570[0m
+[0mDecrementer Balance: $-31571[0m
+[0mIncrementer Balance: $-31570[0m
+[0mIncrementer Balance: $-31569[0m
+<---- SNIP ---->
+[0mIncrementer Balance: $-3985[0m
+[0mIncrementer Balance: $-3984[0m
+[0mDecrementer Balance: $-3985[0m
+[0mDecrementer Balance: $-3986[0m
+<---- SNIP ---->
+[0mDecrementer Balance: $-10372[0m
+[0mDecrementer Balance: $-10373[0m
+[0mIncrementer Balance: $-10372[0m
+[0mIncrementer Balance: $-10371[0m
+<---- SNIP ---->
+[0mIncrementer Balance: $-442[0m
+[0mIncrementer Balance: $-441[0m
+[0mDecrementer Balance: $-442[0m
+[0mDecrementer Balance: $-443[0m
+<---- SNIP ---->
+[0mDecrementer Balance: $-31468[0m
+[0mDecrementer Balance: $-31469[0m
+[0mIncrementer Balance: $-31468[0m
+[0mIncrementer Balance: $-31467[0m
+<---- SNIP ---->
+[0mIncrementer Balance: $-4861[0m
+[0mIncrementer Balance: $-4860[0m
+[0mDecrementer Balance: $-4861[0m
+[0mDecrementer Balance: $-4862[0m
+<---- SNIP ---->
+[0mDecrementer Balance: $-8390[0m
+[0mDecrementer Balance: $-8391[0m
+[0mIncrementer Balance: $-8390[0m
+[0mIncrementer Balance: $-8389[0m
+<---- SNIP ---->
+[0mIncrementer Balance: $8353[0m
+[0mIncrementer Balance: $8354[0m
+[0mDecrementer Balance: $8353[0m
+[0mDecrementer Balance: $8352[0m
+<---- SNIP ---->
+[0mDecrementer Balance: $2[0m
+[0mDecrementer Balance: $1[0m
+[0mDecrementer Balance: $0[0m
+
+Testing release methods
+---------------------
+
+Testing Release():
+  Acquire()...
+    Release()...
+
+Testing Release(1):
+  Acquire()...
+    Release(1)...
+
+Testing Release(2):
+  Acquire()...
+    Release(2) (should throw exception):
+  Exception thrown successfully for Release(2)
+
+Testing Release() * 2:
+  Mutex still has 0 tokens
+    Release()...
+    Release() (should throw exception)...
+  Exception thrown successfully for extra Release()
+
+Finished
+
+All threads have finished

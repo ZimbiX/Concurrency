@@ -1,0 +1,27 @@
+Which test do you want to run?
+  1. Semaphore
+  2. Channel
+  3. Bound Channel
+  4. Mutex
+  5. Latch
+  6. Barrier
+  7. Light Switch
+  8. Exchanger
+  9. Active Object
+ 10. Semaphore FIFO
+ 11. Reader-Writer Lock
+  Q. Quit
+Enter: 
+All threads have finished
+[32molleH
+[32m!dlrow
+[32mI
+[32mma
+[32ma
+[32mdrow
+[32mgnisrever
+[32mdna
+[32mgnitnirp
+[30mTestActiveObjectWordGenerator finished sending words to its output channel; Stopping ActiveObject
+[32m.margorp
+^C

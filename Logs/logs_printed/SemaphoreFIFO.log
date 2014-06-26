@@ -1,0 +1,253 @@
+Which test do you want to run?
+  1. Semaphore
+  2. Channel
+  3. Bound Channel
+  4. Mutex
+  5. Latch
+  6. Barrier
+  7. Light Switch
+  8. Exchanger
+  9. Active Object
+ 10. Semaphore FIFO
+ 11. Reader-Writer Lock
+  Q. Quit
+Enter: FIFO Semaphore test
+==============================
+
+Acquire threads: 10
+After the Acquire() requests are made, a Release() will occur every 0.3 seconds
+Unfortunately, testing the order of fast Acquire() requests can only be verified using debug logging from within the actual SemaphoreFIFO utility class. We'll perform two tests utilising this first to prove that fulfilment order for fast Acquire() requests does actually work. Next, we'll perform a test to demonstrate the utility as well as we can while avoiding the potential for interference caused by internal logging.
+
+Legend:
+- (Yellow) -- Request initiated
+- (Green) -- Request fulfilled
+- R -- releasing a token into the FIFO semaphore
+- A -- acquiring a token from the FIFO semaphore
+- A:4 -- acquring a token as the fourth thread that requested one from the FIFO semaphore
+
+
+Test with internal logging (fast Acquire() requests, fast Release()s)
+This test is for checking the correctness of '_numThreadsQueued' and '_numTokens' after an Acquire() or Release(). With fast token releases, the exact thread release order does not matter -- in this test, the threads' number indicating its release order might not match its acquire order, but that's fine.
+------------------------------
+
+[37m...
+R      A0     A1     A2     A3     A4     A5     A6     A7     A8     A9     
+-----------------------------------------------------------------------------
+[0m [33mR[0m
+[37m_numThreadsQueued: 0
+[37m_numTokens: 1
+[0m [32mR[0m
+[0m [33mR[0m
+[37m_numThreadsQueued: 0
+[37m_numTokens: 2
+[0m [32mR[0m
+              [33mA:1
+              [37m_numThreadsQueued: 0
+              [37m_numTokens: 1
+              [32mA:8
+                     [33mA:1
+                     [37m_numThreadsQueued: 0
+                     [37m_numTokens: 0
+                     [32mA:8
+                            [33mA:1
+                                                                      [33mA:2
+                                                 [33mA:3
+                                                               [33mA:4
+                                                        [33mA:5
+                                   [33mA:6
+                                          [33mA:7
+       [33mA:8
+[0m[33mR[0m
+[37m_numThreadsQueued: 8
+[37m_numTokens: 0
+                            [37m_numThreadsQueued: 7
+                            [37m_numTokens: 0
+                            [32mA:1
+[0m[32mR[0m
+[0m[33mR[0m
+[37m_numThreadsQueued: 7
+[37m_numTokens: 0
+[0m[32mR[0m
+                                                                      [37m_numThreadsQueued: 6
+                                                                      [37m_numTokens: 0
+[0m[33mR[0m
+                                                                      [32mA:2
+[37m_numThreadsQueued: 6
+[37m_numTokens: 0
+                                                 [37m_numThreadsQueued: 5
+                                                 [37m_numTokens: 0
+                                                 [32mA:3
+[0m[32mR[0m
+[0m[33mR[0m
+[37m_numThreadsQueued: 5
+[37m_numTokens: 0
+                                                               [37m_numThreadsQueued: 4
+                                                               [37m_numTokens: 0
+                                                               [32mA:4
+[0m[32mR[0m
+[0m[33mR[0m
+[37m_numThreadsQueued: 4
+[37m_numTokens: 0
+[0m[32mR[0m
+                                                        [37m_numThreadsQueued: 3
+[0m[33mR[0m
+                                                        [37m_numTokens: 0
+                                                        [32mA:5
+[37m_numThreadsQueued: 3
+[37m_numTokens: 0
+[0m[32mR[0m
+[0m[33mR[0m
+[37m_numThreadsQueued: 3
+[37m_numTokens: 0
+                                          [37m_numThreadsQueued: 2
+                                          [37m_numTokens: 0
+                                          [32mA:6
+[0m[32mR[0m
+[0m[33mR[0m
+[37m_numThreadsQueued: 2
+[37m_numTokens: 0
+[0m[32mR[0m
+       [37m_numThreadsQueued: 1
+       [37m_numTokens: 0
+       [32mA:7
+                                   [37m_numThreadsQueued: 0
+                                   [37m_numTokens: 0
+                                   [32mA:8
+
+Test with internal logging (fast Acquire() requests, slower Release()s)
+Order should be maintained.
+------------------------------
+
+[37m...
+R      A0     A1     A2     A3     A4     A5     A6     A7     A8     A9     
+-----------------------------------------------------------------------------
+[0m [33mR[0m
+[37m_numThreadsQueued: 0
+[37m_numTokens: 1
+[0m [32mR[0m
+[0m [33mR[0m
+[37m_numThreadsQueued: 0
+[37m_numTokens: 2
+[0m [32mR[0m
+       [33mA:1
+       [37m_numThreadsQueued: 0
+       [37m_numTokens: 1
+       [32mA:8
+                                                 [33mA:1
+                                                 [37m_numThreadsQueued: 0
+                                                 [37m_numTokens: 0
+                                                 [32mA:8
+              [33mA:1
+                                          [33mA:2
+                                   [33mA:3
+                            [33mA:4
+                     [33mA:5
+                                                        [33mA:6
+                                                               [33mA:7
+                                                                      [33mA:8
+[0m[33mR[0m
+[37m_numThreadsQueued: 8
+[37m_numTokens: 0
+              [37m_numThreadsQueued: 7
+[0m[32mR[0m
+              [37m_numTokens: 0
+              [32mA:1
+[0m[33mR[0m
+[37m_numThreadsQueued: 7
+[37m_numTokens: 0
+[0m[32mR[0m
+                                          [37m_numThreadsQueued: 6
+                                          [37m_numTokens: 0
+                                          [32mA:2
+[0m[33mR[0m
+[37m_numThreadsQueued: 6
+[37m_numTokens: 0
+                                   [37m_numThreadsQueued: 5
+                                   [37m_numTokens: 0
+[0m[32mR[0m
+                                   [32mA:3
+[0m[33mR[0m
+[37m_numThreadsQueued: 5
+[37m_numTokens: 0
+[0m[32mR[0m
+                            [37m_numThreadsQueued: 4
+                            [37m_numTokens: 0
+                            [32mA:4
+[0m[33mR[0m
+[37m_numThreadsQueued: 4
+[37m_numTokens: 0
+[0m[32mR[0m
+                     [37m_numThreadsQueued: 3
+                     [37m_numTokens: 0
+                     [32mA:5
+[0m[33mR[0m
+[37m_numThreadsQueued: 3
+[37m_numTokens: 0
+[0m[32mR[0m
+                                                        [37m_numThreadsQueued: 2
+                                                        [37m_numTokens: 0
+                                                        [32mA:6
+[0m[33mR[0m
+[37m_numThreadsQueued: 2
+[37m_numTokens: 0
+[0m[32mR[0m
+                                                               [37m_numThreadsQueued: 1
+                                                               [37m_numTokens: 0
+                                                               [32mA:7
+[0m[33mR[0m
+[37m_numThreadsQueued: 1
+[37m_numTokens: 0
+[0m[32mR[0m
+                                                                      [37m_numThreadsQueued: 0
+                                                                      [37m_numTokens: 0
+                                                                      [32mA:8
+
+Test without internal logging (slower Acquire() requests, slower Release()s)
+Order should be maintained.
+------------------------------
+
+[37m...
+R      A0     A1     A2     A3     A4     A5     A6     A7     A8     A9     
+-----------------------------------------------------------------------------
+[0m [33mR[0m
+[0m [32mR[0m
+[0m [33mR[0m
+[0m [32mR[0m
+[0m       [33mA[0m
+[0m       [32mA[0m
+[0m              [33mA[0m
+[0m              [32mA[0m
+[0m                     [33mA[0m
+[0m                            [33mA[0m
+[0m                                   [33mA[0m
+[0m                                          [33mA[0m
+[0m                                                 [33mA[0m
+[0m                                                        [33mA[0m
+[0m                                                               [33mA[0m
+[0m                                                                      [33mA[0m
+[0m[33mR[0m
+[0m[32mR[0m
+[0m                     [32mA[0m
+[0m[33mR[0m
+[0m[32mR[0m
+[0m                            [32mA[0m
+[0m[33mR[0m
+[0m[32mR[0m
+[0m                                   [32mA[0m
+[0m[33mR[0m
+[0m[32mR[0m
+[0m                                          [32mA[0m
+[0m[33mR[0m
+[0m[32mR[0m
+[0m                                                 [32mA[0m
+[0m[33mR[0m
+[0m[32mR[0m
+[0m                                                        [32mA[0m
+[0m[33mR[0m
+[0m[32mR[0m
+[0m                                                               [32mA[0m
+[0m[33mR[0m
+[0m[32mR[0m
+[0m                                                                      [32mA[0m
+
+All threads have finished

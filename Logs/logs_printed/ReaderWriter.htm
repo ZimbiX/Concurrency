@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>ReaderWriter.log</title>
+<style type="text/css">* { font-size: 9pt !important; }</style><style type="text/css">pre { overflow-wrap: break-word; }</style></head>
+<body>
+<pre style="font-family:Courier New;font-size:10pt;">Which test do you want to run?
+  1. Semaphore
+  2. Channel
+  3. Bound Channel
+  4. Mutex
+  5. Latch
+  6. Barrier
+  7. Light Switch
+  8. Exchanger
+  9. Active Object
+ 10. Semaphore FIFO
+ 11. Reader-Writer Lock
+  Q. Quit
+Enter: 
+Reader-Writer Lock test
+==============================
+
+Tests have an access duration of 2.25 seconds, and wait 0.5 seconds between new requests
+------------------------------
+
+Test 1:
+
+W1           W2           R1           R2           
+----------------------------------------------------
+<span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WAcq</span>
+<span style="color:#000000;background-color:#f00000;"></span><span style="color:#000000;background-color:#f00000;">WAcq</span>
+<span style="color:#888;">...
+</span>             <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WAcq</span>
+                          <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RAcq</span>
+                                       <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RAcq</span>
+<span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WRel</span>
+                          <span style="color:#000000;background-color:#00f000;"></span><span style="color:#000000;background-color:#00f000;">RAcq</span>
+                                       <span style="color:#000000;background-color:#00f000;"></span><span style="color:#000000;background-color:#00f000;">RAcq</span>
+<span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">WRel</span>
+<span style="color:#888;">...
+</span><span style="color:#888;">...
+</span>                          <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RRel</span>
+                                       <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RRel</span>
+                          <span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">RRel</span>
+                                       <span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">RRel</span>
+             <span style="color:#000000;background-color:#f00000;"></span><span style="color:#000000;background-color:#f00000;">WAcq</span>
+<span style="color:#888;">...
+</span>             <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WRel</span>
+             <span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">WRel</span>
+
+Test 2:
+
+W1           W2           R1           R2           R3           R4           W3           
+-------------------------------------------------------------------------------------------
+<span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WAcq</span>
+<span style="color:#000000;background-color:#f00000;"></span><span style="color:#000000;background-color:#f00000;">WAcq</span>
+<span style="color:#888;">...
+</span>             <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WAcq</span>
+                          <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RAcq</span>
+                                       <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RAcq</span>
+                                                    <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RAcq</span>
+<span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WRel</span>
+                          <span style="color:#000000;background-color:#00f000;"></span><span style="color:#000000;background-color:#00f000;">RAcq</span>
+                                       <span style="color:#000000;background-color:#00f000;"></span><span style="color:#000000;background-color:#00f000;">RAcq</span>
+<span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">WRel</span>
+                                                    <span style="color:#000000;background-color:#00f000;"></span><span style="color:#000000;background-color:#00f000;">RAcq</span>
+<span style="color:#888;">...
+</span><span style="color:#888;">...
+</span><span style="color:#888;">...
+</span>                                                                 <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RAcq</span>
+                                                                              <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WAcq</span>
+                          <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RRel</span>
+                                       <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RRel</span>
+                                                    <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RRel</span>
+                                       <span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">RRel</span>
+                          <span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">RRel</span>
+                                                    <span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">RRel</span>
+             <span style="color:#000000;background-color:#f00000;"></span><span style="color:#000000;background-color:#f00000;">WAcq</span>
+<span style="color:#888;">...
+</span>             <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WRel</span>
+             <span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">WRel</span>
+                                                                 <span style="color:#000000;background-color:#00f000;"></span><span style="color:#000000;background-color:#00f000;">RAcq</span>
+<span style="color:#888;">...
+</span>                                                                 <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RRel</span>
+                                                                 <span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">RRel</span>
+                                                                              <span style="color:#000000;background-color:#f00000;"></span><span style="color:#000000;background-color:#f00000;">WAcq</span>
+<span style="color:#888;">...
+</span>                                                                              <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WRel</span>
+                                                                              <span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">WRel</span>
+<span style="color:#888;">...
+
+Test 1:
+
+W1           W2           R1           R2           
+----------------------------------------------------
+</span><span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WAcq</span>
+<span style="color:#000000;background-color:#f00000;"></span><span style="color:#000000;background-color:#f00000;">WAcq</span>
+<span style="color:#888;">...
+</span>             <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WAcq</span>
+                          <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RAcq</span>
+                                       <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RAcq</span>
+<span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WRel</span>
+                          <span style="color:#000000;background-color:#00f000;"></span><span style="color:#000000;background-color:#00f000;">RAcq</span>
+<span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">WRel</span>
+                                       <span style="color:#000000;background-color:#00f000;"></span><span style="color:#000000;background-color:#00f000;">RAcq</span>
+<span style="color:#888;">...
+</span><span style="color:#888;">...
+</span>                          <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RRel</span>
+                                       <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RRel</span>
+                          <span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">RRel</span>
+                                       <span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">RRel</span>
+             <span style="color:#000000;background-color:#f00000;"></span><span style="color:#000000;background-color:#f00000;">WAcq</span>
+<span style="color:#888;">...
+</span>             <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WRel</span>
+             <span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">WRel</span>
+
+Test 2:
+
+W1           W2           R1           R2           R3           R4           W3           
+-------------------------------------------------------------------------------------------
+<span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WAcq</span>
+<span style="color:#000000;background-color:#f00000;"></span><span style="color:#000000;background-color:#f00000;">WAcq</span>
+<span style="color:#888;">...
+</span>             <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WAcq</span>
+                          <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RAcq</span>
+                                       <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RAcq</span>
+                                                    <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RAcq</span>
+<span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WRel</span>
+                          <span style="color:#000000;background-color:#00f000;"></span><span style="color:#000000;background-color:#00f000;">RAcq</span>
+                                       <span style="color:#000000;background-color:#00f000;"></span><span style="color:#000000;background-color:#00f000;">RAcq</span>
+<span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">WRel</span>
+                                                    <span style="color:#000000;background-color:#00f000;"></span><span style="color:#000000;background-color:#00f000;">RAcq</span>
+<span style="color:#888;">...
+</span><span style="color:#888;">...
+</span><span style="color:#888;">...
+</span>                                                                 <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RAcq</span>
+                                                                              <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WAcq</span>
+                          <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RRel</span>
+                                       <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RRel</span>
+                          <span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">RRel</span>
+                                       <span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">RRel</span>
+                                                    <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RRel</span>
+                                                    <span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">RRel</span>
+             <span style="color:#000000;background-color:#f00000;"></span><span style="color:#000000;background-color:#f00000;">WAcq</span>
+<span style="color:#888;">...
+</span>             <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WRel</span>
+                                                                 <span style="color:#000000;background-color:#00f000;"></span><span style="color:#000000;background-color:#00f000;">RAcq</span>
+             <span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">WRel</span>
+<span style="color:#888;">...
+</span>                                                                 <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">RRel</span>
+                                                                 <span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">RRel</span>
+                                                                              <span style="color:#000000;background-color:#f00000;"></span><span style="color:#000000;background-color:#f00000;">WAcq</span>
+<span style="color:#888;">...
+</span>                                                                              <span style="color:#000000;background-color:#f0f000;"></span><span style="color:#000000;background-color:#f0f000;">WRel</span>
+                                                                              <span style="color:#000000;background-color:#00f0f0;"></span><span style="color:#000000;background-color:#00f0f0;">WRel</span>
+<span style="color:#888;">...
+</span></pre>
+</body>
+</html>
+<!--HTML generated by ansifilter 1.8, http://www.andre-simon.de/-->

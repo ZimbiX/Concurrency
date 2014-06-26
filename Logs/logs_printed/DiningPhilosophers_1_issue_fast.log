@@ -1,0 +1,30 @@
+[34mDining Philosopher problem
+===============================
+
+Do you want to have lightning-fast philosophers?
+Enter [y/N]:
+Which strategy do you want to use?
+  0. None (issue demonstration)
+  1. Swap the chopstick that's picked up first for one philosopher
+  Q. Quit
+Enter: 
+P1               P2               P3               P4               P5               
+-------------------------------------------------------------------------------------
+[0m                 [36mThinking[0m
+[0m                                                   [36mThinking[0m
+[0m[36mThinking[0m
+[0m                                  [36mThinking[0m
+[0m                                                                    [36mThinking[0m
+[0m[33mHungry[0m
+[0m                 [33mHungry[0m
+[0m                                  [33mHungry[0m
+[0m                                                                    [33mHungry[0m
+[0m                                                   [33mHungry[0m
+[0m[30m< Have A: C0.5[0m
+[0m                 [30m< Have A: C1.5[0m
+[0m                                                                    [30m< Have A: C4.5[0m
+[0m                                  [30m< Have A: C2.5[0m
+[0m                                                   [30m< Have A: C3.5[0m
+
+<---- FROZEN ---->
+^C

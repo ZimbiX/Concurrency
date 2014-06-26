@@ -1,0 +1,146 @@
+[34mCigarette Smokers problem
+===============================
+
+Do you want to have lightning-fast smokers?
+Enter [y/N]:
+Which strategy do you want to use?
+  0. None (issue demonstration)
+  1. Resource turnstiling and iteration checking
+  Q. Quit
+Enter: 
+Table                  S+Tobacco              S+Paper                S+Match                
+--------------------------------------------------------------------------------------------
+[0m[33mNot restocking: Tobacco (1)[0m
+[0m[30mRestocked: Paper[0m
+[0m[30mRestocked: Match[0m
+[0m                       [30mAcquired: Paper[0m
+[0m                       [30mAcquired: Match[0m
+[0m                       [32mSmoking[0m
+[37m...
+[0m[33mNot restocking: Tobacco (1)[0m
+[0m[30mRestocked: Paper[0m
+[0m[30mRestocked: Match[0m
+[0m                       [30mAcquired: Paper[0m
+[0m                       [30mAcquired: Match[0m
+[0m                       [32mSmoking[0m
+[37m...
+[0m[33mNot restocking: Tobacco (1)[0m
+[0m[30mRestocked: Paper[0m
+[0m[30mRestocked: Match[0m
+[0m                       [30mAcquired: Paper[0m
+[0m                       [30mAcquired: Match[0m
+[0m                       [32mSmoking[0m
+[37m...
+[0m[33mNot restocking: Match (3)[0m
+[0m[30mRestocked: Tobacco[0m
+[0m[30mRestocked: Paper[0m
+[0m                                                                     [30mAcquired: Tobacco[0m
+[0m                                                                     [30mAcquired: Paper[0m
+[0m                                                                     [32mSmoking[0m
+[37m...
+[0m[33mNot restocking: Paper (2)[0m
+[0m[30mRestocked: Tobacco[0m
+[0m[30mRestocked: Match[0m
+[0m                                              [30mAcquired: Tobacco[0m
+[0m                                              [30mAcquired: Match[0m
+[0m                                              [32mSmoking[0m
+[37m...
+[0m[33mNot restocking: Paper (2)[0m
+[0m[30mRestocked: Tobacco[0m
+[0m[30mRestocked: Match[0m
+[0m                                              [30mAcquired: Tobacco[0m
+[0m                                              [30mAcquired: Match[0m
+[0m                                              [32mSmoking[0m
+[37m...
+[0m[33mNot restocking: Match (3)[0m
+[0m[30mRestocked: Tobacco[0m
+[0m[30mRestocked: Paper[0m
+[0m                                                                     [30mAcquired: Tobacco[0m
+[0m                                                                     [30mAcquired: Paper[0m
+[0m                                                                     [32mSmoking[0m
+[37m...
+[0m[33mNot restocking: Match (3)[0m
+[0m[30mRestocked: Tobacco[0m
+[0m[30mRestocked: Paper[0m
+[0m                                                                     [30mAcquired: Tobacco[0m
+[0m                                                                     [30mAcquired: Paper[0m
+[0m                                                                     [32mSmoking[0m
+[37m...
+[0m[33mNot restocking: Tobacco (1)[0m
+[0m[30mRestocked: Paper[0m
+[0m[30mRestocked: Match[0m
+[0m                       [30mAcquired: Paper[0m
+[0m                       [30mAcquired: Match[0m
+[0m                       [32mSmoking[0m
+[37m...
+[0m[33mNot restocking: Paper (2)[0m
+[0m[30mRestocked: Tobacco[0m
+[0m[30mRestocked: Match[0m
+[0m                                              [30mAcquired: Tobacco[0m
+[0m                                              [30mAcquired: Match[0m
+[0m                                              [32mSmoking[0m
+[37m...
+[0m[33mNot restocking: Paper (2)[0m
+[0m[30mRestocked: Tobacco[0m
+[0m[30mRestocked: Match[0m
+[0m                                              [30mAcquired: Tobacco[0m
+[0m                                              [30mAcquired: Match[0m
+[0m                                              [32mSmoking[0m
+[37m...
+[0m[33mNot restocking: Match (3)[0m
+[0m[30mRestocked: Tobacco[0m
+[0m[30mRestocked: Paper[0m
+[0m                                                                     [30mAcquired: Tobacco[0m
+[0m                                                                     [30mAcquired: Paper[0m
+[0m                                                                     [32mSmoking[0m
+[37m...
+[0m[33mNot restocking: Paper (2)[0m
+[0m[30mRestocked: Tobacco[0m
+[0m[30mRestocked: Match[0m
+[0m                                              [30mAcquired: Tobacco[0m
+[0m                                              [30mAcquired: Match[0m
+[0m                                              [32mSmoking[0m
+[37m...
+[0m[33mNot restocking: Match (3)[0m
+[0m[30mRestocked: Tobacco[0m
+[0m[30mRestocked: Paper[0m
+[0m                                                                     [30mAcquired: Tobacco[0m
+[0m                                                                     [30mAcquired: Paper[0m
+[0m                                                                     [32mSmoking[0m
+[37m...
+[0m[33mNot restocking: Match (3)[0m
+[0m[30mRestocked: Tobacco[0m
+[0m[30mRestocked: Paper[0m
+[0m                                                                     [30mAcquired: Tobacco[0m
+[0m                                                                     [30mAcquired: Paper[0m
+[0m                                                                     [32mSmoking[0m
+[37m...
+[0m[33mNot restocking: Tobacco (1)[0m
+[0m[30mRestocked: Paper[0m
+[0m[30mRestocked: Match[0m
+[0m                       [30mAcquired: Paper[0m
+[0m                       [30mAcquired: Match[0m
+[0m                       [32mSmoking[0m
+[37m...
+[0m[33mNot restocking: Tobacco (1)[0m
+[0m[30mRestocked: Paper[0m
+[0m[30mRestocked: Match[0m
+[0m                       [30mAcquired: Paper[0m
+[0m                       [30mAcquired: Match[0m
+[0m                       [32mSmoking[0m
+[37m...
+[0m[33mNot restocking: Tobacco (1)[0m
+[0m[30mRestocked: Paper[0m
+[0m[30mRestocked: Match[0m
+[0m                       [30mAcquired: Paper[0m
+[0m                       [30mAcquired: Match[0m
+[0m                       [32mSmoking[0m
+[37m...
+[0m[33mNot restocking: Tobacco (1)[0m
+[0m[30mRestocked: Paper[0m
+[0m[30mRestocked: Match[0m
+[0m                       [30mAcquired: Paper[0m
+[0m                       [30mAcquired: Match[0m
+[0m                       [32mSmoking[0m
+[37m...
+^C

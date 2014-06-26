@@ -1,0 +1,67 @@
+Which test do you want to run?
+  1. Semaphore
+  2. Channel
+  3. Bound Channel
+  4. Mutex
+  5. Latch
+  6. Barrier
+  7. Light Switch
+  8. Exchanger
+  9. Active Object
+ 10. Semaphore FIFO
+ 11. Reader-Writer Lock
+  Q. Quit
+Enter: Channel test
+==============================
+
+Writing data to the channel (Put)...
+P0    P1    P2    P3    P4    P5    P6    P7    P8    P9    
+------------------------------------------------------------
+[37m...
+[0m                              [33mTx:P5...[0m
+[0m                                                [33mTx:P8...[0m
+[0m                                          [33mTx:P7...[0m
+[0m                                                      [33mTx:P9...[0m
+[0m                        [33mTx:P4...[0m
+[0m                                    [33mTx:P6...[0m
+[0m            [33mTx:P2...[0m
+[0m[33mTx:P0...[0m
+[0m                  [33mTx:P3...[0m
+[0m                                    [32mTx:P6[0m
+[0m[32mTx:P0[0m
+[0m                                          [32mTx:P7[0m
+[0m            [32mTx:P2[0m
+[0m                        [32mTx:P4[0m
+[0m                                                      [32mTx:P9[0m
+[0m                  [32mTx:P3[0m
+[0m                                                [32mTx:P8[0m
+[0m                              [32mTx:P5[0m
+[0m      [33mTx:P1...[0m
+[0m      [32mTx:P1[0m
+
+Reading data from the channel (Take)...
+T0    T1    T2    T3    T4    T5    T6    T7    T8    T9    
+------------------------------------------------------------
+[37m...
+[0m[33mRx...[0m
+[0m[32mRx:P6[0m
+[0m      [33mRx...[0m
+[0m      [32mRx:P7[0m
+[0m            [33mRx...[0m
+[0m            [32mRx:P0[0m
+[0m                  [33mRx...[0m
+[0m                  [32mRx:P2[0m
+[0m                        [33mRx...[0m
+[0m                        [32mRx:P4[0m
+[0m                              [33mRx...[0m
+[0m                              [32mRx:P9[0m
+[0m                                    [33mRx...[0m
+[0m                                          [33mRx...[0m
+[0m                                    [32mRx:P3[0m
+[0m                                          [32mRx:P8[0m
+[0m                                                [33mRx...[0m
+[0m                                                [32mRx:P5[0m
+[0m                                                      [33mRx...[0m
+[0m                                                      [32mRx:P1[0m
+
+All threads have finished

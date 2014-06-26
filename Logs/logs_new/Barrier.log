@@ -1,0 +1,108 @@
+Which test do you want to run?
+  1. Semaphore
+  2. Channel
+  3. Bound Channel
+  4. Mutex
+  5. Latch
+  6. Barrier
+  7. Light Switch
+  8. Exchanger
+  9. Active Object
+ 10. Semaphore FIFO
+ 11. Reader-Writer Lock
+  Q. Quit
+Enter: Barrier test
+==============================
+
+Barrier size: 4
+Split visitor thread groups will start every 4 seconds
+We'll be testing 6 groups of the barrier size.
+Note how threads may arrive at the barrier at any time, but threads of a new group can only begin entering the barrier once it is empty.
+
+Legend:
+- A -- thread has just arrived at the barrier (now waiting to enter it)
+- E -- thread has just entered the barrier (now waiting to leave it)
+- L -- thread has just left the barrier
+- L* -- thread has left the barrier as the captain for the group
+V  V  V  V  V  V  V  V  V  V  V  V  V  V  V  V  V  V  V  V  V  V  V  V  
+
+[0m   [33mA[0m
+[0m[33mA[0m
+   [36mE
+[36mE
+[37m........................................................................
+[0m      [33mA[0m
+      [36mE
+[0m         [33mA[0m
+         [36mE
+[0m            [33mA[0m
+      [32mL
+   [32mL
+[32mL
+[0m               [33mA[0m
+         [32mL*
+               [36mE
+            [36mE
+[37m........................................................................
+[0m                  [33mA[0m
+                  [36mE
+[0m                     [33mA[0m
+                     [36mE
+                  [32mL
+            [32mL
+[0m                        [33mA[0m
+               [32mL
+                     [32mL*
+                        [36mE
+[0m                           [33mA[0m
+                           [36mE
+[37m........................................................................
+[0m                              [33mA[0m
+                              [36mE
+[0m                                 [33mA[0m
+                                 [36mE
+                        [32mL
+                           [32mL
+                              [32mL
+                                 [32mL*
+[0m                                    [33mA[0m
+                                    [36mE
+[0m                                       [33mA[0m
+                                       [36mE
+[37m........................................................................
+[0m                                          [33mA[0m
+                                          [36mE
+[0m                                             [33mA[0m
+                                             [36mE
+                                          [32mL
+                                    [32mL
+[0m                                                [33mA[0m
+                                       [32mL
+                                             [32mL*
+[0m                                                   [33mA[0m
+                                                   [36mE
+                                                [36mE
+[37m........................................................................
+[0m                                                      [33mA[0m
+                                                      [36mE
+[0m                                                         [33mA[0m
+                                                         [36mE
+                                                [32mL
+                                                   [32mL
+                                                      [32mL
+                                                         [32mL*
+[0m                                                            [33mA[0m
+                                                            [36mE
+[0m                                                               [33mA[0m
+                                                               [36mE
+[37m........................................................................
+[0m                                                                  [33mA[0m
+                                                                  [36mE
+[0m                                                                     [33mA[0m
+                                                                     [36mE
+                                                                  [32mL
+                                                               [32mL
+                                                            [32mL
+                                                                     [32mL*
+
+All threads have finished

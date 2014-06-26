@@ -1,0 +1,44 @@
+Which test do you want to run?
+  1. Semaphore
+  2. Channel
+  3. Bound Channel
+  4. Mutex
+  5. Latch
+  6. Barrier
+  7. Light Switch
+  8. Exchanger
+  9. Active Object
+ 10. Semaphore FIFO
+ 11. Reader-Writer Lock
+  Q. Quit
+Enter: Light Switch test
+==============================
+
+A group of 5 threads will use the light switch to gain access from the permission semaphore, then another thread will attempt to gain access directly from the permission sempahore. This test will demonstrate that this individual thread will have to wait until all the threads using the light switch have released the permission.
+
+LS1    LS2    LS3    LS4    LS5    D1     
+------------------------------------------
+[0m                     [33mAcq[0m
+[0m[33mAcq[0m
+[0m              [33mAcq[0m
+[0m       [33mAcq[0m
+[0m                            [33mAcq[0m
+[0m[32mAcq'd[0m
+[0m              [32mAcq'd[0m
+[0m                            [32mAcq'd[0m
+[0m                     [32mAcq'd[0m
+[0m       [32mAcq'd[0m
+[37m...
+[0m                                   [33mAcq[0m
+[0m[36mRel'd[0m
+[37m...
+[0m                     [36mRel'd[0m
+[37m...
+[0m              [36mRel'd[0m
+[37m...
+[0m       [36mRel'd[0m
+[37m...
+[0m                            [36mRel'd[0m
+[0m                                   [32mAcq'd[0m
+
+All threads have finished

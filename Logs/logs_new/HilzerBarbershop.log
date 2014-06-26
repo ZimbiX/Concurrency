@@ -1,0 +1,196 @@
+[37m...
+B1            B2            B3            C1            C2            C3            C4            C5            C6            C7            C8            C9            C10           
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[0m                                                                                                  [43m[30mEnterShop[0m
+[0m                            [43m[30mCutHair[0m
+[0m                                                                                                                                                                        [43m[30mEnterShop[0m
+[0m                                          [43m[30mEnterShop[0m
+[0m                                                        [43m[30mEnterShop[0m
+[0m                                                                                                                [43m[30mEnterShop[0m
+[0m[43m[30mCutHair[0m
+[0m              [43m[30mCutHair[0m
+[0m                                                                                                                              [43m[30mEnterShop[0m
+[0m                                                                      [43m[30mEnterShop[0m
+[0m                                                                                    [43m[30mEnterShop[0m
+[0m                                                                                                                                            [43m[30mEnterShop[0m
+[0m                                                                                                                                                          [43m[30mEnterShop[0m
+[0m                                                        [42m[30mEnterShop[0m
+[0m                                                                                                                                                                        [42m[30mEnterShop[0m
+[0m                                                                                    [42m[30mEnterShop[0m
+[0m                                                                                                                              [42m[30mEnterShop[0m
+[0m                                                                                                  [42m[30mEnterShop[0m
+[0m                                                                                                                [42m[30mEnterShop[0m
+[0m                                                                                                                              [43m[30mSitOnSofa[0m
+[0m                                                                                                  [43m[30mSitOnSofa[0m
+[0m                                                                                                                                                          [42m[30mEnterShop[0m
+[0m                                                        [43m[30mSitOnSofa[0m
+[0m                                                                                                                              [42m[30mSitOnSofa[0m
+[0m                                                                                                  [42m[30mSitOnSofa[0m
+[0m                                                        [42m[30mSitOnSofa[0m
+[0m                                                                                                                                                                        [43m[30mSitOnSofa[0m
+[0m                                                                                                                [43m[30mSitOnSofa[0m
+[0m                                                                                                                                                                        [42m[30mSitOnSofa[0m
+[0m                                                                                    [43m[30mSitOnSofa[0m
+[0m                                                                      [42m[30mEnterShop[0m
+[0m                                                                                                                                                          [43m[30mSitOnSofa[0m
+[0m                                                                      [43m[30mSitOnSofa[0m
+[0m                                                        [43m[30mSitInBarberChair[0m
+[0m                                                        [42m[30mSitInBarberChair[0m
+[0m                                                                                                                              [43m[30mSitInBarberChair[0m
+[0m                                                                                                                                                                        [43m[30mSitInBarberChair[0m
+[0m                                                                                                                              [42m[30mSitInBarberChair[0m
+[0m                                                                                                                                                                        [42m[30mSitInBarberChair[0m
+[0m                                                                                                  [43m[30mSitInBarberChair[0m
+[0m                                                                                                                                            [42m[30mEnterShop[0m
+[0m                                                                                                                                            [43m[30mSitOnSofa[0m
+[0m                                          [42m[30mEnterShop[0m
+[0m                                          [43m[30mSitOnSofa[0m
+[0m                                                                                                                                                                        [43m[30mGetHairCut[0m
+[0m                                                                                                                                                                        [42m[30mGetHairCut[0m
+[0m                                                                                                                                                                        [43m[30mPay[0m
+[0m                                          [42m[30mSitOnSofa[0m
+[0m                                          [43m[30mSitInBarberChair[0m
+[0m                                                                                                                [42m[30mSitOnSofa[0m
+[0m                                                                                                                                                          [42m[30mSitOnSofa[0m
+[0m                                                                                                                [43m[30mSitInBarberChair[0m
+[0m                                                                                                                                                          [43m[30mSitInBarberChair[0m
+[0m                                                                                                                              [43m[30mGetHairCut[0m
+[0m                                                        [43m[30mGetHairCut[0m
+[0m                                                                                                                              [42m[30mGetHairCut[0m
+[0m                                                        [42m[30mGetHairCut[0m
+[0m                                                                                                                              [43m[30mPay[0m
+[0m                                                        [43m[30mPay[0m
+[37m...
+[37m...
+[37m...
+[37m...
+[37m...
+[37m...
+[0m              [42m[30mCutHair[0m
+[0m              [46m[30mAcceptPayment[0m
+[0m              [42m[30mAcceptPayment[0m
+[0m                                                                                                                                                                        [42m[30mPay[0m
+[0m              [43m[30mCutHair[0m
+[0m                                                                                                                                                          [42m[30mSitInBarberChair[0m
+[0m                                                                                                                                                                        [41m[30mSitInBarberChair[0m
+[0m                                                                                                                                                          [43m[30mGetHairCut[0m
+[0m                            [42m[30mCutHair[0m
+[0m                            [46m[30mAcceptPayment[0m
+[0m                                                                                    [42m[30mSitOnSofa[0m
+[0m                            [42m[30mAcceptPayment[0m
+[0m[42m[30mCutHair[0m
+[0m                                                                                    [43m[30mSitInBarberChair[0m
+[0m                                                        [42m[30mPay[0m
+[0m[46m[30mAcceptPayment[0m
+[0m                                                                                                                                                                        [30m_customers: 9[0m
+[0m                                                                                                                                                          [42m[30mGetHairCut[0m
+[0m                                                                                    [42m[30mSitInBarberChair[0m
+[0m                                                                                                                                                          [43m[30mPay[0m
+[0m                                                                                    [43m[30mGetHairCut[0m
+[0m                                                                      [42m[30mSitOnSofa[0m
+[0m                                                                      [43m[30mSitInBarberChair[0m
+[0m                                                                                                                                                                        [41m[30mExitShop[0m
+[0m                            [43m[30mCutHair[0m
+[0m                                                        [41m[30mSitInBarberChair[0m
+[0m                                                        [30m_customers: 8[0m
+[0m                                                                                    [42m[30mGetHairCut[0m
+[0m                                                        [41m[30mExitShop[0m
+[0m                                                                                    [43m[30mPay[0m
+[0m[42m[30mAcceptPayment[0m
+[0m                                                                                                                              [42m[30mPay[0m
+[0m[43m[30mCutHair[0m
+[0m                                                                                                                              [41m[30mSitInBarberChair[0m
+[0m                                                                      [42m[30mSitInBarberChair[0m
+[0m                                                                                                                              [30m_customers: 7[0m
+[0m                                                                      [43m[30mGetHairCut[0m
+[0m                                                                                                                                            [42m[30mSitOnSofa[0m
+[0m                                                                                                                                            [43m[30mSitInBarberChair[0m
+[0m                                                                                                                              [41m[30mExitShop[0m
+[0m                                                                      [42m[30mGetHairCut[0m
+[0m                                                                      [43m[30mPay[0m
+[37m...
+[37m...
+[37m...
+[37m...
+[37m...
+[37m...
+[0m              [42m[30mCutHair[0m
+[0m              [46m[30mAcceptPayment[0m
+[0m              [42m[30mAcceptPayment[0m
+[0m              [43m[30mCutHair[0m
+[0m                                                                                                                                                          [42m[30mPay[0m
+[0m                                                                                                                                                          [41m[30mSitInBarberChair[0m
+[0m                                                                                                                [42m[30mSitInBarberChair[0m
+[0m                                                                                                                                                          [30m_customers: 6[0m
+[0m                                                                                                                [43m[30mGetHairCut[0m
+[0m                                                                                                                                                          [41m[30mExitShop[0m
+[0m                                                                                                                [42m[30mGetHairCut[0m
+[0m                                                                                                                [43m[30mPay[0m
+[0m                            [42m[30mCutHair[0m
+[0m                            [46m[30mAcceptPayment[0m
+[0m                                                                                    [42m[30mPay[0m
+[0m                            [42m[30mAcceptPayment[0m
+[0m                            [43m[30mCutHair[0m
+[0m                                                                                    [41m[30mSitInBarberChair[0m
+[0m                                                                                                  [42m[30mSitInBarberChair[0m
+[0m                                                                                                  [43m[30mGetHairCut[0m
+[0m                                                                                                  [42m[30mGetHairCut[0m
+[0m                                                                                                  [43m[30mPay[0m
+[0m                                                                                    [30m_customers: 5[0m
+[0m                                                                                    [41m[30mExitShop[0m
+[0m[42m[30mCutHair[0m
+[0m[46m[30mAcceptPayment[0m
+[0m[42m[30mAcceptPayment[0m
+[0m[43m[30mCutHair[0m
+[0m                                                                      [42m[30mPay[0m
+[0m                                          [42m[30mSitInBarberChair[0m
+[0m                                                                      [41m[30mSitInBarberChair[0m
+[0m                                          [43m[30mGetHairCut[0m
+[0m                                                                      [30m_customers: 4[0m
+[0m                                          [42m[30mGetHairCut[0m
+[0m                                                                      [41m[30mExitShop[0m
+[0m                                          [43m[30mPay[0m
+[37m...
+[37m...
+[37m...
+[37m...
+[37m...
+[37m...
+[0m              [42m[30mCutHair[0m
+[0m              [46m[30mAcceptPayment[0m
+[0m              [42m[30mAcceptPayment[0m
+[0m                                                                                                                [42m[30mPay[0m
+[0m              [43m[30mCutHair[0m
+[0m                                                                                                                [41m[30mSitInBarberChair[0m
+[0m                                                                                                                                            [42m[30mSitInBarberChair[0m
+[0m                                                                                                                [30m_customers: 3[0m
+[0m                                                                                                                                            [43m[30mGetHairCut[0m
+[0m                                                                                                                [41m[30mExitShop[0m
+[0m                            [42m[30mCutHair[0m
+[0m                            [46m[30mAcceptPayment[0m
+[0m                            [42m[30mAcceptPayment[0m
+[0m[42m[30mCutHair[0m
+[0m                                                                                                  [42m[30mPay[0m
+[0m[46m[30mAcceptPayment[0m
+[0m                                                                                                  [41m[30mSitInBarberChair[0m
+[0m                                                                                                                                            [42m[30mGetHairCut[0m
+[0m                                                                                                  [30m_customers: 2[0m
+[0m                                                                                                                                            [43m[30mPay[0m
+[0m                                                                                                  [41m[30mExitShop[0m
+[0m                            [43m[30mCutHair[0m
+[0m[42m[30mAcceptPayment[0m
+[0m[43m[30mCutHair[0m
+[0m                                          [42m[30mPay[0m
+[0m                                          [41m[30mSitInBarberChair[0m
+[0m                                          [30m_customers: 1[0m
+[0m                                          [41m[30mExitShop[0m
+[37m...
+[37m...
+[0m              [42m[30mCutHair[0m
+[0m              [46m[30mAcceptPayment[0m
+[0m              [42m[30mAcceptPayment[0m
+[0m              [43m[30mCutHair[0m
+[0m                                                                                                                                            [42m[30mPay[0m
+[0m                                                                                                                                            [41m[30mSitInBarberChair[0m
+[0m                                                                                                                                            [30m_customers: 0[0m
+[0m                                                                                                                                            [41m[30mExitShop[0m

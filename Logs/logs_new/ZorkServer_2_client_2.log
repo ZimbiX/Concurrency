@@ -1,0 +1,52 @@
+$ telnet localhost 5485
+
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+Welcome to the Zork server
+> 2
+Sorry, I don't understand the instruction "2"
+
+It is dark. You are deep within a forest, surrounded by trees. There is a smallcliff face to the North, with an iron door inset, faintly marked "EN513b". There is a smallpile of stones beside you. You have a key.
+
+> go south
+Moved south, but it was not very effective; everything looks the same!
+
+It is dark. You are deep within a forest, surrounded by trees. There is a smallcliff face to the North, with an iron door inset, faintly marked "EN513b". There is a smallpile of stones beside you. You have a key and a small stone.
+
+> walk north
+The door won't budge. The cliff face crumbles as you instead try to climb.
+
+It is dark. You are deep within a forest, surrounded by trees. There is a smallcliff face to the North, with an iron door inset, faintly marked "EN513b". There is a smallpile of stones beside you. You have a key and a small stone.
+
+> use key in door
+The key fits in the door, but it won't turn.
+
+It is dark. You are deep within a forest, surrounded by trees. There is a smallcliff face to the North, with an iron door inset, faintly marked "EN513b". There is a smallpile of stones beside you. You have a key and a small stone.
+
+> take tree 
+I can't find a tree to take.
+
+It is dark. You are deep within a forest, surrounded by trees. There is a smallcliff face to the North, with an iron door inset, faintly marked "EN513b". There is a smallpile of stones beside you. You have a key and a small stone.
+
+> take stone
+You swap your stone for a new one. It seems incredibly useful.
+
+It is dark. You are deep within a forest, surrounded by trees. There is a smallcliff face to the North, with an iron door inset, faintly marked "EN513b". There is a smallpile of stones beside you. You have a key and a small stone.
+
+> brush teeth
+Sorry, I don't understand the instruction "brush teeth"
+
+It is dark. You are deep within a forest, surrounded by trees. There is a smallcliff face to the North, with an iron door inset, faintly marked "EN513b". There is a smallpile of stones beside you. You have a key and a small stone.
+
+> use key
+The key fits in the door, but it won't turn.
+
+It is dark. You are deep within a forest, surrounded by trees. There is a smallcliff face to the North, with an iron door inset, faintly marked "EN513b". There is a smallpile of stones beside you. You have a key and a small stone.
+
+> right
+Moved right, but it was not very effective; everything looks the same!
+
+It is dark. You are deep within a forest, surrounded by trees. There is a smallcliff face to the North, with an iron door inset, faintly marked "EN513b". There is a smallpile of stones beside you. You have a key and a small stone.
+
+>
