@@ -18,7 +18,7 @@ Each source file includes a detailed description of its purpose and functionalit
     + [Active Object](ConcurrencyUtilities/ActiveObject.cs) [[I](ConcurrencyUtilities/ActiveObjectInput.cs)/[O](ConcurrencyUtilities/ActiveObjectOutput.cs) / [IO](ConcurrencyUtilities/ActiveObjectInputOutput.cs)]
     + [Semaphore FIFO](ConcurrencyUtilities/SemaphoreFIFO.cs)
     + [Reader-Writer Lock](ConcurrencyUtilities/ReaderWriter.cs)
-- Concurrency utility tests
+- [Concurrency utility tests](TestConcurrencyUtilities/)
 - Classical synchronization problems
     + [Cigarette Smokers](CigaretteSmokers/)
     + [Dining Philosophers](DiningPhilosophers/)
