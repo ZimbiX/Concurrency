@@ -26,7 +26,7 @@ Each source file includes a detailed description of its purpose and functionalit
     + [River Crossing](RiverCrossing/)
     + [Hilzer's Barbershop](HilzerBarbershop/)
 - Active Objects: [Zork Server](ZorkServer/) (basic, one player, multi-user)
-- [Explanations related to design forces]()
+- [Explanations related to design forces](Design forces in concurrent programming.md)
 
 ## Results
 
