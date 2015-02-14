@@ -1,21 +1,30 @@
 #!/usr/bin/env ruby
 
+class Array
+  def drop_last
+    self[0...-1]
+  end
+end
+
 module InitAttrs
-  def init_attrs attrs
-    attrs.each { |a, val| send "#{a}=".to_sym, val }
+  def init_attrs attrs, options = {}
+    options = {
+      prefix: ''
+    }.merge options
+    attrs.each { |attr, val| send "#{options[:prefix]}#{attr}=".to_sym, val }
   end
 end
 
 class FileFinder
-  attr_accessor :ext, :location
+  attr_accessor :search_ext, :search_location
   include InitAttrs
 
   def initialize attrs
-    init_attrs attrs
+    init_attrs attrs, prefix: "search_"
   end
 
   def find
-    Dir.glob(File.join location, "*.#{ext}").sort.map do |filename|
+    Dir.glob(File.join search_location, "*.#{search_ext}").sort.map do |filename|
       filename_to_file filename
     end
   end
@@ -23,13 +32,21 @@ class FileFinder
   def filename_to_file filename
     File.new({
       name: filename_without_ext(filename),
-      ext: ext,
-      location: location,
+      ext: search_ext,
+      location: file_location(filename),
     })
   end
 
   def filename_without_ext filename
-    filename.split(/\/|\\/).last.gsub(/\.#{ext}$/, '')
+    file_path_pieces(filename).last.gsub(/\.#{search_ext}$/, '')
+  end
+
+  def file_location filename
+    File.join(*file_path_pieces(filename).drop_last)
+  end
+
+  def file_path_pieces filename
+    filename.split(/\/|\\/)
   end
 end
 
@@ -51,8 +68,9 @@ class File
 end
 
 if __FILE__ == $0
-  location = File.join(File.dirname(__FILE__), "logs_new")
-  FileFinder.new(ext: "htm", location: location).find.map do |file|
+  arg_location = ARGV[0] || '.'
+  arg_ext      = ARGV[1] || '*'
+  FileFinder.new(ext: arg_ext, location: arg_location).find.map do |file|
     print "- [", file.name, "](", file.path, ")"; puts
   end
 end
