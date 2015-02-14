@@ -4,6 +4,8 @@ In the first semester of 2014 I took the Swinburne University unit [*Advanced .N
 
 ## Contents
 
+Each source file includes a detailed description of its purpose and functionality, and is usually thoroughly documented throughout. For those programs where there are many files, the main description will be in `MainClass.cs`.
+
 - Concurrency utilities
     + [Semaphore](ConcurrencyUtilities/Semaphore.cs)
     + [Channel](ConcurrencyUtilities/Channel.cs)
